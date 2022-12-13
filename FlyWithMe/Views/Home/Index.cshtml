@@ -2,30 +2,72 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My Flight</title>
+    @Styles.Render("~/Content/css")
+    <link rel="stylesheet" href="~/Content/home.css" type="text/css" />
+    @Scripts.Render("~/bundles/modernizr")
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+
+</head>
+
+<body>
+    <img class="bg" src="~/images/background.png" alt="">
+
+    <div class="search-box">
+
+        <form action="">
+
+            <span for="from">From</span>
+            <select name="From" id="from" required>
+                <option value="BenGurion">Ben Gurion</option>
+                <option value="Istanbul">Istanbul Sabiha</option>
+                <option value="Dubai">Dubai Al Maktoum</option>
+            </select>
+
+
+
+            <span for="to">To</span>
+            <select name="To" id="to" required>
+                <option value="BenGurion">Ben Gurion</option>
+                <option value="Istanbul">Istanbul Sabiha</option>
+                <option value="Dubai">Dubai Al Maktoum</option>
+            </select>
+
+            <br />
+
+            <span for="departure">Departure</span>
+            <input type="date" id="departure" name="departure" placeholder="Add Date" required>
+
+            <span for="return">Return</span>
+            <input type="date" id="return" name="return" placeholder="Add Date" required>
+
+            <br />
+
+            <span for="class">Class</span>
+            <select name="Class" id="class" required>
+                <option value="economy">Economy Class</option>
+                <option value="business">Business Class</option>
+                <option value="first">First Class</option>
+            </select>
+
+            <span for="travelers">Travelers</span>
+            <input type="text" id="travelers" name="travelers" placeholder="Specify Number of Travelers" required>
+
+            <br />
+
+            <input type="submit" value="Search">
+        </form>
+
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+
+
+
+
+
+</body>
+</html>
