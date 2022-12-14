@@ -3,7 +3,8 @@
 
 @{
     ViewBag.Title = "Finding";
-    string[] colum = new string[] { "From", "To", "DepartureDate", "ReturnDate", "Price", "Capacity", "DO" };
+
+    string[] TableColumns = new string[] { "Air Line", "From", "To", "Take Off", "Arrival", "Price", "Actions" };
 
 
 }
@@ -14,25 +15,63 @@
     @Styles.Render("~/Content/css")
     <link rel="stylesheet" href="~/Content/FlightList.css" type="text/css" />
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" type="text/css" href="cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" />
 
 
 
 </head>
 
-<h3></h3>
-
 
 <div class='parent'>
-    <div class='child'>Your Search Results For Flight From @ViewBag.SearchResults</div>
+    <div class='child'><b>@ViewBag.SearchResults</b></div>
+    <b>@ViewData["Departure"]</b>
 </div>
 
 <table class="table table-bordered table-striped" id="myTable">
     <thead>
         <tr>
 
-            @foreach (string c in colum)
+            @foreach (string column in TableColumns)
             {
-                <th scope="col">@c</th>
+                <th scope="col">@column</th>
+            }
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (FlyWithMe.Class.Planes item in ViewBag.Planes)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.from)</td>
+                <td>@Html.DisplayFor(modelItem => item.to)</td>
+                <td>@Html.DisplayFor(modelItem => item.departureDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.returnDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.price)</td>
+                <td>@Html.DisplayFor(modelItem => item.capacity)</td>
+                <td>
+                    @Html.ActionLink("buying a ticket", "InsertData", "Booking", new { id = item.id }, null)
+                    <b>|</b>
+                    @Html.ActionLink("Details", "Details", new { id = item.id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div class='parent2'>
+    <div class='child2'><b>@ViewData["Destination"]  → @ViewData["Origin"]</b></div>
+    <b>@ViewData["Return"]</b>
+</div>
+
+
+<table class="table table-bordered table-striped" id="myTable2">
+    <thead>
+        <tr>
+
+            @foreach (string column in TableColumns)
+            {
+                <th scope="col">@column</th>
             }
         </tr>
 
@@ -59,15 +98,37 @@
 
 
 
-<link rel="stylesheet" type="text/css" href="cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" />
+
+
+
+
+
+
+
 
 @section Scripts{
     <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 
     <script>
-        $('#myTable').dataTable({ searching: false, paging: false, info: false });
+        $('#myTable').dataTable({
+            searching: false,
+            paging: false,
+            info: false,
+            scrollY: '500px',
+            scrollCollapse: true
+        });
         $(document).ready(function () {
             $('#myTable').DataTable();
+        });
+        $('#myTable2').dataTable({
+            searching: false,
+            paging: false,
+            info: false,
+            scrollY: '500px',
+            scrollCollapse: true
+        });
+        $(document).ready(function () {
+            $('#myTable2').DataTable();
         });
     </script>
 

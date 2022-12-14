@@ -52,6 +52,12 @@ namespace FlyWithMe.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            ViewData["Origin"] = Request["Origin"];
+            ViewData["Destination"] = Request["Destination"];
+
+            ViewData["Departure"] = Request["Departure"];
+            ViewData["Return"] = Request["Return"];
+
             var firebaseClient = new FirebaseClient(FirbaseLink);
             var dbPlanes = await firebaseClient.Child("Planes").OnceAsync<Planes>();
             // await firebaseClient.Child("Planes").PostAsync(new Planes(10,300, "El-Al",DateTime.Now.D);

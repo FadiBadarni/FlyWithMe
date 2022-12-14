@@ -3,17 +3,25 @@
 }
 
 .parent {
-    border: 1px solid black;
     margin: 1rem;
-    padding: 2rem 2rem;
-    text-align: center;
+    padding: 2rem -2rem;
+    
 }
 
 .child {
-    display: inline-block;
-    border: 1px solid red;
-    padding: 1rem 3rem;
-    vertical-align: middle;
+    padding: 1rem 0rem;
+    vertical-align: left;
+    font-size: 30px;
+}
+.parent2 {
+    margin: 1rem;
+    padding: 2rem -2rem;
+}
+
+.child2 {
+    padding: 1rem 0rem;
+    vertical-align: right;
+    font-size: 30px;
 }
 /* spacing */
 
@@ -34,21 +42,21 @@ thead th:nth-child(2) {
 }
 
 thead th:nth-child(3) {
-    width: 20%;
+    width: 10%;
 }
 
 thead th:nth-child(4) {
-    width: 20%;
+    width: 10%;
 }
 thead th:nth-child(5) {
     width: 10%;
 }
 
 thead th:nth-child(6) {
-    width: 10%;
+    width: 8%;
 }
 thead th:nth-child(7) {
-    width: 20%;
+    width: 12%;
 }
 
 th,
