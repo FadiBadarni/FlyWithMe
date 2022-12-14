@@ -52,7 +52,6 @@ namespace FlyWithMe.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-
             var firebaseClient = new FirebaseClient(FirbaseLink);
             var dbPlanes = await firebaseClient.Child("Planes").OnceAsync<Planes>();
             // await firebaseClient.Child("Planes").PostAsync(new Planes(10,300, "El-Al",DateTime.Now.D);
@@ -60,15 +59,18 @@ namespace FlyWithMe.Controllers
             foreach (var plane in dbPlanes)
             {
 
-                if (plane.Object.from == search.from)
-                    if (plane.Object.to == search.To)
-                        //if(plane.Object.departureDate==model.departure)
-                        //  if(plane.Object.returnDate==model.preturn)
-                        if (plane.Object.capacity - plane.Object.bookedSeats >= search.travelers)
+                if (plane.Object.from == search.Origin)
+                    if (plane.Object.to == search.Destination)
+                        //if (plane.Object.departureDate.Equals(search.Departure))
+                        //    if (plane.Object.returnDate.Equals(search.Return))
+                                if (plane.Object.capacity - plane.Object.bookedSeats >= search.Passengers)
                             planeslist.Add(plane.Object);
 
             }
+
             ViewBag.Planes=planeslist;
+            ViewBag.SearchResults = search;
+
             return View();
         }
 

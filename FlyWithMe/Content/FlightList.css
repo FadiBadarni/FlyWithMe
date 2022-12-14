@@ -1,0 +1,122 @@
+﻿body {
+    
+}
+
+.parent {
+    border: 1px solid black;
+    margin: 1rem;
+    padding: 2rem 2rem;
+    text-align: center;
+}
+
+.child {
+    display: inline-block;
+    border: 1px solid red;
+    padding: 1rem 3rem;
+    vertical-align: middle;
+}
+/* spacing */
+
+table {
+    table-layout: fixed;
+    width: 50%;
+    border-collapse: collapse;
+    border-spacing: 0 15px;
+    border: 3px solid purple;
+}
+
+thead th:nth-child(1) {
+    width: 10%;
+}
+
+thead th:nth-child(2) {
+    width: 10%;
+}
+
+thead th:nth-child(3) {
+    width: 20%;
+}
+
+thead th:nth-child(4) {
+    width: 20%;
+}
+thead th:nth-child(5) {
+    width: 10%;
+}
+
+thead th:nth-child(6) {
+    width: 10%;
+}
+thead th:nth-child(7) {
+    width: 20%;
+}
+
+th,
+td {
+    font-weight: bold;
+    padding: 20px;
+    text-align: center;
+}
+td {
+    height: 70px;
+    position: relative;
+    top: 50%;
+    transform: translateY(15%);
+
+}
+/* typography */
+
+html {
+    font-family: "helvetica neue", helvetica, arial, sans-serif;
+}
+
+
+
+th {
+    letter-spacing: 2px;
+}
+
+td {
+    
+    letter-spacing: 1px;
+}
+
+tbody td {
+    text-align: center;
+}
+
+tfoot th {
+    text-align: right;
+}
+/* graphics and colors */
+
+thead,
+tfoot {
+    color: white;
+    text-shadow: 1px 1px 1px black;
+}
+
+    thead th,
+    tfoot th,
+    tfoot td {
+        background: linear-gradient(180deg, rgba(105,105,105,1) 0%, rgba(194,194,194,1) 100%);
+        border: 3px solid grey;
+    }
+
+/* zebra striping */
+
+tbody tr:nth-child(odd) {
+    background-color: #333333;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #b8b8b8;
+}
+
+tbody tr {
+    
+}
+
+table {
+    background-color: #ff33cc;
+}

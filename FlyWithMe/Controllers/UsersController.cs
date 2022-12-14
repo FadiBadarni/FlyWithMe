@@ -16,6 +16,10 @@ namespace FlyWithMe.Controllers
        
         private static string FirbaseLink = "https://myflight-db2b1-default-rtdb.firebaseio.com";
         // GET: Login
+        public ActionResult Index()
+        {
+            return View();
+        }
         public ActionResult Login()
         {
             return View();
@@ -58,7 +62,7 @@ namespace FlyWithMe.Controllers
             return View();
         }
 
-
+        
 
 
 

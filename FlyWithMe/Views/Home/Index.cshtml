@@ -1,86 +1,66 @@
 ﻿@model FlyWithMe.Models.SearchModel
 
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Search";
 }
 
-<hr />
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My Flight</title>
-    @Styles.Render("~/Content/css")
-    <link rel="stylesheet" href="~/Content/home.css" type="text/css" />
-    @Scripts.Render("~/bundles/modernizr")
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@ViewBag.Title - My Flight</title>
+@Styles.Render("~/Content/css")
+<link rel="stylesheet" href="~/Content/home.css" type="text/css" />
+@Scripts.Render("~/bundles/modernizr")
+<img class="bg" src="~/images/background.png" alt="">
+
+<div class="search-box">
+    @using (Html.BeginForm("Finding", "Home"))
+    {
+
+        @Html.AntiForgeryToken()
+        <h4>Flight Search</h4>
+
+        <div class="parent">
+
+            <div class="div1">
+                @Html.LabelFor(model => model.Origin, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.Origin, new { htmlAttributes = new { @class = "form-input" } })
+            </div>
+
+            <div class="div2">
+                @Html.LabelFor(model => model.Destination, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.Destination, new { htmlAttributes = new { @class = "form-input" } })
+            </div>
+
+            <div class="div3">
+                @Html.LabelFor(model => model.Departure, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.Departure, new { htmlAttributes = new { @class = "form-input", @type = "date" } })
+            </div>
+
+            <div class="div4">
+                @Html.LabelFor(model => model.Return, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.Return, new { htmlAttributes = new { @class = "form-input", @type = "date" } })
+            </div>
+
+            <div class="div5">
+                @Html.LabelFor(model => model.Class, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.Class, new { htmlAttributes = new { @class = "form-input" } })
+            </div>
+
+            <div class="div6">
+                @Html.LabelFor(model => model.Passengers, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.Passengers, new { htmlAttributes = new { @class = "form-input" } })
+            </div>
+
+            <div class="div7">
+                    <input type="submit" value="Search" class="btn btn-primary btn-lg btn-block" />
+            </div>
+
+        </div>
+    }
+</div>
 
 
-
-</head>
-
-<body>
-    <img class="bg" src="~/images/background.png" alt="">
-
-    <div class="search-box">
-
-
-
-        <span for="from">From</span>
-        <select name="From" id="from" required>
-            <option value="BenGurion">Ben Gurion</option>
-            <option value="Istanbul">Istanbul Sabiha</option>
-            <option value="Dubai">Dubai Al Maktoum</option>
-        </select>
-
-        @*<select class="form-group">
-                @Html.LabelFor(model => model.To, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.To, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.To, "", new { @class = "text-danger" })
-                </div>
-                <option value="BenGurion">Ben Gurion</option>
-                <option value="Istanbul">Istanbul Sabiha</option>
-                <option value="Dubai">Dubai Al Maktoum</option>
-            </select>*@
-
-        <span for="to">To</span>
-        <select name="To" id="to" required>
-            <option value="BenGurion">Ben Gurion</option>
-            <option value="Istanbul">Istanbul Sabiha</option>
-            <option value="Dubai">Dubai Al Maktoum</option>
-        </select>
-
-        <br />
-
-        <span for="departure">Departure</span>
-        <input type="date" id="departure" name="departure" placeholder="Add Date" required>
-
-        <span for="return">Return</span>
-        <input type="date" id="return" name="return" placeholder="Add Date" required>
-
-        <br />
-
-        <span for="class">Class</span>
-        <select name="Class" id="class" required>
-            <option value="economy">Economy Class</option>
-            <option value="business">Business Class</option>
-            <option value="first">First Class</option>
-        </select>
-
-        <span for="travelers">Travelers</span>
-        <input type="text" id="travelers" name="travelers" placeholder="Specify Number of Travelers" required>
-
-        <br />
-
-        <input type="submit" value="Search">
-
-
-    </div>
-
-
-
-
-
-</body>
-</html>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
