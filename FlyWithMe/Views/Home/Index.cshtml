@@ -1,7 +1,10 @@
-﻿@{
+﻿@model FlyWithMe.Models.SearchModel
+
+@{
     ViewBag.Title = "Home Page";
 }
 
+<hr />
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +16,7 @@
     @Scripts.Render("~/bundles/modernizr")
 
 
+
 </head>
 
 <body>
@@ -20,48 +24,57 @@
 
     <div class="search-box">
 
-        <form action="">
 
-            <span for="from">From</span>
-            <select name="From" id="from" required>
+
+        <span for="from">From</span>
+        <select name="From" id="from" required>
+            <option value="BenGurion">Ben Gurion</option>
+            <option value="Istanbul">Istanbul Sabiha</option>
+            <option value="Dubai">Dubai Al Maktoum</option>
+        </select>
+
+        @*<select class="form-group">
+                @Html.LabelFor(model => model.To, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.To, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.To, "", new { @class = "text-danger" })
+                </div>
                 <option value="BenGurion">Ben Gurion</option>
                 <option value="Istanbul">Istanbul Sabiha</option>
                 <option value="Dubai">Dubai Al Maktoum</option>
-            </select>
+            </select>*@
 
+        <span for="to">To</span>
+        <select name="To" id="to" required>
+            <option value="BenGurion">Ben Gurion</option>
+            <option value="Istanbul">Istanbul Sabiha</option>
+            <option value="Dubai">Dubai Al Maktoum</option>
+        </select>
 
+        <br />
 
-            <span for="to">To</span>
-            <select name="To" id="to" required>
-                <option value="BenGurion">Ben Gurion</option>
-                <option value="Istanbul">Istanbul Sabiha</option>
-                <option value="Dubai">Dubai Al Maktoum</option>
-            </select>
+        <span for="departure">Departure</span>
+        <input type="date" id="departure" name="departure" placeholder="Add Date" required>
 
-            <br />
+        <span for="return">Return</span>
+        <input type="date" id="return" name="return" placeholder="Add Date" required>
 
-            <span for="departure">Departure</span>
-            <input type="date" id="departure" name="departure" placeholder="Add Date" required>
+        <br />
 
-            <span for="return">Return</span>
-            <input type="date" id="return" name="return" placeholder="Add Date" required>
+        <span for="class">Class</span>
+        <select name="Class" id="class" required>
+            <option value="economy">Economy Class</option>
+            <option value="business">Business Class</option>
+            <option value="first">First Class</option>
+        </select>
 
-            <br />
+        <span for="travelers">Travelers</span>
+        <input type="text" id="travelers" name="travelers" placeholder="Specify Number of Travelers" required>
 
-            <span for="class">Class</span>
-            <select name="Class" id="class" required>
-                <option value="economy">Economy Class</option>
-                <option value="business">Business Class</option>
-                <option value="first">First Class</option>
-            </select>
+        <br />
 
-            <span for="travelers">Travelers</span>
-            <input type="text" id="travelers" name="travelers" placeholder="Specify Number of Travelers" required>
+        <input type="submit" value="Search">
 
-            <br />
-
-            <input type="submit" value="Search">
-        </form>
 
     </div>
 

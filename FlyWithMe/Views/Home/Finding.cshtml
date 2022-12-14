@@ -1,0 +1,58 @@
+﻿@model IEnumerable<FlyWithMe.Class.Planes>
+
+@{
+    ViewBag.Title = "Finding";
+    string[] colum = new string[] { "From", "To", "DepartureDate", "ReturnDate", "Price", "Capacity", "DO" };
+}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<table class="table table-bordered table-striped" id="myTable">
+    <thead>
+        <tr>
+            @foreach (string c in colum)
+            {
+                <th>@c</th>
+            }
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (FlyWithMe.Class.Planes item in ViewBag.Planes)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.from)</td>
+                <td>@Html.DisplayFor(modelItem => item.to)</td>
+                <td>@Html.DisplayFor(modelItem => item.departureDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.returnDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.price)</td>
+                <td>@Html.DisplayFor(modelItem => item.capacity)</td>
+                <td>
+                    @Html.ActionLink("buying a ticket", "InsertData", "Booking", new { id = item.id },null) |
+                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<link rel="stylesheet" type="text/css" href="cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" />
+
+@section Scripts{
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+
+}
+
