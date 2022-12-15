@@ -137,11 +137,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BuyingModel.cs" />
+    <Compile Include="Models\BookingModule.cs" />
     <Compile Include="Models\InsertDataModel.cs" />
     <Compile Include="Models\SearchModel.cs" />
-    <Compile Include="Models\LoginModel.cs" />
-    <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +149,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\FlightList.css" />
     <Content Include="Content\home.css" />
+    <Content Include="Content\PassengersInfo.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -182,13 +181,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Users\Login.cshtml" />
-    <Content Include="Views\Users\Register.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Finding.cshtml" />
     <Content Include="Views\Booking\InsertData.cshtml" />
-    <Content Include="Views\Booking\Buying.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Booking\PassengersInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

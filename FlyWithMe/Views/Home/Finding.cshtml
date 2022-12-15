@@ -21,10 +21,16 @@
 
 </head>
 
+<div class="info"></div>
 
 <div class='parent'>
-    <div class='child'><b>@ViewBag.SearchResults</b></div>
-    <b>@ViewData["Departure"]</b>
+    <div class='child'>
+        <b>@ViewBag.SearchResults</b>
+    </div>
+
+    <div class="date">
+        <b>@ViewData["Departure"]</b>
+    </div>
 </div>
 
 <table class="table table-bordered table-striped" id="myTable">
@@ -59,9 +65,14 @@
 </table>
 
 
+<div class="info"></div>
+
+
 <div class='parent2'>
     <div class='child2'><b>@ViewData["Destination"]  → @ViewData["Origin"]</b></div>
-    <b>@ViewData["Return"]</b>
+    <div class="date">
+        <b>@ViewData["Return"]</b>
+    </div>
 </div>
 
 

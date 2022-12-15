@@ -1,0 +1,57 @@
+﻿@model FlyWithMe.Models.BookingModule
+
+@{
+    ViewBag.Title = "Buying";
+}
+<link rel="stylesheet" href="~/Content/PassengersInfo.css" type="text/css" />
+<h2>Passengers Information</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="parent">
+
+        <div class="div1">
+            @Html.LabelFor(model => model.firstName, htmlAttributes: new { @class = "form-label" })
+            @Html.EditorFor(model => model.firstName, new { htmlAttributes = new { @class = "form-input" } })
+        </div>
+
+        <div class="div2">
+            @Html.LabelFor(model => model.lastName, htmlAttributes: new { @class = "form-label" })
+            @Html.EditorFor(model => model.lastName, new { htmlAttributes = new { @class = "form-input" } })
+        </div>
+
+        <div class="div3">
+            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "form-label" })
+            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-input" } })
+        </div>
+
+        <div class="div4">
+            @Html.LabelFor(model => model.yearOfBirth, htmlAttributes: new { @class = "form-label" })
+            @Html.EditorFor(model => model.yearOfBirth, new { htmlAttributes = new { @class = "form-input" } })
+        </div>
+
+        <div class="div5">
+            @Html.LabelFor(model => model.phoneNumber, htmlAttributes: new { @class = "form-label" })
+            @Html.EditorFor(model => model.phoneNumber, new { htmlAttributes = new { @class = "form-input" } })
+        </div>
+
+        <div class="div6">
+            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "form-label" })
+            @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-input" } })
+        </div>
+
+        <div class="div7">
+            <input type="submit" value="Proceed" class="btn btn-primary btn-md btn-block" />
+        </div>
+
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

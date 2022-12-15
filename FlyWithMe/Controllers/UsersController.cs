@@ -20,47 +20,47 @@ namespace FlyWithMe.Controllers
         {
             return View();
         }
-        public ActionResult Login()
-        {
-            return View();
-        }
-        public ActionResult Register()
-        {
-            return View();
-        }
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<ActionResult> Register(RegisterModel model)
-        {
-            if (model.Password != model.PasswordConfirm) return View();
-            var firebaseClient = new FirebaseClient(FirbaseLink);
-            var dbUsers = await firebaseClient.Child("Users").OnceAsync<RegisterModel>();
-            foreach (var user in dbUsers)
-            {
+        //public ActionResult Login()
+        //{
+        //    return View();
+        //}
+        //public ActionResult Register()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public async Task<ActionResult> Register(RegisterModel model)
+        //{
+        //    if (model.Password != model.PasswordConfirm) return View();
+        //    var firebaseClient = new FirebaseClient(FirbaseLink);
+        //    var dbUsers = await firebaseClient.Child("Users").OnceAsync<RegisterModel>();
+        //    foreach (var user in dbUsers)
+        //    {
 
-                if(user.Object.Email==model.Email) { return View(); }
-            }
-            var result = await firebaseClient.Child("Users").PostAsync(model);
+        //        if(user.Object.Email==model.Email) { return View(); }
+        //    }
+        //    var result = await firebaseClient.Child("Users").PostAsync(model);
 
-           return Redirect("/Home"); 
-        }
+        //   return Redirect("/Home"); 
+        //}
 
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<ActionResult> Login(LoginModel model)
-        {
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public async Task<ActionResult> Login(LoginModel model)
+        //{
            
-            var firebaseClient = new FirebaseClient(FirbaseLink);
-            var dbUsers = await firebaseClient.Child("Users").OnceAsync<RegisterModel>();
-            foreach (var user in dbUsers)
-            {
+        //    var firebaseClient = new FirebaseClient(FirbaseLink);
+        //    var dbUsers = await firebaseClient.Child("Users").OnceAsync<RegisterModel>();
+        //    foreach (var user in dbUsers)
+        //    {
 
-                if (user.Object.Email == model.Email &&
-                    user.Object.Password == model.Password) { return Redirect("/Home"); }
+        //        if (user.Object.Email == model.Email &&
+        //            user.Object.Password == model.Password) { return Redirect("/Home"); }
               
-            }
-            return View();
-        }
+        //    }
+        //    return View();
+        //}
 
         
 

@@ -12,13 +12,7 @@ namespace FlyWithMe.Controllers
 {
     public class BookingController : Controller
     {
-        // GET: Booking
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-      
+  
         public ActionResult InsertData(int? id)
         {
             if (id == null)
@@ -28,16 +22,8 @@ namespace FlyWithMe.Controllers
             return View();
         }
 
-        public ActionResult Buying()
+        public ActionResult PassengersInfo()
         {
-            return View();
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        public ActionResult Buying(InsertDataModel insertDataModel)
-        {
-
             return View();
         }
 
