@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -16,10 +17,54 @@ namespace FlyWithMe.Controllers
     public class HomeController : Controller
     {
         private static string FirbaseLink = "https://myflight-db2b1-default-rtdb.firebaseio.com";
-        private List<Planes> planeslist = new List<Planes>();
+       
 
         public ActionResult Index()
         {
+            //var firebaseClient = new FirebaseClient(FirbaseLink);
+
+            //List<string> days = new List<string> { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
+            //// List<string> Cites = new List<string> { "Vienna", "Brussels", "Bahrain", "Sofia", "Montreal", "Beijing", "Larnaca", "Paris", "Berlin", "Rome", "Barcelona", "Geneva", "Bangko" };
+            //List<string> AirPort = new List<string> { "El Al" };
+            //List<string> FromTo = new List<string> { "Bangkok", "TelAviv" };
+            //int x = 9;
+            //Random rd = new Random();
+            
+
+
+            
+
+            //for (int i = 180; i < 200; i++)
+            //{
+            //    int bookedSeats = rd.Next(401);
+            //    int capacity = rd.Next(bookedSeats, 401);
+            //    double price = rd.Next(100, 1201);
+            //    string company = AirPort[rd.Next(AirPort.Count)];
+            //    int h1 = rd.Next(25);
+            //    int m1 = rd.Next(0, 61);
+
+            //    string sm1 = ":" + m1;
+            //    if (m1 < 10)
+            //        if (m1 == 0) sm1 = h1 + ":00";
+            //        else sm1 = h1 + ":0" + m1;
+            //    string landing = h1 + sm1;
+
+            //    string takeOff = (h1 + x) + sm1;
+            //    int indexDays = rd.Next(days.Count);
+            //    int indexFromTo = rd.Next(FromTo.Count);
+            //    Planes p = new Planes()
+            //    {
+            //        BookedSeats = bookedSeats,
+            //        Capacity = capacity,
+            //        Price = price,
+            //        ID = i,
+            //        Company = company,
+            //        Landing = landing,
+            //        TakeOff = takeOff
+            //    };
+            //    await firebaseClient.Child("Planes").Child(FromTo[indexFromTo]).
+            //        Child(FromTo[(indexFromTo + 1) % 2]).Child(days[indexDays]).Child(i + "").PutAsync(p);
+            //}
             return View();
         }
 
@@ -37,19 +82,21 @@ namespace FlyWithMe.Controllers
             return View();
         }
 
-        
-        public ActionResult Search()
-        {
-            return View();
-        }
-       
 
-        [HttpPost]
+        public ActionResult Finding()
+        {
+           return Redirect("/Home");
+
+        }
+
+
+            [HttpPost]
         public async Task<ActionResult> Finding(SearchModel search)
         {
             if (search == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return Redirect("/Home");
             }
 
             ViewData["Origin"] = Request["Origin"];
@@ -59,22 +106,33 @@ namespace FlyWithMe.Controllers
             ViewData["Return"] = Request["Return"];
 
             var firebaseClient = new FirebaseClient(FirbaseLink);
-            var dbPlanes = await firebaseClient.Child("Planes").OnceAsync<Planes>();
-            // await firebaseClient.Child("Planes").PostAsync(new Planes(10,300, "El-Al",DateTime.Now.D);
+            var dbPlanes = await firebaseClient.Child("Planes")
+                .Child(search.Origin)
+                .Child(search.Destination)
+                .Child(search.Departure.DayOfWeek.ToString())
+                .OnceAsync<Planes>();
+            List<Planes> GoingPlaneslist = new List<Planes>();
+            List<Planes> BackPlaneslist = new List<Planes>();
+            foreach (var plane in dbPlanes)
+            { 
+                if (plane.Object.Capacity - plane.Object.BookedSeats >= search.Passengers)
+                GoingPlaneslist.Add(plane.Object);
+
+            }
+            dbPlanes = await firebaseClient.Child("Planes")
+               .Child(search.Destination)
+               .Child(search.Origin)
+               .Child(search.Departure.DayOfWeek.ToString())
+               .OnceAsync<Planes>();
 
             foreach (var plane in dbPlanes)
             {
-
-                if (plane.Object.from == search.Origin)
-                    if (plane.Object.to == search.Destination)
-                        //if (plane.Object.departureDate.Equals(search.Departure))
-                        //    if (plane.Object.returnDate.Equals(search.Return))
-                                if (plane.Object.capacity - plane.Object.bookedSeats >= search.Passengers)
-                            planeslist.Add(plane.Object);
-
+                if (plane.Object.Capacity - plane.Object.BookedSeats >= search.Passengers)
+                    BackPlaneslist.Add(plane.Object);
             }
 
-            ViewBag.Planes=planeslist;
+            ViewBag.GoingPlaneslist = GoingPlaneslist;
+            ViewBag.BackPlaneslist = BackPlaneslist;
             ViewBag.SearchResults = search;
 
             return View();
@@ -91,7 +149,7 @@ namespace FlyWithMe.Controllers
             var dbPlanes = await firebaseClient.Child("Planes").OnceAsync<Planes>();
             Planes selectPlane;
             foreach (var plane in dbPlanes)
-                if(plane.Object.id== id)
+                if(plane.Object.ID== id)
                 {
                     selectPlane=plane.Object;
                     break;

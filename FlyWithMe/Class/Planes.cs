@@ -10,29 +10,38 @@ namespace FlyWithMe.Class
         public int BookedSeats { get; set; }
         public int Capacity { get; set; }
         public string Company { get; set; }
-        public string DepartureDate { get; set; }
-        public string From { get; set; }
+        //public string DepartureDate { get; set; }
+      /// <summary>
+      // public string From { get; set; }
+      /// </summary>
         public int ID { get; set; }
         public string Landing { get; set; }
         public double Price  { get; set; }
-        public string ReturnDate { get; set; }
+       // public string ReturnDate { get; set; }
 
         public string TakeOff { get; set; }
-    
-        public string To { get; set; }
-        public Planes(int bookedSeats, int capacity, string company, string departureDate, string from, int id, string landing, double price, string returnDate, string takeOff, string to)
+
+        public double TaotalPrice(int x)
         {
-            this.BookedSeats = bookedSeats;
-            this.Capacity = capacity;
-            this.Company = company;
-            this.DepartureDate = departureDate;
-            this.From = from;
-            this.ID = id;
-            this.Landing = landing;
-            this.Price = price;
-            this.ReturnDate = returnDate;
-            TakeOff = takeOff;
-            this.To = to;
+           
+            return Price * x * 0.90;
         }
+
+        
+        // public string To { get; set; }
+        //public Planes(int bookedSeats, int capacity, string company, int id, string landing, double price, string takeOff)
+        //{
+        //    this.BookedSeats = bookedSeats;
+        //    this.Capacity = capacity;
+        //    this.Company = company;
+        //   // this.DepartureDate = departureDate;
+        //    //this.From = from;
+        //    this.ID = id;
+        //    this.Landing = landing;
+        //    this.Price = price;
+        //   // this.ReturnDate = returnDate;
+        //    TakeOff = takeOff;
+        //   // this.To = to;
+        //}
     }
 }

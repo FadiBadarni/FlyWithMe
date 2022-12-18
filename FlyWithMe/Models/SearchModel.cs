@@ -28,9 +28,8 @@ namespace FlyWithMe.Models
     }
     public enum cities
     {
-        Vienna, Brussels, Bahrain, Sofia, Montreal, Beijing,
-        Larnaca, Paris, Berlin, Rome, Barcelona, Geneva, Bangkok
-
+        TelAviv,Vienna, Brussels, Bahrain, Sofia, Montreal, Beijing,
+        Larnaca, Paris, Berlin, Rome, Barcelona, Geneva, Bangko
     }
    
 }

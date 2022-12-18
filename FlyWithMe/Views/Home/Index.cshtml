@@ -19,22 +19,23 @@
 
         @Html.AntiForgeryToken()
         <h4>Flight Search</h4>
-        
+
         <div class="parent">
 
             <div class="div1">
                 @Html.LabelFor(model => model.Origin, htmlAttributes: new { @class = "form-label" })
-                @Html.EditorFor(model => model.Origin, new { htmlAttributes = new { @class = "form-input" } })
+                @Html.DropDownListFor(model => model.Origin, new SelectList(Enum.GetValues(typeof(FlyWithMe.Models.cities))), "Select City")
+
             </div>
 
             <div class="div2">
                 @Html.LabelFor(model => model.Destination, htmlAttributes: new { @class = "form-label" })
-                @Html.EditorFor(model => model.Destination, new { htmlAttributes = new { @class = "form-input" } })
+                @Html.DropDownListFor(model => model.Destination, new SelectList(Enum.GetValues(typeof(FlyWithMe.Models.cities))), "Select City")
             </div>
 
             <div class="div3">
                 @Html.LabelFor(model => model.Departure, htmlAttributes: new { @class = "form-label" })
-                @Html.Html.DropDownListFor(model => model.Departure, new { htmlAttributes = new { @class = "form-input", @type = "date" } })
+                @Html.EditorFor(model => model.Departure, new { htmlAttributes = new { @class = "form-input", @type = "date" } })
             </div>
 
             <div class="div4">
@@ -52,13 +53,17 @@
                 @Html.EditorFor(model => model.Passengers, new { htmlAttributes = new { @class = "form-input" } })
             </div>
 
+
             <div class="div7">
-                    <input type="submit" value="Search" class="btn btn-primary btn-lg btn-block" />
+                <input type="submit" value="Search" class="btn btn-primary btn-lg btn-block" />
             </div>
 
         </div>
     }
 </div>
+
+
+
 
 
 @section Scripts {
