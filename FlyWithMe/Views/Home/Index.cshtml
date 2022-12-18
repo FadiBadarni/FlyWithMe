@@ -34,7 +34,7 @@
 
             <div class="div3">
                 @Html.LabelFor(model => model.Departure, htmlAttributes: new { @class = "form-label" })
-                @Html.EditorFor(model => model.Departure, new { htmlAttributes = new { @class = "form-input", @type = "date" } })
+                @Html.Html.DropDownListFor(model => model.Departure, new { htmlAttributes = new { @class = "form-input", @type = "date" } })
             </div>
 
             <div class="div4">
