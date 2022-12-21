@@ -24,13 +24,13 @@
 
             <div class="div1">
                 @Html.LabelFor(model => model.Origin, htmlAttributes: new { @class = "form-label" })
-                @Html.DropDownListFor(model => model.Origin, new SelectList(Enum.GetValues(typeof(FlyWithMe.Models.cities))), "Select City")
+                @Html.DropDownListFor(model => model.Origin, new  SelectList(Enum.GetValues(typeof(FlyWithMe.Models.cities))), "Select City", new { @class = "form-input" })
 
             </div>
 
             <div class="div2">
                 @Html.LabelFor(model => model.Destination, htmlAttributes: new { @class = "form-label" })
-                @Html.DropDownListFor(model => model.Destination, new SelectList(Enum.GetValues(typeof(FlyWithMe.Models.cities))), "Select City")
+                @Html.DropDownListFor(model => model.Destination, new SelectList(Enum.GetValues(typeof(FlyWithMe.Models.cities))), "Select City", new { @class = "form-input" })
             </div>
 
             <div class="div3">
@@ -55,7 +55,7 @@
 
 
             <div class="div7">
-                <input type="submit" value="Search" class="btn btn-primary btn-lg btn-block" />
+                <input type="submit" value="Search" class="btn btn-primary btn-lg btn-block" id="button" />
             </div>
 
         </div>

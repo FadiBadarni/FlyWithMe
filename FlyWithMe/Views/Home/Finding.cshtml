@@ -23,11 +23,11 @@
 
 <div class="info"></div>
 
-<div class='parent'>
-    <div class='child'>
+<div class='parent2'>
+    <div class='child2'>
         <b>@ViewBag.SearchResults</b>
     </div>
-
+    
     <div class="date">
         <b>@ViewData["Departure"]</b>
     </div>
@@ -54,7 +54,7 @@
                 <td>@Html.DisplayFor(modelItem => item.Landing)</td>
                 <td>@Html.DisplayFor(modelItem => item.Price)</td>             
                 <td>
-                    @Html.ActionLink("buying a ticket", "InsertData", "Booking", new { id = item.ID }, null)
+                    @Html.ActionLink("buying a ticket", "PassengersInfo", "Booking", new { id = item.ID, count = x }, null)
                     <b>|</b>
                     @Html.ActionLink("Details", "Details", new { id = item.ID })
                 </td>

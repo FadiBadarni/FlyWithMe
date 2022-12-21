@@ -13,16 +13,17 @@ namespace FlyWithMe.Controllers
     public class BookingController : Controller
     {
   
-        public ActionResult InsertData(int? id)
+        public ActionResult PassengersInfo(int? id, int? count)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            Session["count"] = count;
             return View();
         }
 
-        public ActionResult PassengersInfo()
+        public ActionResult Payment()
         {
             return View();
         }

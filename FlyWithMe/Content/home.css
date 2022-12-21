@@ -103,3 +103,22 @@ h4 {
         box-shadow: inset 100px 0 0 0 #939393;
         color: white;
     }
+
+.navbar {
+    padding: 0.5rem;
+}
+
+.nav {
+    position: absolute !important;
+    right: 40% !important;
+}
+
+li {
+    font-size: 20px !important;
+}
+
+.logo {
+    display: flex !important;
+    height: 50px !important;
+}
+
