@@ -1,7 +1,7 @@
 ﻿
 @model IEnumerable<FlyWithMe.Class.Planes>
 @{
-    ViewBag.Title = "Finding2";
+    ViewBag.Title = "InboundFlights";
     int x = ViewBag.SearchResults.Passengers;
     string[] TableColumns = new string[] { "ID", "Air Line", "Take Off", "Arrival", "Price x " + x, "Actions" };
 
@@ -53,7 +53,7 @@
 
 
                 <td>
-                    @Html.ActionLink("buying a ticket", "BookingInfo", "Booking", new { IdGo=ViewBag.OnePlanes.ID,IdBack = item.ID, Origin = ViewBag.SearchResults.Origin, Destination = ViewBag.SearchResults.Destination, Departure = ViewBag.SearchResults.Departure, Return = ViewBag.SearchResults.Return, Class = ViewBag.SearchResults.Class, Passengers = ViewBag.SearchResults.Passengers }, null) 
+                    @Html.ActionLink("Choose Outbound Flight", "PassengersInfo", "Booking", new { IdGo=ViewBag.OnePlanes.ID,IdBack = item.ID, Origin = ViewBag.SearchResults.Origin, Destination = ViewBag.SearchResults.Destination, Departure = ViewBag.SearchResults.Departure, Return = ViewBag.SearchResults.Return, Class = ViewBag.SearchResults.Class, Passengers = ViewBag.SearchResults.Passengers }, null) 
                     <b>|</b>
                     @Html.ActionLink("Details", "Details", new { id = item.ID })
                 </td>

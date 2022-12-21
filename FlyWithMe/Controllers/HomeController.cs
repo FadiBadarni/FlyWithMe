@@ -84,7 +84,7 @@ namespace FlyWithMe.Controllers
         }
 
 
-        public ActionResult Finding()
+        public ActionResult OutboundFlights()
         {
            return Redirect("/Home");
 
@@ -92,7 +92,7 @@ namespace FlyWithMe.Controllers
 
 
             [HttpPost]
-        public async Task<ActionResult> Finding(SearchModel search)
+        public async Task<ActionResult> OutboundFlights(SearchModel search)
         {
             if (search == null)
             {
@@ -149,7 +149,7 @@ namespace FlyWithMe.Controllers
         }
 
 
-        public async Task<ActionResult> Finding2([Bind(Include = "IdGo,IdBack,Origin,Destination,Departure,Return,Class,Passengers")] Searching search)
+        public async Task<ActionResult> InboundFlights([Bind(Include = "IdGo,IdBack,Origin,Destination,Departure,Return,Class,Passengers")] Searching search)
         {
            
             ViewData["Origin"] = Request["Origin"];
@@ -187,36 +187,36 @@ namespace FlyWithMe.Controllers
         }
 
 
-        public async Task<ActionResult> BookingInfo([Bind(Include = "IdGo,IdBack,Origin,Destination,Departure,Return,Class,Passengers")] Searching search)
-        {
-            double price = 0;
-            List<Planes> planes = new List<Planes>();
-            var firebaseClient = new FirebaseClient(FirbaseLink);
-            var goPlanes = await firebaseClient.Child("Planes").Child(search.Origin)
-            .Child(search.Destination)
-            .Child(search.Departure.DayOfWeek.ToString()).Child(search.IdGo.ToString())
-            .OnceSingleAsync<Planes>();
-            goPlanes.TotalPrice(search.Passengers);
-            price += goPlanes.Price;
-            planes.Add(goPlanes);
-            if (search.IdBack != -1)
-            {
-                var backPlanes = await firebaseClient.Child("Planes").Child(search.Destination)
-             .Child(search.Origin)
-             .Child(search.Departure.DayOfWeek.ToString()).Child(search.IdBack.ToString())
-             .OnceSingleAsync<Planes>();
-                backPlanes.TotalPrice(search.Passengers);
-                price += backPlanes.Price;
-                planes.Add(backPlanes);
-            }
+        //public async Task<ActionResult> BookingInfo([Bind(Include = "IdGo,IdBack,Origin,Destination,Departure,Return,Class,Passengers")] Searching search)
+        //{
+        //    double price = 0;
+        //    List<Planes> planes = new List<Planes>();
+        //    var firebaseClient = new FirebaseClient(FirbaseLink);
+        //    var goPlanes = await firebaseClient.Child("Planes").Child(search.Origin)
+        //    .Child(search.Destination)
+        //    .Child(search.Departure.DayOfWeek.ToString()).Child(search.IdGo.ToString())
+        //    .OnceSingleAsync<Planes>();
+        //    goPlanes.TotalPrice(search.Passengers);
+        //    price += goPlanes.Price;
+        //    planes.Add(goPlanes);
+        //    if (search.IdBack != -1)
+        //    {
+        //        var backPlanes = await firebaseClient.Child("Planes").Child(search.Destination)
+        //     .Child(search.Origin)
+        //     .Child(search.Departure.DayOfWeek.ToString()).Child(search.IdBack.ToString())
+        //     .OnceSingleAsync<Planes>();
+        //        backPlanes.TotalPrice(search.Passengers);
+        //        price += backPlanes.Price;
+        //        planes.Add(backPlanes);
+        //    }
 
             
-            ViewBag.SearchResults = search;
-            ViewBag.Planes = planes;
-            ViewBag.Price = price;
+        //    ViewBag.SearchResults = search;
+        //    ViewBag.Planes = planes;
+        //    ViewBag.Price = price;
 
-            return View();
-        }
+        //    return View();
+        //}
     }
 
 }

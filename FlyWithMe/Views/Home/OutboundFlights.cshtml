@@ -2,7 +2,7 @@
 @model IEnumerable<FlyWithMe.Class.Planes>
 
 @{
-    ViewBag.Title = "Finding";
+    ViewBag.Title = "OutboundFlights";
     int x = ViewBag.SearchResults.Passengers;
     string[] TableColumns = new string[] { "ID","Air Line", "Take Off", "Arrival", "Price x "+x, "Actions" };
 
@@ -22,7 +22,7 @@
 </head>
 
 
-
+<div class="info"></div>
 <div class='parent2'>
     <div class='child2'>
         <b>@ViewBag.SearchResults</b>
@@ -57,8 +57,7 @@
 =======
                 <td>@Html.DisplayFor(modelItem => item.Price)</td>             
                 <td>
-                    @Html.ActionLink("buying a ticket", "PassengersInfo", "Booking", new { id = item.ID, count = x }, null)
-                    <b>|</b>
+                    @Html.ActionLink("Choose OutBound Flight", "InboundFlights", "Home", new { IdGo = item.ID, IdBack = -1, Origin = ViewBag.SearchResults.Origin, Destination = ViewBag.SearchResults.Destination, Departure = ViewBag.SearchResults.Departure, Return = ViewBag.SearchResults.Return, Class = ViewBag.SearchResults.Class, Passengers = ViewBag.SearchResults.Passengers }, null)                    <b>|</b>
                     @Html.ActionLink("Details", "Details", new { id = item.ID })
                 </td>
             </tr>
@@ -68,47 +67,6 @@
 
 
 <div class="info"></div>
-
-
-<div class='parent2'>
-    <div class='child2'><b>@ViewData["Destination"]  → @ViewData["Origin"]</b></div>
-    <div class="date">
-        <b>@ViewData["Return"]</b>
-    </div>
-</div>
-
-
-<table class="table table-bordered table-striped" id="myTable2">
-    <thead>
-        <tr>
-
-            @foreach (string column in TableColumns)
-            {
-                <th scope="col">@column</th>
-            }
-        </tr>
-
-    </thead>
-    <tbody>
-        @foreach (FlyWithMe.Class.Planes item in ViewBag.BackPlaneslist)
-        {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.ID)</td>
-                <td>@Html.DisplayFor(modelItem => item.Company)</td>
-                <td>@Html.DisplayFor(modelItem => item.TakeOff)</td>
-                <td>@Html.DisplayFor(modelItem => item.Landing)</td>
-
-                <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                <td>
-
-                    @Html.ActionLink("buying a ticket", "Finding2", "Home", new { IdGo = item.ID,IdBack=-1, Origin = ViewBag.SearchResults.Origin, Destination = ViewBag.SearchResults.Destination, Departure = ViewBag.SearchResults.Departure, Return = ViewBag.SearchResults.Return, Class = ViewBag.SearchResults.Class, Passengers = ViewBag.SearchResults.Passengers }, null)
-                    <b>|</b>
-                    @Html.ActionLink("Details", "Details", new { id = item.ID })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
 
 
 
