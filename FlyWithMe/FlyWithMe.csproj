@@ -131,12 +131,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Class\Planes.cs" />
+    <Compile Include="Class\Searching.cs" />
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BookingInfoModel.cs" />
     <Compile Include="Models\BookingModule.cs" />
     <Compile Include="Models\InsertDataModel.cs" />
     <Compile Include="Models\Passenger.cs" />
@@ -189,7 +191,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Finding.cshtml" />
     <Content Include="Views\Booking\PassengersInfo.cshtml" />
+    <Content Include="Views\Home\Finding2.cshtml" />
+    <Content Include="Views\Booking\BookingInfo.cshtml" />
+    <Content Include="Views\Home\BookingInfo.cshtml" />
     <Content Include="Views\Booking\Payment.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

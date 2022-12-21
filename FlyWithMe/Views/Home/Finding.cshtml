@@ -3,9 +3,9 @@
 
 @{
     ViewBag.Title = "Finding";
-
-    string[] TableColumns = new string[] { "ID","Air Line", "Take Off", "Arrival", "Person Price", "Actions" };
     int x = ViewBag.SearchResults.Passengers;
+    string[] TableColumns = new string[] { "ID","Air Line", "Take Off", "Arrival", "Price x "+x, "Actions" };
+
 
 }
 <head>
@@ -21,7 +21,7 @@
 
 </head>
 
-<div class="info"></div>
+
 
 <div class='parent2'>
     <div class='child2'>
@@ -52,6 +52,9 @@
                 <td>@Html.DisplayFor(modelItem => item.Company)</td>
                 <td>@Html.DisplayFor(modelItem => item.TakeOff)</td>
                 <td>@Html.DisplayFor(modelItem => item.Landing)</td>
+
+                @Html.Display(item.TotalPrice(x).ToString())
+=======
                 <td>@Html.DisplayFor(modelItem => item.Price)</td>             
                 <td>
                     @Html.ActionLink("buying a ticket", "PassengersInfo", "Booking", new { id = item.ID, count = x }, null)
@@ -94,10 +97,11 @@
                 <td>@Html.DisplayFor(modelItem => item.Company)</td>
                 <td>@Html.DisplayFor(modelItem => item.TakeOff)</td>
                 <td>@Html.DisplayFor(modelItem => item.Landing)</td>
-                <td>@Html.DisplayFor(modelItem => item.Price)</td>
 
+                <td>@Html.DisplayFor(modelItem => item.Price)</td>
                 <td>
-                    @Html.ActionLink("buying a ticket", "InsertData", "Booking", new { id = item.ID }, null)
+
+                    @Html.ActionLink("buying a ticket", "Finding2", "Home", new { IdGo = item.ID,IdBack=-1, Origin = ViewBag.SearchResults.Origin, Destination = ViewBag.SearchResults.Destination, Departure = ViewBag.SearchResults.Departure, Return = ViewBag.SearchResults.Return, Class = ViewBag.SearchResults.Class, Passengers = ViewBag.SearchResults.Passengers }, null)
                     <b>|</b>
                     @Html.ActionLink("Details", "Details", new { id = item.ID })
                 </td>
@@ -105,12 +109,6 @@
         }
     </tbody>
 </table>
-
-
-
-
-
-
 
 
 
@@ -129,16 +127,6 @@
         });
         $(document).ready(function () {
             $('#myTable').DataTable();
-        });
-        $('#myTable2').dataTable({
-            searching: true,
-            paging: false,
-            info: false,
-            scrollY: '500px',
-            scrollCollapse: true
-        });
-        $(document).ready(function () {
-            $('#myTable2').DataTable();
         });
     </script>
 

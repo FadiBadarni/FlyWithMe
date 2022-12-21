@@ -1,0 +1,70 @@
+﻿@model FlyWithMe.Models.BookingInfoModel
+@{
+    ViewBag.Title = "BookingInfo";
+
+}
+
+
+<h1>
+    You want to go From @ViewBag.SearchResults.Origin in Date  @ViewBag.SearchResults.Departure to
+    @ViewBag.SearchResults.Destination in Date @ViewBag.SearchResults.Return
+    with this planes
+</h1>
+
+@foreach (FlyWithMe.Class.Planes planes in ViewBag.planes)
+{
+    <tr>
+        <td>@Html.Display(planes.ToString())</td>
+    </tr>
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>BookingInfoModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Bag, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Bag)
+                    @Html.ValidationMessageFor(model => model.Bag, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Meal, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Meal)
+                    @Html.ValidationMessageFor(model => model.Meal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VIP, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.VIP)
+                    @Html.ValidationMessageFor(model => model.VIP, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
