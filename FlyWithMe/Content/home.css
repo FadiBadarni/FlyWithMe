@@ -104,13 +104,22 @@ h4 {
         color: white;
     }
 
-
-input[type=button] {
-    background-color: #04AA6D;
-    border: none;
-    color: white;
-    padding: 16px 32px;
-    text-decoration: none;
-    margin: 4px 2px;
-    cursor: pointer;
+.navbar {
+    padding: 0.5rem;
 }
+
+.nav {
+    position: absolute !important;
+    right: 40% !important;
+}
+
+li {
+    font-size: 20px !important;
+}
+
+.logo {
+    display: flex !important;
+    height: 50px !important;
+}
+
+

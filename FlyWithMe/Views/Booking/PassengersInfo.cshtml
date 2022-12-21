@@ -1,53 +1,42 @@
-﻿@model FlyWithMe.Models.BookingModule
+﻿
 
 @{
-    ViewBag.Title = "Buying";
+    ViewBag.Title = "Passenger Information";
+    int passengersCount = (int)Session["count"];
 }
-<link rel="stylesheet" href="~/Content/PassengersInfo.css" type="text/css" />
-<h2>Passengers Information</h2>
 
+<head>
+    @Styles.Render("~/Content/PassengersInfo.css")
+</head>
 
-@using (Html.BeginForm())
+@model List<FlyWithMe.Models.Passenger>
+
+<h2>Passenger Information</h2>
+<br />
+@using (Html.BeginForm("Payment", "Booking", FormMethod.Post))
 {
-    @Html.AntiForgeryToken()
 
-    <div class="parent">
+    for (int i = 0; i < passengersCount; i++)
+    {
+        <div class="passenger-form">
 
-        <div class="div1">
-            @Html.LabelFor(model => model.firstName, htmlAttributes: new { @class = "form-label" })
-            @Html.EditorFor(model => model.firstName, new { htmlAttributes = new { @class = "form-input" } })
+            <h3>Passenger @(i + 1)</h3>
+            <img class="passenger-img" src="~/images/passenger.png" alt="Alternate Text" />
+            <div class="form-group">
+                @Html.Label("Name")
+                @Html.TextBoxFor(m => m[i].Name, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Email")
+                @Html.TextBoxFor(m => m[i].Email, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Phone")
+                @Html.TextBoxFor(m => m[i].Phone, new { @class = "form-control" })
+            </div>
         </div>
-
-        <div class="div2">
-            @Html.LabelFor(model => model.lastName, htmlAttributes: new { @class = "form-label" })
-            @Html.EditorFor(model => model.lastName, new { htmlAttributes = new { @class = "form-input" } })
-        </div>
-
-        <div class="div3">
-            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "form-label" })
-            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-input" } })
-        </div>
-
-        <div class="div4">
-            @Html.LabelFor(model => model.yearOfBirth, htmlAttributes: new { @class = "form-label" })
-            @Html.EditorFor(model => model.yearOfBirth, new { htmlAttributes = new { @class = "form-input" } })
-        </div>
-
-        <div class="div5">
-            @Html.LabelFor(model => model.phoneNumber, htmlAttributes: new { @class = "form-label" })
-            @Html.EditorFor(model => model.phoneNumber, new { htmlAttributes = new { @class = "form-input" } })
-        </div>
-
-        <div class="div6">
-            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "form-label" })
-            @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-input" } })
-        </div>
-
-        <div class="div7">
-            <input type="submit" value="Proceed" class="btn btn-primary btn-md btn-block" />
-        </div>
-
-    </div>
+    }
+    <button type="submit">Proceed to Payment</button>
 }
 
 

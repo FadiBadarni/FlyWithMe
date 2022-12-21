@@ -16,17 +16,20 @@ namespace FlyWithMe.Controllers
     
     public class BookingController : Controller
     {
+
         private static string FirbaseLink = "https://myflight-db2b1-default-rtdb.firebaseio.com";
         public ActionResult InsertData(int? id)
+
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            Session["count"] = count;
             return View();
         }
 
-        public ActionResult PassengersInfo()
+        public ActionResult Payment()
         {
             return View();
         }

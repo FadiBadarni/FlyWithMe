@@ -106,6 +106,8 @@ namespace FlyWithMe.Controllers
             ViewData["Departure"] = Request["Departure"];
             ViewData["Return"] = Request["Return"];
 
+            ViewData["PassengersCount"] = search.Passengers;
+
             var firebaseClient = new FirebaseClient(FirbaseLink);
 
            // Searching searching = new Searching(search);

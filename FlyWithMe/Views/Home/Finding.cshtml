@@ -23,11 +23,11 @@
 
 
 
-<div class='parent'>
-    <div class='child'>
+<div class='parent2'>
+    <div class='child2'>
         <b>@ViewBag.SearchResults</b>
     </div>
-
+    
     <div class="date">
         <b>@ViewData["Departure"]</b>
     </div>
@@ -52,7 +52,52 @@
                 <td>@Html.DisplayFor(modelItem => item.Company)</td>
                 <td>@Html.DisplayFor(modelItem => item.TakeOff)</td>
                 <td>@Html.DisplayFor(modelItem => item.Landing)</td>
+
                 @Html.Display(item.TotalPrice(x).ToString())
+=======
+                <td>@Html.DisplayFor(modelItem => item.Price)</td>             
+                <td>
+                    @Html.ActionLink("buying a ticket", "PassengersInfo", "Booking", new { id = item.ID, count = x }, null)
+                    <b>|</b>
+                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div class="info"></div>
+
+
+<div class='parent2'>
+    <div class='child2'><b>@ViewData["Destination"]  → @ViewData["Origin"]</b></div>
+    <div class="date">
+        <b>@ViewData["Return"]</b>
+    </div>
+</div>
+
+
+<table class="table table-bordered table-striped" id="myTable2">
+    <thead>
+        <tr>
+
+            @foreach (string column in TableColumns)
+            {
+                <th scope="col">@column</th>
+            }
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (FlyWithMe.Class.Planes item in ViewBag.BackPlaneslist)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.ID)</td>
+                <td>@Html.DisplayFor(modelItem => item.Company)</td>
+                <td>@Html.DisplayFor(modelItem => item.TakeOff)</td>
+                <td>@Html.DisplayFor(modelItem => item.Landing)</td>
+
                 <td>@Html.DisplayFor(modelItem => item.Price)</td>
                 <td>
 
