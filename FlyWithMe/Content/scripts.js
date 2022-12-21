@@ -11,7 +11,7 @@
 
     var minDate = year + '-' + month + '-' + day;
 
-    $('#txtDate').attr('min', minDate);
+    $('#startDate').attr('min', minDate);
 });
 $(function () {
     var dtToday = new Date();
@@ -26,5 +26,20 @@ $(function () {
 
     var minDate = year + '-' + month + '-' + day;
 
-    $('#txtDate2').attr('min', minDate);
+    $('#endDate').attr('min', minDate);
 });
+
+$(function () {
+    $(".flights-table tbody tr").addClass("unfocused");
+    $('.unfocused').hover(function () {
+        $(this).removeClass('unfocused');
+    }, function () {
+        $(this).addClass('unfocused');
+    });
+});
+
+function changeFontColor(color) {
+    document.querySelector('.child2').style.color = color;
+} 
+
+

@@ -144,7 +144,6 @@ namespace FlyWithMe.Controllers
            
             ViewData["Origin"] = Request["Origin"];
             ViewData["Destination"] = Request["Destination"];
-
             ViewData["Departure"] = Request["Departure"];
             ViewData["Return"] = Request["Return"];
 

@@ -4,9 +4,13 @@
     ViewBag.Title = "InboundFlights";
     int x = ViewBag.SearchResults.Passengers;
     string[] TableColumns = new string[] { "ID", "Air Line", "Take Off", "Arrival", "Price x " + x, "Actions" };
-
-
 }
+
+@section Scripts
+{
+    <script src="@Url.Content("~/Content/scripts.js")"></script>
+}
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,17 +23,42 @@
 
 
 
-<div class='parent2'>
-    <div class='child2'><b>@ViewData["Destination"]  → @ViewData["Origin"]</b></div>
-    <div class="date">
-        <b>@ViewData["Return"]</b>
+<section id="section">
+
+    <div class='parent2'>
+        <div class='child'>
+            <b>@ViewBag.Destination ⸺✈︎ @ViewBag.Origin</b>
+        </div>
     </div>
-</div>
+    <div class="child2">
+        Displaying Results For @x Passengers <b>|</b> Economy Class
+    </div>
 
-<div class='child2'><h18>@ViewBag.OnePlanes</h18></div>
+</section>
+
+<div class='child3'>Selected Outbound Flight</div>
 
 
-<table class="table table-bordered table-striped" id="myTable2">
+<table class="flights-table2" id="">
+    <tbody>
+        <tr onmouseover="changeFontColor('#D70040')" onmouseout="changeFontColor('black')">
+            <td>@ViewBag.OnePlanes.ID</td>
+            <td>@ViewBag.OnePlanes.Company</td>
+            <td>@ViewBag.OnePlanes.TakeOff</td>
+            <td>@ViewBag.OnePlanes.Landing</td>
+            <td>@ViewBag.OnePlanes.Price</td>
+            <td>
+                <a href='javascript:history.go(-1)'>Change Selection</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+
+
+<table class="flights-table" id="">
     <thead>
         <tr>
 
@@ -43,7 +72,7 @@
     <tbody>
         @foreach (FlyWithMe.Class.Planes item in ViewBag.BackPlaneslist)
         {
-            <tr>
+            <tr onmouseover="changeFontColor('#D70040')" onmouseout="changeFontColor('black')">
                 <td>@Html.DisplayFor(modelItem => item.ID)</td>
                 <td>@Html.DisplayFor(modelItem => item.Company)</td>
                 <td>@Html.DisplayFor(modelItem => item.TakeOff)</td>
@@ -53,9 +82,7 @@
 
 
                 <td>
-                    @Html.ActionLink("Choose Outbound Flight", "PassengersInfo", "Booking", new { IdGo=ViewBag.OnePlanes.ID,IdBack = item.ID, Origin = ViewBag.SearchResults.Origin, Destination = ViewBag.SearchResults.Destination, Departure = ViewBag.SearchResults.Departure, Return = ViewBag.SearchResults.Return, Class = ViewBag.SearchResults.Class, Passengers = ViewBag.SearchResults.Passengers }, null) 
-                    <b>|</b>
-                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                    @Html.ActionLink("Choose Inbound Flight", "PassengersInfo", "Booking", new { IdGo = ViewBag.OnePlanes.ID, IdBack = item.ID, Origin = ViewBag.SearchResults.Origin, Destination = ViewBag.SearchResults.Destination, Departure = ViewBag.SearchResults.Departure, Return = ViewBag.SearchResults.Return, Class = ViewBag.SearchResults.Class, Passengers = ViewBag.SearchResults.Passengers }, null)
                 </td>
             </tr>
         }
@@ -63,46 +90,4 @@
 </table>
 
 
-
-
-
-
-
-@using (Html.BeginForm("action", "yourcontrollername", new { }))
-{
-
-    @Html.Hidden("SearchResults", (object)ViewBag.SearchResults)
-    @Html.Hidden("OnePlanes", (object)ViewBag.OnePlanes)
-
-
-    <input type="button" name="button" class="button1" value="Skip"
-           style="
-  background-color: #04AA6D;
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-decoration: none;
-  margin: 4px 2px;
-  cursor: pointer;" />
-}
-
-
-
-@section Scripts{
-    <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-
-    <script>
-        $('#myTable2').dataTable({
-            searching: true,
-            paging: false,
-            info: false,
-            scrollY: '500px',
-            scrollCollapse: true
-        });
-        $(document).ready(function () {
-            $('#myTable2').DataTable();
-        });
-    </script>
-
-}
 

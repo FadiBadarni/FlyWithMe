@@ -138,9 +138,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BookingInfoModel.cs" />
     <Compile Include="Models\BookingModule.cs" />
     <Compile Include="Models\Passenger.cs" />
+    <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -154,6 +154,7 @@
     <Content Include="Content\FlightList.css" />
     <Content Include="Content\home.css" />
     <Content Include="Content\PassengersInfo.css" />
+    <Content Include="Content\Payment.css" />
     <Content Include="Content\scripts.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

@@ -1,0 +1,29 @@
+﻿.payment-form {
+    border: 3px solid red;
+    height: 500px;
+    width: 450px;
+    position: absolute;
+    margin-top: 40px;
+    
+}
+.form-group {
+    position: relative;
+    text-align: left;
+    left: 70px;
+    top: 30px;
+}
+.information {
+    border: 3px solid red;
+    height: 600px;
+    width: 550px;
+    float:right;
+    position:relative;
+    margin-top: 40px;
+}
+.pay-button {
+    width: 150px;
+    position: relative;
+    top:60px;
+    left:150px;
+    background:border-box;
+}

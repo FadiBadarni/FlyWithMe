@@ -22,7 +22,7 @@ namespace FlyWithMe.Models
         public int Passengers { get; set; }
         public override string ToString()
         {
-            return Origin + " → " + Destination;
+            return Origin + " ⸺✈︎ " + Destination;
         }
 
         public  static SearchModel Copy(SearchModel model)

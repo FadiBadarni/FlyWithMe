@@ -7,38 +7,75 @@
 
 <head>
     @Styles.Render("~/Content/PassengersInfo.css")
+    @Styles.Render("~/Content/FlightList.css")
 </head>
 
 @model List<FlyWithMe.Models.Passenger>
 
-<h2>Passenger Information</h2>
-<br />
-@using (Html.BeginForm("Payment", "Booking", FormMethod.Post))
-{
 
-    for (int i = 0; i < passengersCount; i++)
+
+<section2>
+    <div class="header">Chosen Outbound Flight</div>
+    <table class="flights-table" id="">
+        <tbody>
+            <tr>
+                <td>Plane ID</td>
+                <td>Plane Company</td>
+                <td>Plane TakeOff</td>
+                <td>Plane Landing</td>
+                <td>Plane Price</td>
+                <td>
+                    <a href='javascript:history.go(-1)'>Change Selection</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="header2">Chosen Inbound Flight</div>
+    <table class="flights-table" id="">
+        <tbody>
+            <tr>
+                <td>Plane ID</td>
+                <td>Plane Company</td>
+                <td>Plane TakeOff</td>
+                <td>Plane Landing</td>
+                <td>Plane Price</td>
+                <td>
+                    <a href='javascript:history.go(-1)'>Change Selection</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</section2>
+<section3>
+    <h2>Passenger Information</h2>
+
+    @using (Html.BeginForm("Payment", "Booking", FormMethod.Post))
     {
-        <div class="passenger-form">
 
-            <h3>Passenger @(i + 1)</h3>
-            <img class="passenger-img" src="~/images/passenger.png" alt="Alternate Text" />
-            <div class="form-group">
-                @Html.Label("Name")
-                @Html.TextBoxFor(m => m[i].Name, new { @class = "form-control" })
+        for (int i = 0; i < passengersCount; i++)
+        {
+            <div class="passenger-form">
+
+                <h3>Passenger @(i + 1)</h3>
+                <img class="passenger-img" src="~/images/passenger.png" alt="Alternate Text" />
+                <div class="form-group">
+                    @Html.Label("Name")
+                    @Html.TextBoxFor(m => m[i].Name, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("Email")
+                    @Html.TextBoxFor(m => m[i].Email, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("Phone")
+                    @Html.TextBoxFor(m => m[i].Phone, new { @class = "form-control" })
+                </div>
             </div>
-            <div class="form-group">
-                @Html.Label("Email")
-                @Html.TextBoxFor(m => m[i].Email, new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                @Html.Label("Phone")
-                @Html.TextBoxFor(m => m[i].Phone, new { @class = "form-control" })
-            </div>
-        </div>
+        }
+        <button type="submit">Proceed to Payment</button>
     }
-    <button type="submit">Proceed to Payment</button>
-}
-
+</section3>
 
 
 @section Scripts {

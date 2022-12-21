@@ -12,14 +12,9 @@ namespace FlyWithMe.Class
         public int Capacity { get; set; }
         public string Company { get; set; }
         //public string DepartureDate { get; set; }
-      /// <summary>
-      // public string From { get; set; }
-      /// </summary>
         public int ID { get; set; }
         public string Landing { get; set; }
         public double Price  { get; set; }
-       // public string ReturnDate { get; set; }
-
         public string TakeOff { get; set; }
        
         public Object TotalPrice(int x) 

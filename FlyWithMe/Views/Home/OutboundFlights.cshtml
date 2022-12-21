@@ -4,9 +4,11 @@
 @{
     ViewBag.Title = "OutboundFlights";
     int x = ViewBag.SearchResults.Passengers;
-    string[] TableColumns = new string[] { "ID","Air Line", "Take Off", "Arrival", "Price x "+x, "Actions" };
-
-
+    string[] TableColumns = new string[] { "ID", "Air Line", "Take Off", "Arrival", "Price", "Actions" };
+}
+@section Scripts
+{
+    <script src="@Url.Content("~/Content/scripts.js")"></script>
 }
 <head>
     <meta charset="utf-8" />
@@ -22,18 +24,21 @@
 </head>
 
 
-<div class="info"></div>
-<div class='parent2'>
-    <div class='child2'>
-        <b>@ViewBag.SearchResults</b>
-    </div>
-    
-    <div class="date">
-        <b>@ViewData["Departure"]</b>
-    </div>
-</div>
+<section id="section">
 
-<table class="table table-bordered table-striped" id="myTable">
+    <div class='parent2'>
+        <div class='child'>
+            <b>@ViewBag.SearchResults</b>
+        </div>
+    </div>
+    <div class="child2">
+        Displaying Results For @x Passengers <b>|</b> Economy Class
+    </div>
+
+</section>
+
+
+<table class="flights-table" id="">
     <thead>
         <tr>
 
@@ -47,46 +52,20 @@
     <tbody>
         @foreach (FlyWithMe.Class.Planes item in ViewBag.GoingPlaneslist)
         {
-            <tr>
+            <tr onmouseover="changeFontColor('#D70040')" onmouseout="changeFontColor('black')">
                 <td>@Html.DisplayFor(modelItem => item.ID)</td>
                 <td>@Html.DisplayFor(modelItem => item.Company)</td>
                 <td>@Html.DisplayFor(modelItem => item.TakeOff)</td>
                 <td>@Html.DisplayFor(modelItem => item.Landing)</td>
 
+
                 @Html.Display(item.TotalPrice(x).ToString())
-=======
-                <td>@Html.DisplayFor(modelItem => item.Price)</td>             
+                <td>@Html.DisplayFor(modelItem => item.Price)</td>
                 <td>
-                    @Html.ActionLink("Choose OutBound Flight", "InboundFlights", "Home", new { IdGo = item.ID, IdBack = -1, Origin = ViewBag.SearchResults.Origin, Destination = ViewBag.SearchResults.Destination, Departure = ViewBag.SearchResults.Departure, Return = ViewBag.SearchResults.Return, Class = ViewBag.SearchResults.Class, Passengers = ViewBag.SearchResults.Passengers }, null)                    <b>|</b>
-                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                    @Html.ActionLink("Choose OutBound Flight", "InboundFlights", "Home", new { IdGo = item.ID, IdBack = -1, Origin = ViewBag.SearchResults.Origin, Destination = ViewBag.SearchResults.Destination, Departure = ViewBag.SearchResults.Departure, Return = ViewBag.SearchResults.Return, Class = ViewBag.SearchResults.Class, Passengers = ViewBag.SearchResults.Passengers }, null)
                 </td>
             </tr>
         }
     </tbody>
 </table>
-
-
-<div class="info"></div>
-
-
-
-
-
-@section Scripts{
-    <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-
-    <script>
-        $('#myTable').dataTable({
-            searching: true,
-            paging: false,
-            info: false,
-            scrollY: '500px',
-            scrollCollapse: true
-        });
-        $(document).ready(function () {
-            $('#myTable').DataTable();
-        });
-    </script>
-
-}
 
