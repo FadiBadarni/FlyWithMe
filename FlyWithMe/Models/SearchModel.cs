@@ -25,6 +25,19 @@ namespace FlyWithMe.Models
             return Origin + " → " + Destination;
         }
 
+        public  static SearchModel Copy(SearchModel model)
+        {
+            SearchModel newSearch = new SearchModel()
+            {
+                Origin = model.Origin,
+                Destination = model.Destination,
+                Departure = model.Departure,
+                Return = model.Return,
+                Class = model.Class,
+                Passengers = model.Passengers
+            };
+            return newSearch;
+        }
     }
     public enum cities
     {

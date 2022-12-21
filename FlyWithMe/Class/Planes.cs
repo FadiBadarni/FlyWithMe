@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 
@@ -20,14 +21,17 @@ namespace FlyWithMe.Class
        // public string ReturnDate { get; set; }
 
         public string TakeOff { get; set; }
-
-        public double TaotalPrice(int x)
+       
+        public Object TotalPrice(int x) 
         {
-           
-            return Price * x * 0.90;
+            return this.Price=Price*=x;
         }
 
-        
+        public override string ToString()
+        {
+            return "Landing:"+Landing+ "     TakeOff:"+ TakeOff + "\n Total Price:" + Price;
+        }
+
         // public string To { get; set; }
         //public Planes(int bookedSeats, int capacity, string company, int id, string landing, double price, string takeOff)
         //{
