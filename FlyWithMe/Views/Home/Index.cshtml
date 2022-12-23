@@ -15,59 +15,62 @@
 @Styles.Render("~/Content/css")
 <link rel="stylesheet" href="~/Content/home.css" type="text/css" />
 @Scripts.Render("~/bundles/modernizr")
-<img class="bg" src="~/images/background.png" alt="">
+<body>
 
-<div class="search-box">
-    @using (Html.BeginForm("OutboundFlights", "Home"))
-    {
+    <img class="bg" src="~/images/background.jpg" alt="">
+    <div class="heading">Life Is Short But</div>
+    <div class="heading2">The World Is Wide</div>
+    <div class="search-box">
 
-        @Html.AntiForgeryToken()
-        <h4>Flight Search</h4>
+        @using (Html.BeginForm("OutboundFlights", "Home"))
+        {
 
-        <div class="parent">
+            @Html.AntiForgeryToken()
 
-            <div class="div1">
-                @Html.LabelFor(model => model.Origin, htmlAttributes: new { @class = "form-label" })
-                @Html.DropDownListFor(model => model.Origin, new SelectList(Enum.GetValues(typeof(FlyWithMe.Models.cities))), "Select City", new { @class = "form-input" })
+
+            <div class="parent">
+
+                <div class="div1">
+                    @*@Html.LabelFor(model => model.Origin, htmlAttributes: new { @class = "form-label" })*@
+                    @Html.DropDownListFor(model => model.Origin, new SelectList(Enum.GetValues(typeof(FlyWithMe.Models.cities))), "Select Origin", new { @class = "form-input" })
+
+                </div>
+
+                <div class="div2">
+                    @*@Html.LabelFor(model => model.Destination, htmlAttributes: new { @class = "form-label" })*@
+                    @Html.DropDownListFor(model => model.Destination, new SelectList(Enum.GetValues(typeof(FlyWithMe.Models.cities))), "Select Destintation", new { @class = "form-input" })
+                </div>
+
+                <div class="div3">
+                    @Html.EditorFor(model => model.Departure, new { htmlAttributes = new { @class = "form-input", @type = "date", @id = "startDate" } })
+                    @Html.LabelFor(model => model.Departure, htmlAttributes: new { @class = "form-label" })
+                </div>
+
+                <div class="div4">
+                    @Html.EditorFor(model => model.Return, new { htmlAttributes = new { @class = "form-input", @type = "date", @id = "endDate" } })
+                    @Html.LabelFor(model => model.Return, htmlAttributes: new { @class = "form-label" })
+                </div>
+
+                <div class="div5">
+                    @*@Html.LabelFor(model => model.Class, htmlAttributes: new { @class = "form-label" })*@
+                    @Html.EditorFor(model => model.Class, new { htmlAttributes = new { @class = "form-input" } })
+                </div>
+
+                <div class="div6">
+                    @*@Html.LabelFor(model => model.Passengers, htmlAttributes: new { @class = "form-label" })*@
+                    @Html.EditorFor(model => model.Passengers, new { htmlAttributes = new { @class = "form-input" } })
+
+                </div>
+
+
+                <input type="submit" value="Search" class="" id="button" />
+
 
             </div>
+        }
 
-            <div class="div2">
-                @Html.LabelFor(model => model.Destination, htmlAttributes: new { @class = "form-label" })
-                @Html.DropDownListFor(model => model.Destination, new SelectList(Enum.GetValues(typeof(FlyWithMe.Models.cities))), "Select City", new { @class = "form-input" })
-            </div>
-
-            <div class="div3">
-                @Html.LabelFor(model => model.Departure, htmlAttributes: new { @class = "form-label" })
-                @Html.EditorFor(model => model.Departure, new { htmlAttributes = new { @class = "form-input", @type = "date" , @id= "startDate" } })
-            </div>
-            
-            <div class="div4">
-                @Html.LabelFor(model => model.Return, htmlAttributes: new { @class = "form-label" })
-                @Html.EditorFor(model => model.Return, new { htmlAttributes = new { @class = "form-input", @type = "date", @id = "endDate" } })
-            </div>
-
-            <div class="div5">
-                @Html.LabelFor(model => model.Class, htmlAttributes: new { @class = "form-label" })
-                @Html.EditorFor(model => model.Class, new { htmlAttributes = new { @class = "form-input" } })
-            </div>
-
-            <div class="div6">
-                @Html.LabelFor(model => model.Passengers, htmlAttributes: new { @class = "form-label" })
-                @Html.EditorFor(model => model.Passengers, new { htmlAttributes = new { @class = "form-input" } })
-
-            </div>
-
-
-            <div class="div7">
-                <input type="submit" value="Search" class="btn btn-primary btn-lg btn-block" id="button" />
-            </div>
-            
-        </div>
-    }
-
-</div>
-
+    </div>
+</body>
 <script>$("#startDate").datepicker({
         minDate: 0,
         onSelect: function (date) {

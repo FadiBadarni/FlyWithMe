@@ -40,6 +40,16 @@
 
 
 <table class="flights-table2" id="">
+    <thead>
+        <tr>
+
+            @foreach (string column in TableColumns)
+            {
+                <th scope="col">@column</th>
+            }
+        </tr>
+
+    </thead>
     <tbody>
         <tr onmouseover="changeFontColor('#D70040')" onmouseout="changeFontColor('black')">
             <td>@ViewBag.OnePlanes.ID</td>
@@ -57,6 +67,10 @@
 
 
 
+<div id="wrapper">
+    <div id="left">Select Inbound Flight</div>
+    <a href="#" id="right">Skip Choice</a>
+</div>
 
 <table class="flights-table" id="">
     <thead>
