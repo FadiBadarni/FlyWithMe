@@ -189,6 +189,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Class\CityNameAttribute.cs" />
+    <Compile Include="Class\PaymentFirebase.cs" />
     <Compile Include="Class\Planes.cs" />
     <Compile Include="Class\Searching.cs" />
     <Compile Include="Controllers\BookingController.cs" />

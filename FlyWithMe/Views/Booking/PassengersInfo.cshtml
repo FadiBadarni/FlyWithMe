@@ -3,6 +3,13 @@
 @{
     ViewBag.Title = "Passenger Information";
     int passengersCount = (int)Session["count"];
+
+    FlyWithMe.Class.Planes plane = ViewBag.outboundFlight;
+
+    FlyWithMe.Class.Planes outboundFlight = plane.copy();
+    FlyWithMe.Class.Planes inboundFlight = ViewBag.inboundFlight;
+    FlyWithMe.Class.Searching searching= ViewBag.search;
+
 }
 
 <head>
@@ -19,11 +26,11 @@
     <table class="flights-table" id="">
         <tbody>
             <tr>
-                <td>@ViewBag.outboundFlight.DepartureDate</td>
-                <td>@ViewBag.outboundFlight.Company</td>
-                <td>@ViewBag.outboundFlight.TakeOff</td>
-                <td>@ViewBag.outboundFlight.Landing</td>
-                <td>@ViewBag.outboundFlight.Price</td>
+                <td>@outboundFlight.DepartureDate</td>
+                <td>@outboundFlight.Company</td>
+                <td>@outboundFlight.TakeOff</td>
+                <td>@outboundFlight.Landing</td>
+                <td>@outboundFlight.Price</td>
                 <td>
                     <a href='javascript:history.go(-2)'>Change Selection</a>
                 </td>
@@ -37,11 +44,11 @@
             <tbody>
                 <tr>
 
-                    <td>@ViewBag.inboundFlight.DepartureDate</td>
-                    <td>@ViewBag.inboundFlight.Company</td>
-                    <td>@ViewBag.inboundFlight.TakeOff</td>
-                    <td>@ViewBag.inboundFlight.Landing</td>
-                    <td>@ViewBag.inboundFlight.Price</td>
+                    <td>@inboundFlight.DepartureDate</td>
+                    <td>@inboundFlight.Company</td>
+                    <td>@inboundFlight.TakeOff</td>
+                    <td>@inboundFlight.Landing</td>
+                    <td>@inboundFlight.Price</td>
                     <td>
                         <a href='javascript:history.go(-1)'>Change Selection</a>
                     </td>
@@ -55,7 +62,9 @@
 <section3>
     <h2>Passenger Information</h2>
 
-    @using (Html.BeginForm("Payment", "Booking", FormMethod.Post))
+    
+
+    @using (Html.BeginForm("Payment", "Booking", new { goPlane = outboundFlight.infoTostring(), backPlane = inboundFlight.infoTostring(),searching=searching.infoTostring()}, FormMethod.Post))
     {
 
         for (int i = 0; i < passengersCount; i++)

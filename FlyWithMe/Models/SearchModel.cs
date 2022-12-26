@@ -34,13 +34,18 @@ namespace FlyWithMe.Models
                 Origin = model.Origin,
                 Destination = model.Destination,
                 Departure = model.Departure,
-                Return = model.Return,
+                Return = model.Return,   
                 Class = model.Class,
                 Passengers = model.Passengers
             };
             return newSearch;
         }
 
+
+        //public static string infoInString()
+        //{
+        //    return ""
+        //}
     }
 
 }

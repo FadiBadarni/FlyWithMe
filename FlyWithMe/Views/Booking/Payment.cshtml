@@ -2,6 +2,10 @@
 
 @{
     ViewBag.Title = "Payment";
+    FlyWithMe.Class.Planes plane1 = ViewBag.planes1;
+    FlyWithMe.Class.Planes plane2 = ViewBag.planes2;
+    List<FlyWithMe.Models.Passenger> passenger = ViewBag.p;
+    FlyWithMe.Class.Searching searching= ViewBag.search;
 }
 
 <head>
@@ -35,5 +39,25 @@
     }
 </div>
 <div class="information">
-    Here goes total information about the whole booking made so far
+    <h2>
+        Here goes total information about the whole booking made so far
+        You want to go  From @searching.Origin To @searching.Return in
+        @plane1 
+        and back with
+        @plane2
+        and you want to pay @plane1.Price + @plane2.Price
+
+        
+        for @passenger.Count,
+        @foreach (FlyWithMe.Models.Passenger p in passenger)
+        {
+            int i = 1;
+            Html.TextBox("the  passenger number" + i);@p
+            Html.TextBox("will sit in");
+            Html.TextBox((plane1.Capacity + i).ToString());
+
+        }
+    </h2>
+   
+    
 </div>

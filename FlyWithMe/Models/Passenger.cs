@@ -21,5 +21,10 @@ namespace FlyWithMe.Models
         [Required]
         [DataType(DataType.Text)]
         public int ID { get; set; }
+
+        public override string ToString()
+        {
+            return ID +"\n"+Name +"\n"+Email+"\n"+Phone+"\n";
+        }
     }
 }

@@ -391,12 +391,6 @@ namespace FlyWithMe.Controllers
             ViewBag.SearchResults = search;
             ViewBag.onePlanes = onePlanes;
 
-
-
-
-
-
-
             return View();
         }
     }
