@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "InboundFlights";
     int x = ViewBag.SearchResults.Passengers;
-    string[] TableColumns = new string[] { "ID", "Air Line", "Take Off", "Arrival", "Price x " + x, "Actions" };
+    string[] TableColumns = new string[] { "Departure Date", "Air Line", "Take Off", "Arrival", "Price x " + x, "Actions" };
 }
 
 @section Scripts
@@ -52,7 +52,7 @@
     </thead>
     <tbody>
         <tr onmouseover="changeFontColor('#D70040')" onmouseout="changeFontColor('black')">
-            <td>@ViewBag.OnePlanes.ID</td>
+            <td>@ViewBag.OnePlanes.DepartureDate</td>
             <td>@ViewBag.OnePlanes.Company</td>
             <td>@ViewBag.OnePlanes.TakeOff</td>
             <td>@ViewBag.OnePlanes.Landing</td>
@@ -69,7 +69,9 @@
 
 <div id="wrapper">
     <div id="left">Select Inbound Flight</div>
-    <a href="#" id="right">Skip Choice</a>
+    @*<a href="#" id="right">Skip Choice</a>*@
+    @Html.ActionLink("Skip", "PassengersInfo", "Booking", new { IdGo = ViewBag.OnePlanes.ID, IdBack = -1, Origin = ViewBag.SearchResults.Origin, Destination = ViewBag.SearchResults.Destination, Departure = ViewBag.SearchResults.Departure, Return = ViewBag.SearchResults.Return, Class = ViewBag.SearchResults.Class, Passengers = ViewBag.SearchResults.Passengers }, null)
+
 </div>
 
 <table class="flights-table" id="">
@@ -87,7 +89,7 @@
         @foreach (FlyWithMe.Class.Planes item in ViewBag.BackPlaneslist)
         {
             <tr onmouseover="changeFontColor('#D70040')" onmouseout="changeFontColor('black')">
-                <td>@Html.DisplayFor(modelItem => item.ID)</td>
+                <td>@Html.DisplayFor(modelItem => item.DepartureDate)</td>
                 <td>@Html.DisplayFor(modelItem => item.Company)</td>
                 <td>@Html.DisplayFor(modelItem => item.TakeOff)</td>
                 <td>@Html.DisplayFor(modelItem => item.Landing)</td>

@@ -18,51 +18,234 @@ namespace FlyWithMe.Controllers
     public class HomeController : Controller
     {
         private static string FirbaseLink = "https://myflight-db2b1-default-rtdb.firebaseio.com";
-       
+
 
         public ActionResult Index()
         {
-            //var firebaseClient = new FirebaseClient(FirbaseLink);
 
-            //List<string> days = new List<string> { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
-            //// List<string> Cites = new List<string> { "Vienna", "Brussels", "Bahrain", "Sofia", "Montreal", "Beijing", "Larnaca", "Paris", "Berlin", "Rome", "Barcelona", "Geneva", "Bangko" };
-            //List<string> AirPort = new List<string> { "El Al" };
-            //List<string> FromTo = new List<string> { "Bangkok", "TelAviv" };
-            //int x = 9;
-            //Random rd = new Random();
-            //for (int i = 180; i < 200; i++)
+            // Replace these placeholder values with your own Firebase project details
+            string apiKey = "AIzaSyAvKjlB0TZ_lgvFGMFKEcuhDHbgi0Dpf4M";
+            string databaseURL = "https://myflight-db2b1-default-rtdb.firebaseio.com";
+
+            // Initialize the Firebase client
+            var firebaseClient = new FirebaseClient(databaseURL, new FirebaseOptions
+            {
+                AuthTokenAsyncFactory = () => Task.FromResult(apiKey)
+            });
+
+            //const int numPlanes = 2000;
+            //// Generate a list of 50 random city names
+            //var cityNames = GenerateRandomCityNames();
+
+            //// Loop through the city names and add planes to the database
+            //for (var i = 0; i < numPlanes; i++)
             //{
-            //    int bookedSeats = rd.Next(401);
-            //    int capacity = rd.Next(bookedSeats, 401);
-            //    double price = rd.Next(100, 1201);
-            //    string company = AirPort[rd.Next(AirPort.Count)];
-            //    int h1 = rd.Next(25);
-            //    int m1 = rd.Next(0, 61);
+            //    // Generate a random departure city
+            //    var departureCity = GenerateRandomCityName();
 
-            //    string sm1 = ":" + m1;
-            //    if (m1 < 10)
-            //        if (m1 == 0) sm1 = h1 + ":00";
-            //        else sm1 = h1 + ":0" + m1;
-            //    string landing = h1 + sm1;
+            //    // Generate a random destination city
+            //    var destinationCity = GenerateRandomCityName();
 
-            //    string takeOff = (h1 + x) + sm1;
-            //    int indexDays = rd.Next(days.Count);
-            //    int indexFromTo = rd.Next(FromTo.Count);
-            //    Planes p = new Planes()
+            //    // Skip the same city
+            //    if (departureCity == destinationCity)
+            //    {
+            //        continue;
+            //    }
+
+            //    // Generate a random year and month
+            //    var randomYear = rnd.Next(2023, 2024);
+            //    var randomMonth = rnd.Next(2, 13);
+            //    var yearMonth = $"{randomYear}-{randomMonth:D2}";
+
+            //    var takeOffDate = GenerateRandomDate(randomYear, randomMonth);
+
+            //    // Generate a random plane ID
+            //    var planeID = GenerateRandomPlaneID();
+
+            //    // Generate random booking information
+            //    var bookedSeats = rnd.Next(0, 101);
+            //    var capacity = 100;
+            //    var company = GenerateRandomCompanyName();
+
+
+            //    // Generate a random landing time
+            //    var landing = GenerateRandomLandingTime();
+
+
+            //    var price = rnd.Next(100, 1000);
+
+            //    var takeoff = GenerateRandomTakeoffTime(landing);
+
+            //    // Add the plane to the database
+            //    var plane = new Planes
             //    {
             //        BookedSeats = bookedSeats,
             //        Capacity = capacity,
-            //        Price = price,
-            //        ID = i,
             //        Company = company,
+            //        ID = planeID,
             //        Landing = landing,
-            //        TakeOff = takeOff
+            //        Price = price,
+            //        TakeOff = takeoff,
+            //        DepartureDate = takeOffDate
             //    };
-            //    await firebaseClient.Child("Planes").Child(FromTo[indexFromTo]).
-            //        Child(FromTo[(indexFromTo + 1) % 2]).Child(days[indexDays]).Child(i + "").PutAsync(p);
+            //    var planeKey = firebaseClient
+            //        .Child("Planes")
+            //        .Child(departureCity)
+            //        .Child(destinationCity)
+            //        .Child(yearMonth)
+            //        .Child(planeID.ToString())
+            //        .PutAsync(plane);
+
             //}
-            return View();
+
+
+
+
+            var model = new SearchModel();
+            var cities = Enum.GetValues(typeof(Cities)).Cast<Cities>();
+            var selectList = new SelectList(cities.Select(x => new
+            {
+                Value = x,
+                Text = x.GetType()
+                        .GetMember(x.ToString())
+                        .First()
+                        .GetCustomAttribute<CityNameAttribute>()
+                        .Name
+            }), "Value", "Text");
+            ViewBag.Cities = selectList;
+            return View(model);
         }
+
+
+
+        private static Random rnd = new Random();
+        private static string GenerateRandomCityName()
+        {
+            var cityNames = new[]
+            {
+                "NewYork", "LosAngeles", "Chicago", "Houston", "Phoenix",
+                "Philadelphia", "SanAntonio", "SanDiego"
+            };
+            var index = rnd.Next(cityNames.Length);
+            return cityNames[index];
+        }
+        // Generate a list of 50 random city names
+        private static List<string> GenerateRandomCityNames()
+        {
+            var cityNames = new List<string>();
+            for (int i = 0; i < 50; i++)
+            {
+                cityNames.Add(GenerateRandomCityName());
+            }
+            return cityNames;
+        }
+
+
+        // Generate a random plane ID
+        private static int GenerateRandomPlaneID()
+        {
+            return rnd.Next(10000, 100000);
+        }
+
+
+        // Generate a random company name
+        private static string GenerateRandomCompanyName()
+        {
+            var companyNames = new[]
+            {
+                   "American Airlines",
+                    "Delta Air Lines",
+                    "Southwest Airlines",
+                    "United Airlines",
+                    "Alaska Airlines",
+                    "JetBlue Airways",
+                    "Spirit Airlines",
+                    "Hawaiian Airlines",
+                    "Frontier Airlines"
+            };
+            var index = rnd.Next(companyNames.Length);
+            return companyNames[index];
+        }
+
+
+        // Generate a random takeoff time
+        private static string GenerateRandomTakeoffTime(string landing)
+        {
+            // Split the landing time string by the colon separator
+            var landingComponents = landing.Split(':');
+
+            // Get the hour and minute components of the landing time
+            var landingHour = int.Parse(landingComponents[0]);
+            var landingMinute = int.Parse(landingComponents[1]);
+
+            // Generate a random hour between 0 and the landing hour (inclusive)
+            var hour = rnd.Next(0, landingHour + 1);
+
+            // Generate a random minute between 0 and 59 (inclusive)
+            var minute = rnd.Next(0, 60);
+
+            // If the generated hour is equal to the landing hour,
+            // make sure the generated minute is earlier than the landing minute
+            if (hour == landingHour && minute >= landingMinute)
+            {
+                minute = rnd.Next(0, landingMinute);
+            }
+
+            // Convert the hour and minute to strings
+            var hourString = hour.ToString("D2");
+            var minuteString = minute.ToString("D2");
+
+            return $"{hourString}:{minuteString}";
+        }
+
+        // Generate a random landing time
+        private static string GenerateRandomLandingTime()
+        {
+            var hour = rnd.Next(0, 24).ToString("D2");
+            var minute = rnd.Next(0, 60).ToString("D2");
+            return $"{hour}:{minute}";
+        }
+
+
+        static string GenerateRandomDate(int year, int month)
+        {
+            // Create a new Random object
+            Random random = new Random();
+
+            // Get the number of days in the specified month
+            int daysInMonth = DateTime.DaysInMonth(year, month);
+
+            // Generate a random day in the specified month
+            int day = random.Next(1, daysInMonth + 1);
+
+            // Return the random date as a string in the desired format
+            return day.ToString("D2") + "/" + month.ToString("D2") + "/" + year.ToString("D4");
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public ActionResult About()
         {
@@ -81,12 +264,12 @@ namespace FlyWithMe.Controllers
 
         public ActionResult OutboundFlights()
         {
-           return Redirect("/Home");
+            return Redirect("/Home");
 
         }
 
 
-            [HttpPost]
+        [HttpPost]
         public async Task<ActionResult> OutboundFlights(SearchModel search)
         {
             if (search == null)
@@ -100,30 +283,43 @@ namespace FlyWithMe.Controllers
 
             ViewData["Departure"] = Request["Departure"];
             ViewData["Return"] = Request["Return"];
-
+            string pushId = "NKALbgxH7-tSrvO3_Kc";
+            int id = 86377;
             ViewData["PassengersCount"] = search.Passengers;
 
             var firebaseClient = new FirebaseClient(FirbaseLink);
-           
+            string yearMonth;
+
+
+            if (search.Departure.Month < 10)
+            {
+                yearMonth = search.Departure.Year.ToString() + "-0" + search.Departure.Month.ToString();
+            }
+            else
+            {
+                yearMonth = search.Departure.Year.ToString() + "-" + search.Departure.Month.ToString();
+
+            }
+
             var dbPlanes = await firebaseClient.Child("Planes")
                 .Child(search.Origin)
                 .Child(search.Destination)
-                .Child(search.Departure.DayOfWeek.ToString())
+                .Child(yearMonth)
                 .OnceAsync<Planes>();
             List<Planes> GoingPlaneslist = new List<Planes>();
             List<Planes> BackPlaneslist = new List<Planes>();
             foreach (var plane in dbPlanes)
-            { 
-               
+            {
                 if (plane.Object.Capacity - plane.Object.BookedSeats >= search.Passengers)
-                GoingPlaneslist.Add(plane.Object);
+                    GoingPlaneslist.Add(plane.Object);
 
             }
+
             dbPlanes = await firebaseClient.Child("Planes")
-               .Child(search.Destination)
-               .Child(search.Origin)
-               .Child(search.Departure.DayOfWeek.ToString())
-               .OnceAsync<Planes>();
+                .Child(search.Destination)
+                .Child(search.Origin)
+                .Child(yearMonth)
+                .OnceAsync<Planes>();
 
             foreach (var plane in dbPlanes)
             {
@@ -132,7 +328,7 @@ namespace FlyWithMe.Controllers
             }
 
             ViewBag.GoingPlaneslist = GoingPlaneslist;
-           // ViewBag.Key = result.Key;
+            // ViewBag.Key = result.Key;
             ViewBag.SearchResults = search;
 
             return View();
@@ -141,7 +337,7 @@ namespace FlyWithMe.Controllers
 
         public async Task<ActionResult> InboundFlights([Bind(Include = "IdGo,IdBack,Origin,Destination,Departure,Return,Class,Passengers")] Searching search)
         {
-           
+
             ViewData["Origin"] = Request["Origin"];
             ViewData["Destination"] = Request["Destination"];
             ViewData["Departure"] = Request["Departure"];
@@ -150,28 +346,57 @@ namespace FlyWithMe.Controllers
             var firebaseClient = new FirebaseClient(FirbaseLink);
             // var search= await firebaseClient.Child("Searching").Child(key).OnceSingleAsync<SearchModel>();
             List<Planes> BackPlaneslist = new List<Planes>();
+            string yearMonth;
+
+            if (search.Departure.Month < 10)
+            {
+                yearMonth = search.Return.Year.ToString() + "-0" + search.Return.Month.ToString();
+            }
+            else
+            {
+                yearMonth = search.Return.Year.ToString() + "-" + search.Return.Month.ToString();
+
+            }
             var dbPlanes = await firebaseClient.Child("Planes")
-              .Child(search.Destination)
-              .Child(search.Origin)
-              .Child(search.Departure.DayOfWeek.ToString())
-              .OnceAsync<Planes>();
+                .Child(search.Destination)
+                .Child(search.Origin)
+                .Child(yearMonth)
+                .OnceAsync<Planes>();
 
             foreach (var plane in dbPlanes)
             {
                 if (plane.Object.Capacity - plane.Object.BookedSeats >= search.Passengers)
                     BackPlaneslist.Add(plane.Object);
             }
+            string previousyearMonth;
+            if (search.Departure.Month < 10)
+            {
+                previousyearMonth = search.Departure.Year.ToString() + "-0" + search.Departure.Month.ToString();
+            }
+            else
+            {
+                previousyearMonth = search.Departure.Year.ToString() + "-" + search.Departure.Month.ToString();
 
+            }
+            string id = search.IdGo.ToString();
             var onePlanes = await firebaseClient.Child("Planes")
            .Child(search.Origin)
            .Child(search.Destination)
-           .Child(search.Departure.DayOfWeek.ToString()).Child(search.IdGo.ToString())
+           .Child(previousyearMonth)
+           .Child(search.IdGo.ToString())
            .OnceSingleAsync<Planes>();
 
             onePlanes.TotalPrice(search.Passengers);
             ViewBag.BackPlaneslist = BackPlaneslist;
             ViewBag.SearchResults = search;
             ViewBag.onePlanes = onePlanes;
+
+
+
+
+
+
+
             return View();
         }
     }

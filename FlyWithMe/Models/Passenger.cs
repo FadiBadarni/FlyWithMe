@@ -17,5 +17,9 @@ namespace FlyWithMe.Models
         [Required]
         [DataType(DataType.Text)]
         public string Phone { get; set; }
+        [Key]
+        [Required]
+        [DataType(DataType.Text)]
+        public int ID { get; set; }
     }
 }

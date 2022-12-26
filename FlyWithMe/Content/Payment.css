@@ -3,7 +3,8 @@
     height: 500px;
     width: 450px;
     position: absolute;
-    margin-top: 40px;
+    
+    top:20%;
     
 }
 .form-group {
@@ -11,6 +12,7 @@
     text-align: left;
     left: 70px;
     top: 30px;
+    width:300px;
 }
 .information {
     border: 3px solid red;
@@ -18,7 +20,7 @@
     width: 550px;
     float:right;
     position:relative;
-    margin-top: 40px;
+    margin-top:10%;
 }
 .pay-button {
     width: 150px;

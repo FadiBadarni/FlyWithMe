@@ -1,6 +1,7 @@
 ﻿$(function () {
     var dtToday = new Date();
 
+
     var month = dtToday.getMonth() + 1;
     var day = dtToday.getDate();
     var year = dtToday.getFullYear();
@@ -30,6 +31,7 @@ $(function () {
 });
 
 $(function () {
+
     $(".flights-table tbody tr").addClass("unfocused");
     $('.unfocused').hover(function () {
         $(this).removeClass('unfocused');
@@ -40,6 +42,7 @@ $(function () {
 
 function changeFontColor(color) {
     document.querySelector('.child2').style.color = color;
-} 
+}
+
 
 

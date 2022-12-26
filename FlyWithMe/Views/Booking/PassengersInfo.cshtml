@@ -19,32 +19,37 @@
     <table class="flights-table" id="">
         <tbody>
             <tr>
-                <td>Plane ID</td>
-                <td>Plane Company</td>
-                <td>Plane TakeOff</td>
-                <td>Plane Landing</td>
-                <td>Plane Price</td>
+                <td>@ViewBag.outboundFlight.DepartureDate</td>
+                <td>@ViewBag.outboundFlight.Company</td>
+                <td>@ViewBag.outboundFlight.TakeOff</td>
+                <td>@ViewBag.outboundFlight.Landing</td>
+                <td>@ViewBag.outboundFlight.Price</td>
                 <td>
-                    <a href='javascript:history.go(-1)'>Change Selection</a>
+                    <a href='javascript:history.go(-2)'>Change Selection</a>
                 </td>
             </tr>
         </tbody>
     </table>
-    <div class="header2">Chosen Inbound Flight</div>
-    <table class="flights-table" id="">
-        <tbody>
-            <tr>
-                <td>Plane ID</td>
-                <td>Plane Company</td>
-                <td>Plane TakeOff</td>
-                <td>Plane Landing</td>
-                <td>Plane Price</td>
-                <td>
-                    <a href='javascript:history.go(-1)'>Change Selection</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    @if (@ViewBag.inboundFlight != null)
+    {
+        <div class="header2">Chosen Inbound Flight</div>
+        <table class="flights-table" id="">
+            <tbody>
+                <tr>
+
+                    <td>@ViewBag.inboundFlight.DepartureDate</td>
+                    <td>@ViewBag.inboundFlight.Company</td>
+                    <td>@ViewBag.inboundFlight.TakeOff</td>
+                    <td>@ViewBag.inboundFlight.Landing</td>
+                    <td>@ViewBag.inboundFlight.Price</td>
+                    <td>
+                        <a href='javascript:history.go(-1)'>Change Selection</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    }
+
 
 </section2>
 <section3>
@@ -60,6 +65,10 @@
                 <h3>Passenger @(i + 1)</h3>
                 <img class="passenger-img" src="~/images/passenger.png" alt="Alternate Text" />
                 <div class="form-group">
+                    @Html.Label("ID")
+                    @Html.TextBoxFor(m => m[i].ID, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
                     @Html.Label("Name")
                     @Html.TextBoxFor(m => m[i].Name, new { @class = "form-control" })
                 </div>
@@ -71,6 +80,7 @@
                     @Html.Label("Phone")
                     @Html.TextBoxFor(m => m[i].Phone, new { @class = "form-control" })
                 </div>
+
             </div>
         }
         <button type="submit">Proceed to Payment</button>

@@ -29,7 +29,7 @@ section3 {
 }
 .passenger-form {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     background-color: #fff;
     color: #444;
     border: 3px solid black;
@@ -56,7 +56,7 @@ label {
     outline-color:red;
 }
 .form-control {
-    width: 200px;
+    width: 160px;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;

@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = "OutboundFlights";
     int x = ViewBag.SearchResults.Passengers;
-    string[] TableColumns = new string[] { "ID", "Air Line", "Take Off", "Arrival", "Price", "Actions" };
+    string[] TableColumns = new string[] { "Departure Date", "Air Line", "Take Off", "Arrival", "Price", "Actions" };
 }
 @section Scripts
 {
@@ -53,7 +53,7 @@
         @foreach (FlyWithMe.Class.Planes item in ViewBag.GoingPlaneslist)
         {
             <tr onmouseover="changeFontColor('#D70040')" onmouseout="changeFontColor('black')">
-                <td>@Html.DisplayFor(modelItem => item.ID)</td>
+                <td>@Html.DisplayFor(modelItem => item.DepartureDate)</td>
                 <td>@Html.DisplayFor(modelItem => item.Company)</td>
                 <td>@Html.DisplayFor(modelItem => item.TakeOff)</td>
                 <td>@Html.DisplayFor(modelItem => item.Landing)</td>

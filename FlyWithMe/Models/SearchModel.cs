@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 
 namespace FlyWithMe.Models
@@ -25,7 +27,7 @@ namespace FlyWithMe.Models
             return Origin + " ⸺✈︎ " + Destination;
         }
 
-        public  static SearchModel Copy(SearchModel model)
+        public static SearchModel Copy(SearchModel model)
         {
             SearchModel newSearch = new SearchModel()
             {
@@ -38,11 +40,7 @@ namespace FlyWithMe.Models
             };
             return newSearch;
         }
+
     }
-    public enum cities
-    {
-        TelAviv,Vienna, Brussels, Bahrain, Sofia, Montreal, Beijing,
-        Larnaca, Paris, Berlin, Rome, Barcelona, Geneva, Bangko
-    }
-   
+
 }
