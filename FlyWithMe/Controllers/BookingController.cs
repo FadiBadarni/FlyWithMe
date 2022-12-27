@@ -26,17 +26,8 @@ namespace FlyWithMe.Controllers
             string DepartureYearMonth, ReturnYearMonth;
 
 
+            DepartureYearMonth = search.yearMonth(1);
 
-
-            if (search.Departure.Month < 10)
-            {
-                DepartureYearMonth = search.Departure.Year.ToString() + "-0" + search.Departure.Month.ToString();
-            }
-            else
-            {
-                DepartureYearMonth = search.Departure.Year.ToString() + "-" + search.Departure.Month.ToString();
-
-            }
             var outboundFlight = await firebaseClient.Child("Planes")
                 .Child(search.Origin)
                 .Child(search.Destination)
@@ -49,14 +40,7 @@ namespace FlyWithMe.Controllers
 
             if (search.IdBack != -1)
             {
-                if (search.Return.Month < 10)
-                {
-                    ReturnYearMonth = search.Return.Year.ToString() + "-0" + search.Return.Month.ToString();
-                }
-                else
-                {
-                    ReturnYearMonth = search.Return.Year.ToString() + "-" + search.Return.Month.ToString();
-                }
+                ReturnYearMonth=search.yearMonth(2);
                 var inboundFlight = await firebaseClient.Child("Planes")
                     .Child(search.Destination)
                     .Child(search.Origin)
@@ -89,23 +73,46 @@ namespace FlyWithMe.Controllers
         {
             Planes planes1 = new Planes();
             Planes planes2 = null;
+            Searching search = new Searching();
+            search.bulidSearchingFromSring(searching);
+            var firebaseClient = new FirebaseClient(FirbaseLink);
+
+
             planes1.bulidPlaneFromSring(goPlane);
+            planes1.BookedSeats += p.Count;
+            var Updateplane = firebaseClient
+                    .Child("Planes")
+                    .Child(search.Origin)
+                    .Child(search.Destination)
+                    .Child(search.yearMonth(1))
+                    .Child(planes1.ID + "")
+                    .Child("BookedSeats")
+                    .PutAsync(planes1.BookedSeats);
+           
             if (backPlane != "Empty")
             {
                 planes2 = new Planes();
                 planes2.bulidPlaneFromSring(backPlane);
+                planes2.BookedSeats += p.Count;
                 ViewBag.planes2 = planes2;
+
+                Updateplane = firebaseClient
+                 .Child("Planes")
+                 .Child(search.Destination)
+                 .Child(search.Origin)
+                 .Child(search.yearMonth(2))
+                 .Child(planes2.ID + "")
+                    .Child("BookedSeats")
+                 .PutAsync(planes2.BookedSeats);
             }
             List<int> seatNumber = new List<int>();
             for (int i = 0; i < p.Count; i++)
             {
-                seatNumber.Add(planes1.BookedSeats + i);
+                seatNumber.Add(planes1.BookedSeats - i);
             }
 
 
-            Searching search = new Searching();
-            search.bulidSearchingFromSring(searching);
-            var firebaseClient = new FirebaseClient(FirbaseLink);
+          
             PaymentFirebase paymentFirebase = new PaymentFirebase
             {
                 id = p[0].ID,
@@ -124,16 +131,21 @@ namespace FlyWithMe.Controllers
             ViewBag.p = p;
             ViewBag.search = search;
 
-
-
-
             return View();
         }
-        //public ActionResult Payment([Bind(Include = "IdGo,IdBack,Origin,Destination,Departure,Return,Class,Passengers")] Searching search)
-        //{
-        //    return View();
-        //}
 
+
+        [HttpPost]
+        public ActionResult ProcessPayment(Models.Payment payment, string id)
+        {
+            var firebaseClient = new FirebaseClient(FirbaseLink);
+            var PaymentFirebase = firebaseClient
+                  .Child("Payment")
+                  .Child(id).Child("payment")
+                  .PutAsync(payment);
+            
+            return View();
+        }
 
     }
 }

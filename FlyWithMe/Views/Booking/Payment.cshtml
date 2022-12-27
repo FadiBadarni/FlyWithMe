@@ -162,7 +162,7 @@
     </div>
     <h2>Payment Information</h2>
     <div class="payment-form">
-        @using (Html.BeginForm("/ProcessPayment", "post"))
+        @using (Html.BeginForm("/ProcessPayment", "Booking", new { Id = passenger[0].ID }, FormMethod.Post))
         {
             <div class="form-group">
                 @Html.Label("Name")

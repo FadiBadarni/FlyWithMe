@@ -14,7 +14,7 @@ namespace FlyWithMe.Class
         public int Capacity { get; set; }
         public string Company { get; set; }
         public string DepartureDate { get; set; }
-        [Key]
+        //[Key]
         public int ID { get; set; }
         public string Landing { get; set; }
         public int Price { get; set; }
@@ -33,18 +33,19 @@ namespace FlyWithMe.Class
 
 
         public Planes() { }
-        public Planes copy() { 
-            return new Planes
-            {
-                BookedSeats = this.BookedSeats,
-                Capacity = this.Capacity,
-                Company = this.Company,
-                DepartureDate = this.DepartureDate,
-                Landing = this.Landing,
-                Price = this.Price,
-                TakeOff = this.TakeOff
-            };
-        }
+        //public Planes copy() { 
+        //    return new Planes
+        //    {
+        //        BookedSeats = this.BookedSeats,
+        //        Capacity = this.Capacity,
+        //        Company = this.Company,
+        //        DepartureDate = this.DepartureDate,
+        //        ID = this.ID,
+        //        Landing = this.Landing,
+        //        Price = this.Price,
+        //        TakeOff = this.TakeOff
+        //    };
+        //}
 
         public string infoTostring()
         {
