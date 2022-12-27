@@ -22,88 +22,96 @@
 </head>
 
 
+<body>
 
-<section id="section">
+    <section id="section">
 
-    <div class='parent2'>
-        <div class='child'>
-            <b>@ViewBag.Destination ⸺✈︎ @ViewBag.Origin</b>
+        <div class='parent2'>
+            <div class='child'>
+                <b>@ViewBag.Destination ⸺✈︎ @ViewBag.Origin</b>
+            </div>
         </div>
-    </div>
-    <div class="child2">
-        Displaying Results For @x Passengers <b>|</b> Economy Class
-    </div>
+        <div class="child2">
+            Displaying Results For @x Passengers <b>|</b> Economy Class
+        </div>
 
-</section>
+    </section>
 
-<div class='child3'>Selected Outbound Flight</div>
-
-
-<table class="flights-table2" id="">
-    <thead>
-        <tr>
-
-            @foreach (string column in TableColumns)
-            {
-                <th scope="col">@column</th>
-            }
-        </tr>
-
-    </thead>
-    <tbody>
-        <tr onmouseover="changeFontColor('#D70040')" onmouseout="changeFontColor('black')">
-            <td>@ViewBag.OnePlanes.DepartureDate</td>
-            <td>@ViewBag.OnePlanes.Company</td>
-            <td>@ViewBag.OnePlanes.TakeOff</td>
-            <td>@ViewBag.OnePlanes.Landing</td>
-            <td>@ViewBag.OnePlanes.Price</td>
-            <td>
-                <a href='javascript:history.go(-1)'>Change Selection</a>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    <div class='child3'>Selected Outbound Flight</div>
 
 
+    <table class="flights-table2" id="">
+        <thead>
+            <tr>
 
+                @foreach (string column in TableColumns)
+                {
+                    <th scope="col">@column</th>
+                }
+            </tr>
 
-<div id="wrapper">
-    <div id="left">Select Inbound Flight</div>
-    @*<a href="#" id="right">Skip Choice</a>*@
-    @Html.ActionLink("Skip", "PassengersInfo", "Booking", new { IdGo = ViewBag.OnePlanes.ID, IdBack = -1, Origin = ViewBag.SearchResults.Origin, Destination = ViewBag.SearchResults.Destination, Departure = ViewBag.SearchResults.Departure, Return = ViewBag.SearchResults.Return, Class = ViewBag.SearchResults.Class, Passengers = ViewBag.SearchResults.Passengers }, null)
-
-</div>
-
-<table class="flights-table" id="">
-    <thead>
-        <tr>
-
-            @foreach (string column in TableColumns)
-            {
-                <th scope="col">@column</th>
-            }
-        </tr>
-
-    </thead>
-    <tbody>
-        @foreach (FlyWithMe.Class.Planes item in ViewBag.BackPlaneslist)
-        {
+        </thead>
+        <tbody>
             <tr onmouseover="changeFontColor('#D70040')" onmouseout="changeFontColor('black')">
-                <td>@Html.DisplayFor(modelItem => item.DepartureDate)</td>
-                <td>@Html.DisplayFor(modelItem => item.Company)</td>
-                <td>@Html.DisplayFor(modelItem => item.TakeOff)</td>
-                <td>@Html.DisplayFor(modelItem => item.Landing)</td>
-                @Html.Display(item.TotalPrice(x).ToString())
-                <td>@Html.DisplayFor(modelItem => item.Price)</td>
-
-
+                <td>@ViewBag.OnePlanes.DepartureDate</td>
+                <td>@ViewBag.OnePlanes.Company</td>
+                <td>@ViewBag.OnePlanes.TakeOff</td>
+                <td>@ViewBag.OnePlanes.Landing</td>
+                <td>@ViewBag.OnePlanes.Price</td>
                 <td>
-                    @Html.ActionLink("Choose Inbound Flight", "PassengersInfo", "Booking", new { IdGo = ViewBag.OnePlanes.ID, IdBack = item.ID, Origin = ViewBag.SearchResults.Origin, Destination = ViewBag.SearchResults.Destination, Departure = ViewBag.SearchResults.Departure, Return = ViewBag.SearchResults.Return, Class = ViewBag.SearchResults.Class, Passengers = ViewBag.SearchResults.Passengers }, null)
+                    <a href='javascript:history.go(-1)'>Change Selection</a>
                 </td>
             </tr>
-        }
-    </tbody>
-</table>
+        </tbody>
+    </table>
 
 
 
+
+    <div id="wrapper">
+        <div id="left">Select Inbound Flight</div>
+        @*<a href="#" id="right">Skip Choice</a>*@
+        @Html.ActionLink("Skip", "PassengersInfo", "Booking", new { IdGo = ViewBag.OnePlanes.ID, IdBack = -1, Origin = ViewBag.SearchResults.Origin, Destination = ViewBag.SearchResults.Destination, Departure = ViewBag.SearchResults.Departure, Return = ViewBag.SearchResults.Return, Class = ViewBag.SearchResults.Class, Passengers = ViewBag.SearchResults.Passengers }, new { id = "skip-link" })
+
+    </div>
+    <label for="sortList" id="sortListLabel">Sort flights by:</label>
+    <select id="sortList" onchange="sortTable()">
+        <option value="" disabled selected>Sort By</option>
+        <option value="price-asc">Price (Ascending)</option>
+        <option value="price-desc">Price (Descending)</option>
+        <option value="popularity">Popularity</option>
+    </select>
+    <table class="flights-table" id="flights-table">
+        <thead>
+            <tr>
+
+                @foreach (string column in TableColumns)
+                {
+                    <th scope="col">@column</th>
+                }
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (FlyWithMe.Class.Planes item in ViewBag.BackPlaneslist)
+            {
+                <tr onmouseover="changeFontColor('#D70040')" onmouseout="changeFontColor('black')" data-price="@item.Price" data-popularity="@item.BookedSeats">
+                    <td>@Html.DisplayFor(modelItem => item.DepartureDate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Company)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TakeOff)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Landing)</td>
+                    @Html.Display(item.TotalPrice(x).ToString())
+                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
+
+
+                    <td>
+                        @Html.ActionLink("Choose Inbound Flight", "PassengersInfo", "Booking", new { IdGo = ViewBag.OnePlanes.ID, IdBack = item.ID, Origin = ViewBag.SearchResults.Origin, Destination = ViewBag.SearchResults.Destination, Departure = ViewBag.SearchResults.Departure, Return = ViewBag.SearchResults.Return, Class = ViewBag.SearchResults.Class, Passengers = ViewBag.SearchResults.Passengers }, null)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <script src="~/Content/scripts.js"></script>
+
+</body>

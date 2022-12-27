@@ -245,8 +245,6 @@ namespace FlyWithMe.Controllers
 
 
 
-
-
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -283,8 +281,7 @@ namespace FlyWithMe.Controllers
 
             ViewData["Departure"] = Request["Departure"];
             ViewData["Return"] = Request["Return"];
-            string pushId = "NKALbgxH7-tSrvO3_Kc";
-            int id = 86377;
+
             ViewData["PassengersCount"] = search.Passengers;
 
             var firebaseClient = new FirebaseClient(FirbaseLink);

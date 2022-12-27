@@ -44,7 +44,6 @@ section {
     padding: 3rem 0rem;
     font-size: 25px;
     text-align: center;
-    
 }
 
 .child2 {
@@ -55,6 +54,7 @@ section {
     font-weight: 600;
     top: 20px;
 }
+
 .child3 {
     padding: 3rem 0rem;
     font-size: 20px;
@@ -69,12 +69,10 @@ section {
     font-size: 20px;
     font-weight: 900;
     color: #0F4092;
-    
 }
 
 #left {
     flex: 0 0 88%;
-
 }
 
 
@@ -82,20 +80,23 @@ section {
     flex: 1;
     transition: 0.3s ease-in-out;
 }
+
     #right:hover {
         cursor: pointer;
         color: rgb(114,179,255);
     }
+
 .flights-table {
     border-collapse: separate;
     border-spacing: 0 5px; /* Add 5px of space between rows */
     width: 100%;
 }
+
 .flights-table2 {
     border-collapse: separate;
     border-spacing: 0 5px; /* Add 5px of space between rows */
     width: 100%;
-    margin-bottom:50px;
+    margin-bottom: 50px;
 }
 
 td:nth-child(1) {
@@ -143,8 +144,6 @@ td {
     filter: blur(2px);
     -webkit-filter: blur(2px);
     -moz-filter: blur(2px);
-    -o-filter: blur(2px);
-    -ms-filter: blur(2px);
 }
 
 tbody tr {
@@ -167,3 +166,28 @@ tbody tr {
         transform: translateY(-8px); /* Lift the rows up on hover */
     }
 
+#sortListLabel {
+    margin-top: 30px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#sortList {
+    background-color: #ffffff; /* white */
+    color: #000000; /* black */
+    font-size: 16px;
+    border: 1px solid #cccccc; /* light grey */
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 8px;
+    margin-left: 20px;
+}
+
+    #sortList:hover {
+        color: #0000ff; /* blue */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* stronger shadow */
+    }
+
+    #sortList:focus {
+        border-color: red; /* blue */
+    }
