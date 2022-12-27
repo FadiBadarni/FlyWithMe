@@ -281,13 +281,14 @@ namespace FlyWithMe.Controllers
 
             ViewData["Departure"] = Request["Departure"];
             ViewData["Return"] = Request["Return"];
-
+            string pushId = "NKALbgxH7-tSrvO3_Kc";
+            int id = 86377;
             ViewData["PassengersCount"] = search.Passengers;
 
             var firebaseClient = new FirebaseClient(FirbaseLink);
             string yearMonth;
 
-
+            
             if (search.Departure.Month < 10)
             {
                 yearMonth = search.Departure.Year.ToString() + "-0" + search.Departure.Month.ToString();
@@ -344,16 +345,8 @@ namespace FlyWithMe.Controllers
             // var search= await firebaseClient.Child("Searching").Child(key).OnceSingleAsync<SearchModel>();
             List<Planes> BackPlaneslist = new List<Planes>();
             string yearMonth;
-
-            if (search.Departure.Month < 10)
-            {
-                yearMonth = search.Return.Year.ToString() + "-0" + search.Return.Month.ToString();
-            }
-            else
-            {
-                yearMonth = search.Return.Year.ToString() + "-" + search.Return.Month.ToString();
-
-            }
+            yearMonth = search.yearMonth(2);
+            
             var dbPlanes = await firebaseClient.Child("Planes")
                 .Child(search.Destination)
                 .Child(search.Origin)
@@ -365,16 +358,8 @@ namespace FlyWithMe.Controllers
                 if (plane.Object.Capacity - plane.Object.BookedSeats >= search.Passengers)
                     BackPlaneslist.Add(plane.Object);
             }
-            string previousyearMonth;
-            if (search.Departure.Month < 10)
-            {
-                previousyearMonth = search.Departure.Year.ToString() + "-0" + search.Departure.Month.ToString();
-            }
-            else
-            {
-                previousyearMonth = search.Departure.Year.ToString() + "-" + search.Departure.Month.ToString();
-
-            }
+            string previousyearMonth=search.yearMonth(1);
+           
             string id = search.IdGo.ToString();
             var onePlanes = await firebaseClient.Child("Planes")
            .Child(search.Origin)

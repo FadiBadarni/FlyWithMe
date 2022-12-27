@@ -4,9 +4,7 @@
     ViewBag.Title = "Passenger Information";
     int passengersCount = (int)Session["count"];
 
-    FlyWithMe.Class.Planes plane = ViewBag.outboundFlight;
-
-    FlyWithMe.Class.Planes outboundFlight = plane.copy();
+    FlyWithMe.Class.Planes outboundFlight = ViewBag.outboundFlight;
     FlyWithMe.Class.Planes inboundFlight = ViewBag.inboundFlight;
     FlyWithMe.Class.Searching searching= ViewBag.search;
 

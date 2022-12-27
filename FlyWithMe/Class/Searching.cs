@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using FlyWithMe.Models;
+using PayPal.Api;
 
 namespace FlyWithMe.Class
 {
@@ -109,5 +110,29 @@ namespace FlyWithMe.Class
             y = int.Parse(help, NumberStyles.AllowCurrencySymbol);
             return new DateTime(y, m, d);
         }
+
+        public  string yearMonth(int x)
+        {
+            if (x == 1)
+            {
+                if (Departure.Month < 10)
+                    return Departure.Year.ToString() + "-0" + Departure.Month.ToString();
+
+                else
+                    return Departure.Year.ToString() + "-" + Departure.Month.ToString();
+
+            }
+            else
+            {
+                if (Departure.Month < 10)
+                    return Return.Year.ToString() + "-0" + Return.Month.ToString();
+
+                else
+                    return Return.Year.ToString() + "-" + Return.Month.ToString();
+            }
+
+
+        }
+            
     }
 }
