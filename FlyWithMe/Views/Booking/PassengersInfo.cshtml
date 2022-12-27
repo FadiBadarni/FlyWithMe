@@ -62,37 +62,72 @@
 <section3>
     <h2>Passenger Information</h2>
 
-    
 
-    @using (Html.BeginForm("Payment", "Booking", new { goPlane = outboundFlight.infoTostring(), backPlane = inboundFlight.infoTostring(),searching=searching.infoTostring()}, FormMethod.Post))
+    @if (inboundFlight != null)
     {
-
-        for (int i = 0; i < passengersCount; i++)
+        using (Html.BeginForm("Payment", "Booking", new { goPlane = outboundFlight.infoTostring(), backPlane = inboundFlight.infoTostring(), searching = searching.infoTostring() }, FormMethod.Post))
         {
-            <div class="passenger-form">
 
-                <h3>Passenger @(i + 1)</h3>
-                <img class="passenger-img" src="~/images/passenger.png" alt="Alternate Text" />
-                <div class="form-group">
-                    @Html.Label("ID")
-                    @Html.TextBoxFor(m => m[i].ID, new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    @Html.Label("Name")
-                    @Html.TextBoxFor(m => m[i].Name, new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    @Html.Label("Email")
-                    @Html.TextBoxFor(m => m[i].Email, new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    @Html.Label("Phone")
-                    @Html.TextBoxFor(m => m[i].Phone, new { @class = "form-control" })
-                </div>
+            for (int i = 0; i < passengersCount; i++)
+            {
+                <div class="passenger-form">
 
-            </div>
+                    <h3>Passenger @(i + 1)</h3>
+                    <img class="passenger-img" src="~/images/passenger.png" alt="Alternate Text" />
+                    <div class="form-group">
+                        @Html.Label("ID")
+                        @Html.TextBoxFor(m => m[i].ID, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Name")
+                        @Html.TextBoxFor(m => m[i].Name, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Email")
+                        @Html.TextBoxFor(m => m[i].Email, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Phone")
+                        @Html.TextBoxFor(m => m[i].Phone, new { @class = "form-control" })
+                    </div>
+
+                </div>
+            }
+            <button type="submit">Proceed to Payment</button>
         }
-        <button type="submit">Proceed to Payment</button>
+    }
+    @if (inboundFlight == null)
+    {
+        using (Html.BeginForm("Payment", "Booking", new { goPlane = outboundFlight.infoTostring(), backPlane = "Empty", searching = searching.infoTostring() }, FormMethod.Post))
+        {
+
+            for (int i = 0; i < passengersCount; i++)
+            {
+                <div class="passenger-form">
+
+                    <h3>Passenger @(i + 1)</h3>
+                    <img class="passenger-img" src="~/images/passenger.png" alt="Alternate Text" />
+                    <div class="form-group">
+                        @Html.Label("ID")
+                        @Html.TextBoxFor(m => m[i].ID, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Name")
+                        @Html.TextBoxFor(m => m[i].Name, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Email")
+                        @Html.TextBoxFor(m => m[i].Email, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Phone")
+                        @Html.TextBoxFor(m => m[i].Phone, new { @class = "form-control" })
+                    </div>
+
+                </div>
+            }
+            <button type="submit">Proceed to Payment</button>
+        }
     }
 </section3>
 

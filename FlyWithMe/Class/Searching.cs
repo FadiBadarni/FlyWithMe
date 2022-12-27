@@ -11,7 +11,7 @@ namespace FlyWithMe.Class
 {
     public class Searching
     {
-   
+
         public string Origin { get; set; }
 
         public string Destination { get; set; }
@@ -39,7 +39,7 @@ namespace FlyWithMe.Class
             string s = "";
             while (str[i] != ',')
                 s += str[i++];
-            this.Origin =s;
+            this.Origin = s;
 
             s = "";
             i++;
@@ -61,7 +61,7 @@ namespace FlyWithMe.Class
             i++;
             while (str[i] != ',')
                 s += str[i++];
-            this.Return = stringtodate(s); 
+            this.Return = stringtodate(s);
 
 
             s = "";
@@ -87,12 +87,12 @@ namespace FlyWithMe.Class
             i++;
             while (i < str.Length)
                 s += str[i++];
-            this.IdBack = int.Parse(s, NumberStyles.AllowCurrencySymbol);
+            this.IdBack = int.Parse(s, NumberStyles.AllowLeadingSign);
         }
 
         private DateTime stringtodate(string s)
         {
-            int j= 0,m,d,y;
+            int j = 0, m, d, y;
             string help = "";
             while (s[j] != '/')
                 help += s[j++];
@@ -107,7 +107,7 @@ namespace FlyWithMe.Class
             while (s[j] != ' ')
                 help += s[j++];
             y = int.Parse(help, NumberStyles.AllowCurrencySymbol);
-            return new DateTime(y,m,d);
+            return new DateTime(y, m, d);
         }
     }
 }

@@ -74,27 +74,36 @@ namespace FlyWithMe.Controllers
 
 
             ViewBag.outboundFlight = outboundFlight;
-            ViewBag.search= search;
+            ViewBag.search = search;
             Session["count"] = search.Passengers;
             return View();
         }
 
-       
 
-     
+
+
 
 
         [HttpPost]
-        public ActionResult Payment(List<Passenger> p, string goPlane, string backPlane,  string searching)
+        public ActionResult Payment(List<Passenger> p, string goPlane, string backPlane, string searching)
         {
-
-            Planes planes1= new Planes();
+            Planes planes1 = new Planes();
+            Planes planes2 = null;
             planes1.bulidPlaneFromSring(goPlane);
-            Planes planes2 = new Planes();
-            planes2.bulidPlaneFromSring(backPlane);
+            if (backPlane != "Empty")
+            {
+                planes2 = new Planes();
+                planes2.bulidPlaneFromSring(backPlane);
+                ViewBag.planes2 = planes2;
+            }
+            List<int> seatNumber = new List<int>();
+            for (int i = 0; i < p.Count; i++)
+            {
+                seatNumber.Add(planes1.BookedSeats + i);
+            }
 
 
-            Searching search= new Searching();
+            Searching search = new Searching();
             search.bulidSearchingFromSring(searching);
             var firebaseClient = new FirebaseClient(FirbaseLink);
             PaymentFirebase paymentFirebase = new PaymentFirebase
@@ -105,15 +114,19 @@ namespace FlyWithMe.Controllers
                 PaymentInfo = null,
                 passengers = p
             };
-             var PaymentFirebase = firebaseClient
-                    .Child("Payment")
-                    .Child(p[0].ID+"")
-                    .PutAsync(paymentFirebase);
+            var PaymentFirebase = firebaseClient
+                   .Child("Payment")
+                   .Child(p[0].ID + "")
+                   .PutAsync(paymentFirebase);
 
             ViewBag.planes1 = planes1;
-            ViewBag.planes2 = planes2;
+            ViewBag.seatNumber = seatNumber;
             ViewBag.p = p;
             ViewBag.search = search;
+
+
+
+
             return View();
         }
         //public ActionResult Payment([Bind(Include = "IdGo,IdBack,Origin,Destination,Departure,Return,Class,Passengers")] Searching search)

@@ -5,59 +5,188 @@
     FlyWithMe.Class.Planes plane1 = ViewBag.planes1;
     FlyWithMe.Class.Planes plane2 = ViewBag.planes2;
     List<FlyWithMe.Models.Passenger> passenger = ViewBag.p;
-    FlyWithMe.Class.Searching searching= ViewBag.search;
+    FlyWithMe.Class.Searching searching = ViewBag.search;
+    int total = @plane1.Price;
+    if (plane2 != null)
+        total = @plane1.Price + @plane2.Price;
+
+    int i = -1;
+
 }
 
 <head>
     @Styles.Render("~/Content/Payment.css")
 </head>
-<div class="payment-form">
-    @using (Html.BeginForm("/ProcessPayment", "post"))
-    {
-        <div class="form-group">
-            @Html.Label("Name")
-            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-            @Html.Label("Email")
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-            @Html.Label("Card Number")
-            @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-            @Html.Label("Expiration Date")
-            @Html.TextBoxFor(m => m.ExpirationDate, new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-            @Html.Label("Security Code")
-            @Html.TextBoxFor(m => m.SecurityCode, new { @class = "form-control" })
-        </div>
 
-        <button type="submit" class="pay-button">Submit Payment</button>
-    }
-</div>
-<div class="information">
-    <h2>
-        Here goes total information about the whole booking made so far
-        You want to go  From @searching.Origin To @searching.Return in
-        @plane1 
-        and back with
-        @plane2
-        and you want to pay @plane1.Price + @plane2.Price
+<body>
+    <img class="bg" src="~/images/bg2.png" alt="">
 
-        
-        for @passenger.Count,
-        @foreach (FlyWithMe.Models.Passenger p in passenger)
+
+    <div class="information">
+
+        <div class="flights-info">
+            <div class="info-box-title">
+                - First Flight -
+                <div class="first-flight">
+                    <ul>
+                        <li>
+                            Origin Country : @searching.Origin
+                        </li>
+                        <li>
+                            Destination Country : @searching.Destination
+                        </li>
+                        <li>
+                            Departure Date : @searching.Departure.ToString("d")
+                        </li>
+                        <li>
+                            Passengers Count : @searching.Passengers
+                        </li>
+                        <li>
+                            Plane AirLine : @plane1.Company
+                        </li>
+                        <li>
+                            Landing Time : @plane1.Landing
+                        </li>
+                        <li>
+                            Take Off Time : @plane1.TakeOff
+                        </li>
+                        <li>
+                            Total Price : @plane1.Price
+                        </li>
+                    </ul>
+                </div>
+
+
+
+            </div>
+        </div>
+        @if (plane2 != null)
         {
-            int i = 1;
-            Html.TextBox("the  passenger number" + i);@p
-            Html.TextBox("will sit in");
-            Html.TextBox((plane1.Capacity + i).ToString());
-
+            <div class="flights-info2">
+                <div class="info-box-title">
+                    - Second Flight -
+                    <div class="second-flight">
+                        <ul>
+                            <li>
+                                Origin Country : @searching.Destination
+                            </li>
+                            <li>
+                                Destination Country : @searching.Origin
+                            </li>
+                            <li>
+                                Departure Date : @searching.Return.ToString("d")
+                            </li>
+                            <li>
+                                Passengers Count : @searching.Passengers
+                            </li>
+                            <li>
+                                Plane AirLine : @plane2.Company
+                            </li>
+                            <li>
+                                Landing Time : @plane2.Landing
+                            </li>
+                            <li>
+                                Take Off Time : @plane2.TakeOff
+                            </li>
+                            <li>
+                                Total Price : @plane2.Price
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="cross"></div>
         }
-    </h2>
-   
-    
-</div>
+
+
+
+    </div>
+    @if (plane2 != null)
+    {
+        <div class="final-price">
+            Total Price: @total
+        </div>
+    }
+
+
+    <div class="passengers-confirmation">
+        <h2>Passengers Information</h2>
+        <div class="passengers-section">
+            
+            @foreach (FlyWithMe.Models.Passenger p in passenger)
+            {
+                i++;
+                <div class="passenger-card">
+                    @*<img src="~/images/ticket.png" alt="Alternate Text" />*@
+                    <lu class="">
+                        <li class="">
+                            Passenger Name :
+                            <label class="passenger-label">
+                                @p.Name
+                            </label>
+                        </li>
+
+                        <li class="">
+                            Passenger E-mail :
+                            <label class="passenger-label">
+                                @p.Email
+                            </label>
+                        </li>
+
+                        <li class="">
+                            Passenger Phone :
+                            <label class="passenger-label">
+                                @p.Phone
+                            </label>
+                        </li>
+
+                        <li class="">
+                            Passenger ID :
+                            <label class="passenger-label">
+                                @p.ID
+                            </label>
+                        </li>
+
+                        <li class="">
+                            Passenger Seat :
+                            <label class="passenger-label">
+                                @ViewBag.seatNumber[i]
+                            </label>
+                        </li>
+
+                    </lu>
+                </div>
+            }
+
+        </div>
+    </div>
+    <h2>Payment Information</h2>
+    <div class="payment-form">
+        @using (Html.BeginForm("/ProcessPayment", "post"))
+        {
+            <div class="form-group">
+                @Html.Label("Name")
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Email")
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Card Number")
+                @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Expiration Date")
+                @Html.TextBoxFor(m => m.ExpirationDate, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Security Code")
+                @Html.TextBoxFor(m => m.SecurityCode, new { @class = "form-control" })
+            </div>
+
+            <button type="submit" class="pay-button">Submit Payment</button>
+        }
+    </div>
+
+</body>
