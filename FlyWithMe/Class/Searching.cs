@@ -36,6 +36,7 @@ namespace FlyWithMe.Class
 
         public void bulidSearchingFromSring(string str)
         {
+            if (str == null || str.Length == 0) return;
             int i = 0;
             string s = "";
             while (str[i] != ',')

@@ -112,14 +112,17 @@ namespace FlyWithMe.Controllers
             }
 
 
-          
+
             PaymentFirebase paymentFirebase = new PaymentFirebase
             {
                 id = p[0].ID,
                 InboundFlight = planes1,
                 OutboundFlight = planes2,
                 PaymentInfo = null,
-                passengers = p
+                passengers = p,
+                From = search.Origin,
+                To=search.Destination
+
             };
             var PaymentFirebase = firebaseClient
                    .Child("Payment")
@@ -135,17 +138,7 @@ namespace FlyWithMe.Controllers
         }
 
 
-        [HttpPost]
-        public ActionResult ProcessPayment(Models.Payment payment, string id)
-        {
-            var firebaseClient = new FirebaseClient(FirbaseLink);
-            var PaymentFirebase = firebaseClient
-                  .Child("Payment")
-                  .Child(id).Child("payment")
-                  .PutAsync(payment);
-            
-            return View();
-        }
+     
 
     }
 }

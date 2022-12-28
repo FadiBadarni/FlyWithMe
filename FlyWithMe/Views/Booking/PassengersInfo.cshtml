@@ -28,7 +28,7 @@
                 <td>@outboundFlight.Company</td>
                 <td>@outboundFlight.TakeOff</td>
                 <td>@outboundFlight.Landing</td>
-                <td>@outboundFlight.Price</td>
+                <td>@outboundFlight.TotalPrice(searching.Passengers)</td>
                 <td>
                     <a href='javascript:history.go(-2)'>Change Selection</a>
                 </td>
@@ -46,7 +46,7 @@
                     <td>@inboundFlight.Company</td>
                     <td>@inboundFlight.TakeOff</td>
                     <td>@inboundFlight.Landing</td>
-                    <td>@inboundFlight.Price</td>
+                    <td>@inboundFlight.TotalPrice(searching.Passengers)</td>
                     <td>
                         <a href='javascript:history.go(-1)'>Change Selection</a>
                     </td>

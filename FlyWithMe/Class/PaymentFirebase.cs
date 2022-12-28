@@ -14,7 +14,10 @@ namespace FlyWithMe.Class
 
         public Planes OutboundFlight { get; set; }
 
-        public Payment PaymentInfo { get; set; }
+        public PaymentModel PaymentInfo { get; set; }
+
+        public string From { get; set; }
+        public string To { get; set; }
 
     }
 }

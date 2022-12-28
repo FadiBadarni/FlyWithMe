@@ -1,4 +1,4 @@
-﻿@model FlyWithMe.Models.Payment
+﻿@model FlyWithMe.Models.PaymentModel
 
 @{
     ViewBag.Title = "Payment";
@@ -23,45 +23,46 @@
 
 
     <div class="information">
-
-        <div class="flights-info">
-            <div class="info-box-title">
-                - First Flight -
-                <div class="first-flight">
-                    <ul>
-                        <li>
-                            Origin Country : @searching.Origin
-                        </li>
-                        <li>
-                            Destination Country : @searching.Destination
-                        </li>
-                        <li>
-                            Departure Date : @searching.Departure.ToString("d")
-                        </li>
-                        <li>
-                            Passengers Count : @searching.Passengers
-                        </li>
-                        <li>
-                            Plane AirLine : @plane1.Company
-                        </li>
-                        <li>
-                            Landing Time : @plane1.Landing
-                        </li>
-                        <li>
-                            Take Off Time : @plane1.TakeOff
-                        </li>
-                        <li>
-                            Total Price : @plane1.Price
-                        </li>
-                    </ul>
-                </div>
-
-
-
-            </div>
-        </div>
         @if (plane2 != null)
         {
+            <div class="flights-info">
+
+                <div class="info-box-title">
+                    - First Flight -
+                    <div class="first-flight">
+                        <ul>
+                            <li>
+                                Origin Country : @searching.Origin
+                            </li>
+                            <li>
+                                Destination Country : @searching.Destination
+                            </li>
+                            <li>
+                                Departure Date : @searching.Departure.ToString("d")
+                            </li>
+                            <li>
+                                Passengers Count : @searching.Passengers
+                            </li>
+                            <li>
+                                Plane AirLine : @plane1.Company
+                            </li>
+                            <li>
+                                Landing Time : @plane1.Landing
+                            </li>
+                            <li>
+                                Take Off Time : @plane1.TakeOff
+                            </li>
+                            <li>
+                                Total Price : @plane1.Price
+                            </li>
+                        </ul>
+                    </div>
+
+
+
+                </div>
+            </div>
+
             <div class="flights-info2">
                 <div class="info-box-title">
                     - Second Flight -
@@ -94,8 +95,47 @@
                         </ul>
                     </div>
                 </div>
+            </div><div class="cross"></div>
+        }
+        else
+        {
+            <div class="flights-info">
+
+                <div class="info-box-title">
+                    - First Flight -
+                    <div class="first-flight">
+                        <ul>
+                            <li>
+                                Origin Country : @searching.Origin
+                            </li>
+                            <li>
+                                Destination Country : @searching.Destination
+                            </li>
+                            <li>
+                                Departure Date : @searching.Departure.ToString("d")
+                            </li>
+                            <li>
+                                Passengers Count : @searching.Passengers
+                            </li>
+                            <li>
+                                Plane AirLine : @plane1.Company
+                            </li>
+                            <li>
+                                Landing Time : @plane1.Landing
+                            </li>
+                            <li>
+                                Take Off Time : @plane1.TakeOff
+                            </li>
+                            <li>
+                                Total Price : @plane1.Price
+                            </li>
+                        </ul>
+                    </div>
+
+
+
+                </div>
             </div>
-            <div class="cross"></div>
         }
 
 
@@ -163,7 +203,7 @@
     </div>
     <h2 class="payment-title">Payment Information</h2>
     <div class="payment-form">
-        @using (Html.BeginForm("/ProcessPayment", "Booking", new { Id = passenger[0].ID }, FormMethod.Post))
+        @using (Html.BeginForm("/SuccessView", "PaymentWithPaypal", new { Id = passenger[0].ID }, FormMethod.Post))
         {
             <div class="form-group">
                 @Html.Label("Name")
@@ -187,10 +227,27 @@
             </div>
 
             <button type="submit" class="pay-button">Submit Payment</button>
-            <h4>OR</h4>
 
+
+        } 
+        <h4>OR</h4>
+        @if (plane2 != null)
+        {
+            using (Html.BeginForm("PaymentWithPaypal", "PaymentWithPaypal", new { plane1 = plane1.infoTostring(), plane2 = plane2.infoTostring(), searching = searching.infoTostring(), Id = passenger[0].ID }, FormMethod.Post))
+            {
+                <button type="submit" class="pay-button2">Pay With PayPal</button>
+            }
         }
-        <button type="submit" class="pay-button2">Pay With PayPal</button>
+        else
+        {
+            using (Html.BeginForm("PaymentWithPaypal", "PaymentWithPaypal", new { plane1 = plane1.infoTostring(), plane2 = "-1", searching = searching.infoTostring(), Id = passenger[0].ID }, FormMethod.Post))
+            {
+                <button type="submit" class="pay-button2">Pay With PayPal</button>
+            }
+        }
+
+
+
     </div>
 
 

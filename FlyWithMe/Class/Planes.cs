@@ -33,20 +33,7 @@ namespace FlyWithMe.Class
 
 
         public Planes() { }
-        //public Planes copy() { 
-        //    return new Planes
-        //    {
-        //        BookedSeats = this.BookedSeats,
-        //        Capacity = this.Capacity,
-        //        Company = this.Company,
-        //        DepartureDate = this.DepartureDate,
-        //        ID = this.ID,
-        //        Landing = this.Landing,
-        //        Price = this.Price,
-        //        TakeOff = this.TakeOff
-        //    };
-        //}
-
+    
         public string infoTostring()
         {
             return BookedSeats + "," + Capacity + "," + Company + "," + DepartureDate + "," + Landing + "," + Price + "," + TakeOff+","+ID;
@@ -54,6 +41,8 @@ namespace FlyWithMe.Class
 
         public void bulidPlaneFromSring(string str)
         {
+            
+            if(str== null || str.Length == 0) return;
             int i = 0;
             string s = "";
             while (str[i] != ',')
@@ -108,20 +97,6 @@ namespace FlyWithMe.Class
                 
             this.ID = int.Parse(s, NumberStyles.AllowCurrencySymbol);
         }
-        // public string To { get; set; }
-        //public Planes(int bookedSeats, int capacity, string company, int id, string landing, double price, string takeOff)
-        //{
-        //    this.BookedSeats = bookedSeats;
-        //    this.Capacity = capacity;
-        //    this.Company = company;
-        //   // this.DepartureDate = departureDate;
-        //    //this.From = from;
-        //    this.ID = id;
-        //    this.Landing = landing;
-        //    this.Price = price;
-        //   // this.ReturnDate = returnDate;
-        //    TakeOff = takeOff;
-        //   // this.To = to;
-        //}
+    
     }
 }

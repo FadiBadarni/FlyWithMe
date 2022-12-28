@@ -68,8 +68,8 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PayPal, Version=1.9.1.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PayPal.SDK.NETCore.1.9.1.2\lib\netstandard2.0\PayPal.dll</HintPath>
+    <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -190,16 +190,18 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Class\CityNameAttribute.cs" />
     <Compile Include="Class\PaymentFirebase.cs" />
+    <Compile Include="Class\PaypalConfiguration.cs" />
     <Compile Include="Class\Planes.cs" />
     <Compile Include="Class\Searching.cs" />
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PaymentWithPaypalController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BookingModule.cs" />
     <Compile Include="Models\Passenger.cs" />
-    <Compile Include="Models\Payment.cs" />
+    <Compile Include="Models\PaymentModel.cs" />
     <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -254,7 +256,9 @@
     <Content Include="Views\Booking\PassengersInfo.cshtml" />
     <Content Include="Views\Home\InboundFlights.cshtml" />
     <Content Include="Views\Booking\Payment.cshtml" />
-    <Content Include="Views\Booking\ProcessPayment.cshtml" />
+    <Content Include="Views\PaymentWithPaypal\SuccessView.cshtml" />
+    <Content Include="Views\PaymentWithPaypal\PaymentWithPaypal.cshtml" />
+    <Content Include="Views\PaymentWithPaypal\FailureView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

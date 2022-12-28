@@ -6,22 +6,22 @@ using System.Web;
 
 namespace FlyWithMe.Models
 {
-    public class Payment
+    public class PaymentModel
     {
         [Required]
         [DataType(DataType.Text)]
         public string Name { get; set; }
         [Required]
-        [DataType(DataType.Text)]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         [Required]
-        [DataType(DataType.Text)]
+        [DataType(DataType.CreditCard)]
         public string CardNumber { get; set; }
         [Required]
         [DataType(DataType.Text)]
         public string ExpirationDate { get; set; }
         [Required]
         [DataType(DataType.Text)]
-        public string SecurityCode { get; set; }
+        public int SecurityCode { get; set; }
     }
 }

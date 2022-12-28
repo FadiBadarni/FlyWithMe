@@ -1,0 +1,212 @@
+﻿
+@{
+    ViewBag.Title = "Payment Success";
+
+
+    FlyWithMe.Class.PaymentFirebase paymentFirebase = ViewBag.PaymentFirebase;
+    int i = -1;
+    int x = ViewBag.random;
+
+}
+
+<head>
+    <link href="~/Content/ProcessPayment.css" rel="stylesheet" />
+    <title>Payment Success</title>
+</head>
+<body>
+    <div class="payment-box">
+        <div class="left">
+            <iframe src="https://giphy.com/embed/ibolLe3mOqHE3PQTtk" allowFullScreen></iframe>
+            <div id="success-title">Payment Successful</div>
+
+        </div>
+
+        <div class="right">
+            <div id="success-title2">
+                <p>Thank you for your purchase! Your flight details are as follows</p>
+            </div>
+
+
+            <div class="information">
+
+                <div class="flights-info">
+                    <div class="info-box-title">
+                        - First Flight -
+                        <div class="first-flight">
+                            <ul>
+                                <li>
+                                    Origin Country :@paymentFirebase.From
+                                </li>
+                                <li>
+                                    Destination Country :@paymentFirebase.To
+                                </li>
+                                <li>
+                                    Departure Date :@paymentFirebase.InboundFlight.DepartureDate
+                                </li>
+                                <li>
+                                    Passengers Count :@paymentFirebase.passengers.Count()
+                                </li>
+                                <li>
+                                    Plane AirLine :@paymentFirebase.InboundFlight.Company
+                                </li>
+                                <li>
+                                    Landing Time :@paymentFirebase.InboundFlight.Landing
+                                </li>
+                                <li>
+                                    Take Off Time :@paymentFirebase.InboundFlight.TakeOff
+                                </li>
+                                <li>
+                                    Total Price :@paymentFirebase.InboundFlight.Price
+                                </li>
+                            </ul>
+                        </div>
+
+
+
+                    </div>
+                </div>
+                @if (paymentFirebase.OutboundFlight != null)
+                {
+                    <div class="flights-info2">
+                        <div class="info-box-title">
+                            - Second Flight -
+                            <div class="second-flight">
+                                <ul>
+                                    <li>
+                                        Origin Country :@paymentFirebase.To;
+                                    </li>
+                                    <li>
+                                        Destination Country :@paymentFirebase.From
+                                    </li>
+                                    <li>
+                                        Departure Date :@paymentFirebase.OutboundFlight.DepartureDate
+                                    </li>
+                                    <li>
+                                        Passengers Count :@paymentFirebase.passengers.Count
+                                    </li>
+                                    <li>
+                                        Plane AirLine :@paymentFirebase.OutboundFlight.Company
+                                    </li>
+                                    <li>
+                                        Landing Time :@paymentFirebase.OutboundFlight.Landing
+                                    </li>
+                                    <li>
+                                        Take Off Time :@paymentFirebase.OutboundFlight.TakeOff
+                                    </li>
+                                    <li>
+                                        Total Price :@paymentFirebase.OutboundFlight.Price
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+
+
+            </div>
+            <div class="passengers-confirmation">
+                <h2>Passengers Information</h2>
+                <div class="passengers-section">
+
+                    @foreach (FlyWithMe.Models.Passenger p in paymentFirebase.passengers)
+                    {
+                        i++;
+                        <div class="passenger-card" style="width:550px;">
+                            <lu class="">
+                                <li class="">
+                                    Passenger Name :
+                                    <label class="passenger-label">
+                                        @p.Name
+                                    </label>
+                                </li>
+
+                                <li class="">
+                                    Serial Number :
+                                    <label class="passenger-label">
+                                        @(x+i*12)
+                                    </label>
+                                </li>
+
+                                <li class="">
+                                    Passenger Phone :
+                                    <label class="passenger-label">
+                                        @p.Phone
+                                    </label>
+                                </li>
+
+                                <li class="">
+                                    Passenger ID :
+                                    <label class="passenger-label">
+                                        @p.ID
+                                    </label>
+                                </li>
+
+                                <li class="">
+                                    Passenger Seat :
+                                    <label class="passenger-label">
+                                        A @(paymentFirebase.InboundFlight.BookedSeats-i)
+                                    </label>
+                                </li>
+                               
+
+
+                                <li class="">
+                                    Passenger Seat :
+                                    <label class="passenger-label">
+                                        B @(paymentFirebase.OutboundFlight.BookedSeats-i)
+                                    </label>
+                                </li>
+
+                            </lu>
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+            @if (paymentFirebase.PaymentInfo != null)
+            {
+                <div class="payment-info">
+                    <div class="flights-info2">
+                        <h2>Payment Information</h2>
+                        <div class="info-box-title">
+
+                            <div class="second-flight">
+                                <ul>
+                                    <li>
+                                        Name :@paymentFirebase.PaymentInfo.Name
+                                    </li>
+                                    <li>
+                                        Email :@paymentFirebase.PaymentInfo.Email
+                                    </li>
+                                    <li>
+                                        Card Number :@paymentFirebase.PaymentInfo.CardNumber
+                                    </li>
+                                    <li>
+                                        Total Price :
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="second-flight">
+                    <ul>
+                        <li>
+                            PayPal payment
+                        <li>
+                    </ul>
+                </div>
+            }
+            <button class="home-button">Return Home</button>
+        </div>
+        
+    </div>
+
+
+</body>

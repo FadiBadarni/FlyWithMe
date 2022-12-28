@@ -12,11 +12,11 @@ namespace FlyWithMe.Models
         [DataType(DataType.Text)]
         public string Name { get; set; }
         [Required]
-        [DataType(DataType.Text)]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         [Required]
-        [DataType(DataType.Text)]
-        public string Phone { get; set; }
+        [DataType(DataType.PhoneNumber)]
+        public int Phone { get; set; }
         [Key]
         [Required]
         [DataType(DataType.Text)]
