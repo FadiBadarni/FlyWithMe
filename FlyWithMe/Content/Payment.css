@@ -49,7 +49,13 @@
     margin-top: 10px;
 }
 
-
+.passengers-confirmation h2{
+    font-weight:bold;
+    font-size:25px;
+    margin-top:5%;
+    border-bottom: 2px solid black;
+    padding-bottom:20px;
+}
 
 
 .first-flight ul, .second-flight ul {
@@ -129,6 +135,7 @@
 .passengers-confirmation {
     position: relative;
     font-weight: bold;
+    
 }
 
 
@@ -147,7 +154,9 @@
     background-size: cover;
     height: 215px;
     margin: 0;
-    text-align: center;
+    text-align: left;
+    font-size:16px;
+
 }
 
     .passenger-card lu {
@@ -158,24 +167,61 @@
         margin: 0; /* remove the margin */
         padding: 0; /* remove the padding */
         color: #171C49;
-        left: 15px;
+        left:50px;
     }
+@media only screen and (max-width: 990px) and (min-width: 630px) {
 
+    .passenger-card {
+        top: 25%;
+        font-size: 18px;
+    }
+}
+@media only screen and (max-width: 1200px) {
+
+    .passenger-card lu {
+        top: 25%;
+        font-size: 13px;
+    }
+}
     .passenger-card li {
         width: 60%;
         margin: 0;
+        
     }
 
 .passenger-label {
     width: 100px;
 }
 
+
+
+.payment-title{
+    text-align:center;
+    font-weight:bold;
+    font-size:22px;
+    padding-top:20px;
+    padding-bottom:30px;
+}
 .payment-form {
     border: 3px solid red;
-    height: 500px;
+    height: 600px;
     width: 450px;
     position: relative;
     top: 100%;
+    left: 30%;
+
+
+    font-size: 16px !important;
+    background-color: #eee;
+    position: relative;
+    margin: 0;
+    display: inline-block;
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 1px );
+    -webkit-backdrop-filter: blur( 1px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 .form-group {
@@ -193,3 +239,16 @@
     left: 150px;
     background: border-box;
 }
+.pay-button2 {
+    width: 150px;
+    position: relative;
+    top: 65px;
+    left: 150px;
+    background: border-box;
+}
+h4{
+    position:relative;
+    top:65px;
+    left:210px;
+}
+

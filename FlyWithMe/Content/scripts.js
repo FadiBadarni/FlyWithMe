@@ -1,4 +1,29 @@
-﻿$(function () {
+﻿
+// get all the rows in the table
+var rows = document.getElementById('flights-table').getElementsByTagName('tr');
+
+// initialize the lowest price and the row with the lowest price
+var lowestPrice = Infinity;
+var lowestPriceRow = null;
+
+// loop through the rows and find the row with the lowest price
+for (var i = 0; i < rows.length; i++) {
+    var row = rows[i];
+    var price = parseInt(row.getAttribute('data-price'));
+    if (price < lowestPrice) {
+        lowestPrice = price;
+        lowestPriceRow = row;
+    }
+}
+// create a star icon element
+var starIcon = document.createElement('i');
+starIcon.className = 'fas fa-star';
+starIcon.style.marginLeft = '10px'; // add padding to the right of the star icon
+// insert the star icon into the first cell of the row with the lowest price
+lowestPriceRow.cells[4].appendChild(starIcon);
+lowestPriceRow.style.backgroundColor = 'lightyellow';
+
+(function () {
     var dtToday = new Date();
 
 
@@ -14,7 +39,7 @@
 
     $('#startDate').attr('min', minDate);
 });
-$(function () {
+(function () {
     var dtToday = new Date();
 
     var month = dtToday.getMonth() + 1;
@@ -30,7 +55,7 @@ $(function () {
     $('#endDate').attr('min', minDate);
 });
 
-$(function () {
+(function () {
 
     $(".flights-table tbody tr").addClass("unfocused");
     $('.unfocused').hover(function () {
@@ -88,6 +113,14 @@ function sortTable() {
     }
 }
 
+
+
+
+
+
+
+
+
 const form3 = document.querySelector('.search-form');
 form3.addEventListener('submit', handleFormSubmit);
 
@@ -97,7 +130,7 @@ function handleFormSubmit(event) {
     // select the form element
     const form2 = event.target;
     // validate the form input
-    if (!validateForm(form3)) {
+    if (!validateForm(form2)) {
         // form input is invalid, do not show the loading screen
         return;
     }
@@ -114,35 +147,18 @@ function validateForm(form) {
     // select all required form elements
     const requiredFields = form.querySelectorAll('[required]');
     const requiredFieldsArray = Array.from(requiredFields);
-
+    var passengersCount = document.getElementById('PassengersNumber').value;
+    passengersCount = parseInt(passengersCount);
     // check if any required fields are empty
     const emptyFields = requiredFieldsArray.filter((field) => !field.value);
-    if (emptyFields.length > 0) {
+    if (emptyFields.length > 0 || passengersCount > 10 || passengersCount < 1) {
         // at least one required field is empty, return false
         return false;
     }
     return true;
 }
 
-
-
-function hideLoadingScreen() {
-    // get the loading screen element
-    const loadingScreen = document.getElementById('loading-screen');
-
-    // hide the loading screen by setting the display style to "none"
-    loadingScreen.style.display = 'none';
-
-    // reset the flag in sessionStorage to "false"
-    sessionStorage.setItem('loadingScreenShown', 'false');
-}
-function handlePageLoad() {
-    // check the value of the loadingScreenShown flag in sessionStorage
-    const loadingScreenShown = sessionStorage.getItem('loadingScreenShown');
-
-    // if the flag is set to "true", hide the loading screen
-    if (loadingScreenShown === 'true') {
-        hideLoadingScreen();
-    }
-}
-window.addEventListener('load', handlePageLoad);
+window.addEventListener('load', function () {
+    // hide the loading screen
+    document.getElementById('loading-screen').style.display = 'none';
+});

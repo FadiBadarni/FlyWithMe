@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = "OutboundFlights";
     int x = ViewBag.SearchResults.Passengers;
-    string[] TableColumns = new string[] { "Departure Date", "Air Line", "Take Off", "Arrival", "Price", "Actions" };
+    string[] TableColumns = new string[] { "Departure Date", "Air Line", "Take Off", "Arrival", "Price x " + x, "Actions" };
 }
 @section Scripts
 {
@@ -16,8 +16,8 @@
     <title>@ViewBag.Title - My Flight</title>
     @Styles.Render("~/Content/css")
     <link rel="stylesheet" href="~/Content/FlightList.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     @Scripts.Render("~/bundles/modernizr")
-    <link rel="stylesheet" type="text/css" href="cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" />
 
 
 
@@ -60,7 +60,7 @@
         <tbody>
             @foreach (FlyWithMe.Class.Planes item in ViewBag.GoingPlaneslist)
             {
-                <tr onmouseover="changeFontColor('#D70040')" onmouseout="changeFontColor('black')" data-price="@item.Price" data-popularity="@item.BookedSeats">
+                <tr onmouseover="changeFontColor('#D70040')" onmouseout="changeFontColor('black')" data-price="@item.Price" data-popularity="@item.BookedSeats" data-star="false">
                     <td>@Html.DisplayFor(modelItem => item.DepartureDate)</td>
                     <td>@Html.DisplayFor(modelItem => item.Company)</td>
                     <td>@Html.DisplayFor(modelItem => item.TakeOff)</td>
@@ -68,14 +68,14 @@
 
 
                     @Html.Display(item.TotalPrice(x).ToString())
-                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                    <td data-price="@item.Price">@Html.DisplayFor(modelItem => item.Price)</td>
                     <td>
-                        @Html.ActionLink("Choose OutBound Flight", "InboundFlights", "Home", new { IdGo = item.ID, IdBack = -1, Origin = ViewBag.SearchResults.Origin, Destination = ViewBag.SearchResults.Destination, Departure = ViewBag.SearchResults.Departure, Return = ViewBag.SearchResults.Return, Class = ViewBag.SearchResults.Class, Passengers = ViewBag.SearchResults.Passengers }, null)
+                        @Html.ActionLink("Choose OutBound Flight", "InboundFlights", "Home", new { IdGo = item.ID, IdBack = -1, Origin = ViewBag.SearchResults.Origin, Destination = ViewBag.SearchResults.Destination, Departure = ViewBag.SearchResults.Departure, Return = ViewBag.SearchResults.Return, Passengers = ViewBag.SearchResults.Passengers }, null)
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-
+    
     <script src="~/Content/scripts.js"></script>
 </body>

@@ -24,6 +24,7 @@
     <img class="bg" src="~/images/background.jpg" alt="">
     <div class="heading">Life Is Short But</div>
     <div class="heading2">The World Is Wide</div>
+
     <div class="search-box">
 
         @using (Html.BeginForm("OutboundFlights", "Home", FormMethod.Post, new { @class = "search-form" }))
@@ -44,27 +45,22 @@
 
                 <div class="div3">
                     @Html.EditorFor(model => model.Departure, new { htmlAttributes = new { @class = "form-input", @type = "date", @id = "startDate", @onchange = "setMinReturnDate()", placeholder = "", required = "required" } })
-                    @Html.LabelFor(model => model.Departure, htmlAttributes: new { @class = "form-label" })
+                    @*@Html.LabelFor(model => model.Departure, htmlAttributes: new { @class = "form-label" })*@
                 </div>
 
                 <div class="div4">
                     @Html.EditorFor(model => model.Return, new { htmlAttributes = new { @class = "form-input", @type = "date", @id = "endDate", required = "required" } })
-                    @Html.LabelFor(model => model.Return, htmlAttributes: new { @class = "form-label" })
+                    @*@Html.LabelFor(model => model.Return, htmlAttributes: new { @class = "form-label" })*@
                 </div>
-
                 <div class="div5">
-                    @Html.EditorFor(model => model.Class, new { htmlAttributes = new { @class = "form-input", required = "required" } })
-                </div>
-
-                <div class="div6">
-                    @Html.EditorFor(model => model.Passengers, new { htmlAttributes = new { @class = "form-input", placeholder = "Passengers", required = "required" } })
+                    @Html.TextBoxFor(model => model.Passengers, new { @class = "form-input", @id = "PassengersNumber", required = "required", placeholder = "Passengers Number", min = "1", max = "10" })
                 </div>
 
 
-                <input type="submit" value="Search" class="" id="button" />
 
 
             </div>
+            <input type="submit" value="Search" class="" id="button" />
 
         }
 

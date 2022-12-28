@@ -19,8 +19,7 @@ namespace FlyWithMe.Models
         [Required]
         public DateTime Return { get; set; }
         [Required]
-        public string Class { get; set; }
-        [Required]
+        [Range(1, 10)]
         public int Passengers { get; set; }
         public override string ToString()
         {
@@ -34,8 +33,7 @@ namespace FlyWithMe.Models
                 Origin = model.Origin,
                 Destination = model.Destination,
                 Departure = model.Departure,
-                Return = model.Return,   
-                Class = model.Class,
+                Return = model.Return,
                 Passengers = model.Passengers
             };
             return newSearch;

@@ -15,7 +15,7 @@
 }
 
 <head>
-    @Styles.Render("~/Content/Payment.css")
+    <link href="~/Content/Payment.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -120,6 +120,7 @@
                     @*<img src="~/images/ticket.png" alt="Alternate Text" />*@
                     <lu class="">
                         <li class="">
+
                             Passenger Name :
                             <label class="passenger-label">
                                 @p.Name
@@ -156,11 +157,11 @@
 
                     </lu>
                 </div>
-            }
+             }
 
         </div>
     </div>
-    <h2>Payment Information</h2>
+    <h2 class="payment-title">Payment Information</h2>
     <div class="payment-form">
         @using (Html.BeginForm("/ProcessPayment", "Booking", new { Id = passenger[0].ID }, FormMethod.Post))
         {
@@ -186,7 +187,11 @@
             </div>
 
             <button type="submit" class="pay-button">Submit Payment</button>
+            <h4>OR</h4>
+
         }
+        <button type="submit" class="pay-button2">Pay With PayPal</button>
     </div>
+
 
 </body>

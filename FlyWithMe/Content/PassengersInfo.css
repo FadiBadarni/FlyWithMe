@@ -8,7 +8,7 @@ section3 {
     top:50px;
 }
 .header {
-    background-color: lightblue;
+    
     height: 50px;
     width: 80%;
     margin-top: 120px;
@@ -17,8 +17,12 @@ section3 {
     font-weight: 600;
     padding-top: 25px;
 }
+h2{
+    font-weight:bold;
+    font-size:26px;
+    margin-bottom:10px;
+}
 .header2 {
-    background-color: lightblue;
     height: 50px;
     width: 80%;
     margin-top: 30px;
@@ -30,11 +34,14 @@ section3 {
 .passenger-form {
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
-    background-color: #fff;
+    background-color: lightgray;
     color: #444;
-    border: 3px solid black;
+    border: 2px solid black;
     height: 150px;
+    grid-gap: 10px;
+    border-radius:5%;
 }
+
 h3 {
     position: relative;
     height: 20px;
