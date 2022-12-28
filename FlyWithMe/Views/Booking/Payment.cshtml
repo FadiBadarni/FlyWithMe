@@ -152,7 +152,7 @@
     <div class="passengers-confirmation">
         <h2>Passengers Information</h2>
         <div class="passengers-section">
-            
+
             @foreach (FlyWithMe.Models.Passenger p in passenger)
             {
                 i++;
@@ -166,20 +166,23 @@
                                 @p.Name
                             </label>
                         </li>
+                        @if (i == 0)
+                        {
+                            <li class="">
+                                Passenger E-mail :
+                                <label class="passenger-label">
+                                    @p.Email
+                                </label>
+                            </li>
 
-                        <li class="">
-                            Passenger E-mail :
-                            <label class="passenger-label">
-                                @p.Email
-                            </label>
-                        </li>
+                            <li class="">
+                                Passenger Phone :
+                                <label class="passenger-label">
+                                    @p.Phone
+                                </label>
+                            </li>
+                        }
 
-                        <li class="">
-                            Passenger Phone :
-                            <label class="passenger-label">
-                                @p.Phone
-                            </label>
-                        </li>
 
                         <li class="">
                             Passenger ID :
@@ -197,7 +200,7 @@
 
                     </lu>
                 </div>
-             }
+            }
 
         </div>
     </div>
@@ -208,47 +211,61 @@
             <div class="form-group">
                 @Html.Label("Name")
                 @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+
             </div>
             <div class="form-group">
                 @Html.Label("Email")
                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
             </div>
             <div class="form-group">
                 @Html.Label("Card Number")
                 @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.CardNumber, "", new { @class = "text-danger" })
+
             </div>
             <div class="form-group">
                 @Html.Label("Expiration Date")
                 @Html.TextBoxFor(m => m.ExpirationDate, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ExpirationDate, "", new { @class = "text-danger" })
+
             </div>
             <div class="form-group">
                 @Html.Label("Security Code")
                 @Html.TextBoxFor(m => m.SecurityCode, new { @class = "form-control" })
-            </div>
+                @Html.ValidationMessageFor(m => m.SecurityCode, "", new { @class = "text-danger" })
 
+            </div>
             <button type="submit" class="pay-button">Submit Payment</button>
 
+        }
 
-        } 
+
         <h4>OR</h4>
         @if (plane2 != null)
-        {
-            using (Html.BeginForm("PaymentWithPaypal", "PaymentWithPaypal", new { plane1 = plane1.infoTostring(), plane2 = plane2.infoTostring(), searching = searching.infoTostring(), Id = passenger[0].ID }, FormMethod.Post))
             {
-                <button type="submit" class="pay-button2">Pay With PayPal</button>
+                using (Html.BeginForm("PaymentWithPaypal", "PaymentWithPaypal", new { plane1 = plane1.infoTostring(), plane2 = plane2.infoTostring(), searching = searching.infoTostring(), Id = passenger[0].ID }, FormMethod.Post))
+                {
+                    <button type="submit" class="pay-button2">Pay With PayPal</button>
+                }
             }
-        }
-        else
-        {
-            using (Html.BeginForm("PaymentWithPaypal", "PaymentWithPaypal", new { plane1 = plane1.infoTostring(), plane2 = "-1", searching = searching.infoTostring(), Id = passenger[0].ID }, FormMethod.Post))
+            else
             {
-                <button type="submit" class="pay-button2">Pay With PayPal</button>
+                using (Html.BeginForm("PaymentWithPaypal", "PaymentWithPaypal", new { plane1 = plane1.infoTostring(), plane2 = "-1", searching = searching.infoTostring(), Id = passenger[0].ID }, FormMethod.Post))
+                {
+                    <button type="submit" class="pay-button2">Pay With PayPal</button>
+                }
             }
-        }
-
 
 
     </div>
 
 
+
 </body>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

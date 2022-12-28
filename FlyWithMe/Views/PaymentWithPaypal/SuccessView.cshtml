@@ -121,46 +121,80 @@
                                         @p.Name
                                     </label>
                                 </li>
-
-                                <li class="">
-                                    Serial Number :
-                                    <label class="passenger-label">
-                                        @(x+i*12)
-                                    </label>
-                                </li>
-
-                                <li class="">
-                                    Passenger Phone :
-                                    <label class="passenger-label">
-                                        @p.Phone
-                                    </label>
-                                </li>
-
                                 <li class="">
                                     Passenger ID :
                                     <label class="passenger-label">
                                         @p.ID
                                     </label>
                                 </li>
-
                                 <li class="">
                                     Passenger Seat :
                                     <label class="passenger-label">
                                         A @(paymentFirebase.InboundFlight.BookedSeats-i)
                                     </label>
                                 </li>
-                               
-
-
                                 <li class="">
-                                    Passenger Seat :
-                                    <label class="passenger-label">
-                                        B @(paymentFirebase.OutboundFlight.BookedSeats-i)
+                                    Departure Date :
+                                    <label class="passenger-label" id="">
+                                        @(paymentFirebase.InboundFlight.DepartureDate)
                                     </label>
                                 </li>
-
+                                <li class="ticket-id">
+                                    Ticket ID :
+                                    <label class="passenger-label" id="ticketIdLabel">
+                                        ticket ID...
+                                    </label>
+                                </li>
+                                <li class="">
+                                    <label class="passenger-label" id="from-to">
+                                        @(paymentFirebase.From) → @(paymentFirebase.To)
+                                    </label>
+                                </li>
                             </lu>
                         </div>
+                        if (paymentFirebase.OutboundFlight != null)
+                        {
+                            <div class="passenger-card" style="width:550px;">
+                                <lu class="">
+                                    <li class="">
+                                        Passenger Name :
+                                        <label class="passenger-label">
+                                            @p.Name
+                                        </label>
+                                    </li>
+                                    <li class="">
+                                        Passenger ID :
+                                        <label class="passenger-label">
+                                            @p.ID
+                                        </label>
+                                    </li>
+                                    <li class="">
+                                        Passenger Seat :
+                                        <label class="passenger-label">
+                                            A @(paymentFirebase.OutboundFlight.BookedSeats-i)
+                                        </label>
+                                    </li>
+                                    <li class="">
+                                        Departure Date :
+                                        <label class="passenger-label" id="">
+                                            @(paymentFirebase.OutboundFlight.DepartureDate)
+                                        </label>
+                                    </li>
+                                    <li class="ticket-id">
+                                        Ticket ID :
+                                        <label class="passenger-label" id="ticketIdLabel">
+                                            ticket ID...
+                                        </label>
+                                    </li>
+                                    <li class="">
+                                        <label class="passenger-label" id="from-to">
+                                            @(paymentFirebase.To) → @(paymentFirebase.From)
+                                        </label>
+                                    </li>
+                                </lu>
+                            </div>
+                        }
+
                     }
 
 
@@ -184,9 +218,19 @@
                                     <li>
                                         Card Number :@paymentFirebase.PaymentInfo.CardNumber
                                     </li>
-                                    <li>
-                                        Total Price :
-                                    </li>
+                                    @if (paymentFirebase.OutboundFlight != null)
+                                    {
+                                        <li>
+                                            Total Price :@(paymentFirebase.OutboundFlight.Price + paymentFirebase.InboundFlight.Price)
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            Total Price :@(paymentFirebase.InboundFlight.Price)
+                                        </li>
+                                    }
+
                                 </ul>
                             </div>
                         </div>
@@ -197,16 +241,28 @@
             {
                 <div class="second-flight">
                     <ul>
-                        <li>
-                            PayPal payment
-                        <li>
+                        <li class="paypal-li">
+                            Paid With PayPal.
+                        </li>
                     </ul>
                 </div>
             }
             <button class="home-button">Return Home</button>
+
         </div>
-        
+
     </div>
 
 
 </body>
+
+<script>
+    // Get the button element
+    const button = document.querySelector('.home-button');
+
+    // Attach an event listener to the button
+    button.addEventListener('click', function () {
+        // Set the current window's location to the home page URL
+        window.location.href = '/';
+    });
+</script>

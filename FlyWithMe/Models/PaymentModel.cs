@@ -10,17 +10,22 @@ namespace FlyWithMe.Models
     {
         [Required]
         [DataType(DataType.Text)]
+        [RegularExpression(@"^[a-zA-Z]+ [a-zA-Z]+$", ErrorMessage = "Name must contain both a family name and a main name")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         [Required]
-        [DataType(DataType.CreditCard)]
+        [DataType(DataType.Text)]
+        [RegularExpression(@"^\d{16}$", ErrorMessage = "Credit Card must be a 16-Digit Integer")]
         public string CardNumber { get; set; }
         [Required]
         [DataType(DataType.Text)]
+        [RegularExpression(@"^(0[1-9]|1[0-2])\/(202[3-9]|2030)$", ErrorMessage = "Expiration date must be in the format MM/YY, where MM is a two-digit month ranging from 01 to 12 and YY is a two-digit year ranging from 2023 to 2030")]
         public string ExpirationDate { get; set; }
         [Required]
+        [RegularExpression(@"^\d{3}$", ErrorMessage = "CCV must be a 3-Digit Integer")]
         [DataType(DataType.Text)]
         public int SecurityCode { get; set; }
     }

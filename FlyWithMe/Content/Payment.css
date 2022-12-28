@@ -49,12 +49,12 @@
     margin-top: 10px;
 }
 
-.passengers-confirmation h2{
-    font-weight:bold;
-    font-size:25px;
-    margin-top:5%;
+.passengers-confirmation h2 {
+    font-weight: bold;
+    font-size: 25px;
+    margin-top: 5%;
     border-bottom: 2px solid black;
-    padding-bottom:20px;
+    padding-bottom: 20px;
 }
 
 
@@ -135,7 +135,6 @@
 .passengers-confirmation {
     position: relative;
     font-weight: bold;
-    
 }
 
 
@@ -148,27 +147,33 @@
 }
 
 .passenger-card {
-    background-image: url(/images/ticket.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    height: 215px;
+    border: 3px solid black;
+    height: 200px;
     margin: 0;
     text-align: left;
-    font-size:16px;
-
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: box-shadow 0.3s;
+    background-color: #c1d5e0;
 }
+
+    .passenger-card:hover {
+        box-shadow: 0 0 10px 10px rgb(51, 153, 255);
+    }
 
     .passenger-card lu {
         position: relative;
-        top: 20%;
+        top: 13%;
         border: 0; /* remove the border */
         list-style: none; /* remove the bullet points */
         margin: 0; /* remove the margin */
         padding: 0; /* remove the padding */
         color: #171C49;
-        left:50px;
+        left: 40px;
     }
+
 @media only screen and (max-width: 990px) and (min-width: 630px) {
 
     .passenger-card {
@@ -176,6 +181,7 @@
         font-size: 18px;
     }
 }
+
 @media only screen and (max-width: 1200px) {
 
     .passenger-card lu {
@@ -183,11 +189,11 @@
         font-size: 13px;
     }
 }
-    .passenger-card li {
-        width: 60%;
-        margin: 0;
-        
-    }
+
+.passenger-card li {
+    width: 100%;
+    margin: 0;
+}
 
 .passenger-label {
     width: 100px;
@@ -195,22 +201,21 @@
 
 
 
-.payment-title{
-    text-align:center;
-    font-weight:bold;
-    font-size:22px;
-    padding-top:20px;
-    padding-bottom:30px;
+.payment-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 22px;
+    padding-top: 20px;
+    padding-bottom: 30px;
 }
+
 .payment-form {
     border: 3px solid red;
-    height: 600px;
+    height: 700px;
     width: 450px;
     position: relative;
     top: 100%;
     left: 30%;
-
-
     font-size: 16px !important;
     background-color: #eee;
     position: relative;
@@ -233,22 +238,43 @@
 }
 
 .pay-button {
-    width: 150px;
-    position: relative;
-    top: 60px;
-    left: 150px;
+    width: 200px;
+    position: absolute;
+    font-weight: bold;
+    font-size: 18px;
+    top: 78%;
+    left: 120px;
     background: border-box;
-}
-.pay-button2 {
-    width: 150px;
-    position: relative;
-    top: 65px;
-    left: 150px;
-    background: border-box;
-}
-h4{
-    position:relative;
-    top:65px;
-    left:210px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: box-shadow 0.3s;
+    border: 2px solid black;
 }
 
+    .pay-button:hover {
+        box-shadow: 0 0 5px 5px rgb(51, 153, 255);
+    }
+
+.pay-button2 {
+    width: 200px;
+    position: absolute;
+    top: 91%;
+    left: 120px;
+    background: border-box;
+    font-weight: bold;
+    font-size: 18px;
+    border: 2px solid black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: box-shadow 0.3s;
+}
+
+    .pay-button2:hover {
+        box-shadow: 0 0 5px 5px rgb(51, 153, 255);
+    }
+
+h4 {
+    position: absolute;
+    top: 84%;
+    left: 200px;
+    font-weight: bold;
+    font-size: 18px;
+}

@@ -44,13 +44,11 @@
                 </div>
 
                 <div class="div3">
-                    @Html.EditorFor(model => model.Departure, new { htmlAttributes = new { @class = "form-input", @type = "date", @id = "startDate", @onchange = "setMinReturnDate()", placeholder = "", required = "required" } })
-                    @*@Html.LabelFor(model => model.Departure, htmlAttributes: new { @class = "form-label" })*@
+                    @Html.EditorFor(model => model.Departure, new { htmlAttributes = new { @class = "form-input", @type = "date", @id = "startDate", @onchange = "setMinReturnDate()", @min = DateTime.Now.ToString("yyyy-MM-dd"), placeholder = "", required = "required" } })
                 </div>
 
                 <div class="div4">
-                    @Html.EditorFor(model => model.Return, new { htmlAttributes = new { @class = "form-input", @type = "date", @id = "endDate", required = "required" } })
-                    @*@Html.LabelFor(model => model.Return, htmlAttributes: new { @class = "form-label" })*@
+                    @Html.EditorFor(model => model.Return, new { htmlAttributes = new { @class = "form-input", @type = "date", @id = "endDate", @min = DateTime.Now.ToString("yyyy-MM-dd"), required = "required" } })
                 </div>
                 <div class="div5">
                     @Html.TextBoxFor(model => model.Passengers, new { @class = "form-input", @id = "PassengersNumber", required = "required", placeholder = "Passengers Number", min = "1", max = "10" })
@@ -72,6 +70,7 @@
         <iframe src="https://giphy.com/embed/U29iRRUrtx1wjD4GR4" frameBorder="0" allowFullScreen></iframe>
     </div>
 </div>
+
 <script>
 
     function setMinReturnDate() {
@@ -80,8 +79,46 @@
         // Set the minimum value for the return date field to the departure date
         document.getElementById("endDate").min = departureDate;
     }
-</script>
 
+    const form3 = document.querySelector('.search-form');
+    form3.addEventListener('submit', handleFormSubmit);
+
+    function handleFormSubmit(event) {
+        // prevent the default form submission behavior
+        event.preventDefault();
+        // select the form element
+        const form2 = event.target;
+        console.log("Test");
+        // validate the form input
+        if (!validateForm(form2)) {
+            // form input is invalid, do not show the loading screen
+            return;
+        }
+        // show the loading screen
+        document.querySelector('.loading-screen').style.display = 'block';
+        // submit the form after a short delay to allow the loading screen to be displayed
+        setTimeout(() => {
+            sessionStorage.setItem('loadingScreenShown', 'true');
+            form2.submit();
+        }, 2000); // the delay duration should be specified here
+    }
+
+    function validateForm(form) {
+        // select all required form elements
+        const requiredFields = form.querySelectorAll('[required]');
+        const requiredFieldsArray = Array.from(requiredFields);
+        var passengersCount = document.getElementById('PassengersNumber').value;
+        passengersCount = parseInt(passengersCount);
+        // check if any required fields are empty
+        const emptyFields = requiredFieldsArray.filter((field) => !field.value);
+        if (emptyFields.length > 0 || passengersCount > 10 || passengersCount < 1) {
+            // at least one required field is empty, return false
+            return false;
+        }
+        return true;
+    }
+
+</script>
 
 
 

@@ -23,37 +23,6 @@ starIcon.style.marginLeft = '10px'; // add padding to the right of the star icon
 lowestPriceRow.cells[4].appendChild(starIcon);
 lowestPriceRow.style.backgroundColor = 'lightyellow';
 
-(function () {
-    var dtToday = new Date();
-
-
-    var month = dtToday.getMonth() + 1;
-    var day = dtToday.getDate();
-    var year = dtToday.getFullYear();
-    if (month < 10)
-        month = '0' + month.toString();
-    if (day < 10)
-        day = '0' + day.toString();
-
-    var minDate = year + '-' + month + '-' + day;
-
-    $('#startDate').attr('min', minDate);
-});
-(function () {
-    var dtToday = new Date();
-
-    var month = dtToday.getMonth() + 1;
-    var day = dtToday.getDate();
-    var year = dtToday.getFullYear();
-    if (month < 10)
-        month = '0' + month.toString();
-    if (day < 10)
-        day = '0' + day.toString();
-
-    var minDate = year + '-' + month + '-' + day;
-
-    $('#endDate').attr('min', minDate);
-});
 
 (function () {
 
@@ -113,52 +82,3 @@ function sortTable() {
     }
 }
 
-
-
-
-
-
-
-
-
-const form3 = document.querySelector('.search-form');
-form3.addEventListener('submit', handleFormSubmit);
-
-function handleFormSubmit(event) {
-    // prevent the default form submission behavior
-    event.preventDefault();
-    // select the form element
-    const form2 = event.target;
-    // validate the form input
-    if (!validateForm(form2)) {
-        // form input is invalid, do not show the loading screen
-        return;
-    }
-    // show the loading screen
-    document.querySelector('.loading-screen').style.display = 'block';
-    // submit the form after a short delay to allow the loading screen to be displayed
-    setTimeout(() => {
-        sessionStorage.setItem('loadingScreenShown', 'true');
-        form2.submit();
-    }, 2000); // the delay duration should be specified here
-}
-
-function validateForm(form) {
-    // select all required form elements
-    const requiredFields = form.querySelectorAll('[required]');
-    const requiredFieldsArray = Array.from(requiredFields);
-    var passengersCount = document.getElementById('PassengersNumber').value;
-    passengersCount = parseInt(passengersCount);
-    // check if any required fields are empty
-    const emptyFields = requiredFieldsArray.filter((field) => !field.value);
-    if (emptyFields.length > 0 || passengersCount > 10 || passengersCount < 1) {
-        // at least one required field is empty, return false
-        return false;
-    }
-    return true;
-}
-
-window.addEventListener('load', function () {
-    // hide the loading screen
-    document.getElementById('loading-screen').style.display = 'none';
-});

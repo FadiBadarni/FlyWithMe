@@ -144,6 +144,7 @@
 .passengers-confirmation {
     position: relative;
     font-weight: bold;
+    margin-bottom: 30px;
 }
 
     .passengers-confirmation h2{
@@ -151,12 +152,14 @@
         font-weight:bold;
         margin-top:50px;
         margin-left:20px;
+        width:60%;
+        border-bottom:3px solid black;
     }
 
     .passengers-section {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-        grid-gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
+        grid-gap: 0px;
         margin-top: 50px;
         position: relative;
     }
@@ -166,41 +169,62 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    height: 215px;
+    height: 300px;
     margin: 0;
-    width:250px;
+    width:100%;
     text-align: center;
 }
 
     .passenger-card lu {
         position: relative;
-        top: 20%;
+        top: 30%;
+        text-align:left;
+        
         border: 0; /* remove the border */
         list-style: none; /* remove the bullet points */
         margin: 0; /* remove the margin */
         padding: 0; /* remove the padding */
         color: #171C49;
         left: 15px;
+
     }
 
     .passenger-card li {
         width: 60%;
         margin: 0;
+        margin-left: 5%;
     }
+        .passenger-card li:last-child{
+            font-size: 18px;
+            width:400px;
+        }
 
-.passenger-label {
-    width: 100px;
-}
+        .passenger-label {
+            width: 100px;
+        }
+            #from-to {
+                margin-top:0%;
+                margin-left:15%;
+                width: 400px;
+            }
 
 
 .home-button {
     background-color: lightblue;
 
-    width: 150px;
+    width: 250px;
     position: relative;
-    left:43%;
+    left:38%;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 20px;
+}
+
+.paypal-li{
+    width:200px !important;
+    margin-left: 40% !important;
+    margin-bottom:10% !important;
+    text-align:center;
+    font-weight:bold;
 }

@@ -73,21 +73,32 @@
                     <h3>Passenger @(i + 1)</h3>
                     <img class="passenger-img" src="~/images/passenger.png" alt="Alternate Text" />
                     <div class="form-group">
-                        @Html.Label("ID")
+                        @Html.Label("Passport ID")
                         @Html.TextBoxFor(m => m[i].ID, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m[i].ID, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group">
-                        @Html.Label("Name")
+                        @Html.Label("Full Name")
                         @Html.TextBoxFor(m => m[i].Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m[i].Name, "", new { @class = "text-danger" })
+
                     </div>
-                    <div class="form-group">
-                        @Html.Label("Email")
-                        @Html.TextBoxFor(m => m[i].Email, new { @class = "form-control" })
-                    </div>
-                    <div class="form-group">
-                        @Html.Label("Phone")
-                        @Html.TextBoxFor(m => m[i].Phone, new { @class = "form-control" })
-                    </div>
+                    @if (i == 0)
+                    {
+                        <div class="form-group">
+                            @Html.Label("Email")
+                            @Html.TextBoxFor(m => m[i].Email, new { @class = "form-control", pattern = @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$", title = "Please enter a valid email address" })
+                            @Html.ValidationMessageFor(m => m[i].Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Phone")
+                            @Html.TextBoxFor(m => m[i].Phone, new { @class = "form-control" }).
+                            @Html.ValidationMessageFor(m => m[i].Phone, "", new { @class = "text-danger" })
+
+                        </div>
+                    }
+
+
 
                 </div>
             }
@@ -106,21 +117,32 @@
                     <h3>Passenger @(i + 1)</h3>
                     <img class="passenger-img" src="~/images/passenger.png" alt="Alternate Text" />
                     <div class="form-group">
-                        @Html.Label("ID")
+                        @Html.Label("Passport ID")
                         @Html.TextBoxFor(m => m[i].ID, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m[i].ID, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group">
-                        @Html.Label("Name")
+                        @Html.Label("Full Name")
                         @Html.TextBoxFor(m => m[i].Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m[i].Name, "", new { @class = "text-danger" })
+
                     </div>
-                    <div class="form-group">
-                        @Html.Label("Email")
-                        @Html.TextBoxFor(m => m[i].Email, new { @class = "form-control" })
-                    </div>
-                    <div class="form-group">
-                        @Html.Label("Phone")
-                        @Html.TextBoxFor(m => m[i].Phone, new { @class = "form-control" })
-                    </div>
+                    @if (i == 0)
+                    {
+                        <div class="form-group">
+                            @Html.Label("Email")
+                            @Html.TextBoxFor(m => m[i].Email, new { @class = "form-control", pattern = @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$", title = "Please enter a valid email address" })
+                            @Html.ValidationMessageFor(m => m[i].Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Phone")
+                            @Html.TextBoxFor(m => m[i].Phone, new { @class = "form-control" }).
+                            @Html.ValidationMessageFor(m => m[i].Phone, "", new { @class = "text-danger" })
+
+                        </div>
+                    }
+
+
 
                 </div>
             }
