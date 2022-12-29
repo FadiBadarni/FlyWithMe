@@ -97,6 +97,7 @@ namespace FlyWithMe.Controllers
             catch (Exception ex)
             {
                 //return View("FailureView");
+              
                 string idcase = Request.Params["Id"];
                 return Redirect("/PaymentWithPaypal/SuccessView?id=" + idcase);
                 //    return View("SuccessView");
@@ -137,10 +138,10 @@ namespace FlyWithMe.Controllers
                 itemList.items.Add(new Item()
                 {
                     name = "Plane Ticket",
-                    currency = "NIS",
-                    price = item.Price/3 + "",
+                    currency = "ILS",
+                    price = item.Price/ searching.Passengers + "",
                     quantity = searching.Passengers + "",
-                    sku = "999"
+                    sku = "sku"
                 });
                 sum += (item.Price);
             }
@@ -166,7 +167,7 @@ namespace FlyWithMe.Controllers
             //Final amount with details
             var amount = new Amount()
             {
-                currency = "NIS",
+                currency = "ILS",
                 total = (sum).ToString(), // Total must be equal to sum of tax, shipping and subtotal.
                 details = details
             };
@@ -238,30 +239,71 @@ namespace FlyWithMe.Controllers
         public async Task<ActionResult> SuccessView(PaymentModel p, string id)
         {
 
+
+
+            var firebaseClient = new FirebaseClient(FirbaseLink);
+
+            int CounterID = await firebaseClient
+                  .Child("Payment")
+                  .Child("CounterID")
+                  .OnceSingleAsync<int>();
+
+            CounterID++;
+          
+            await firebaseClient.Child("Payment")
+              .Child("CounterID").PutAsync(CounterID);
+
+
             if (id == null)
                 id = Request.Params["id"];
 
 
-            string Encrypted_Credit_Card = null;
-            var firebaseClient = new FirebaseClient(FirbaseLink);
+            
+           
             PaymentFirebase paymentFirebase = await firebaseClient
                   .Child("Payment")
-                  .Child(id)
+                  .Child(id).Child("Unpaid")
                   .OnceSingleAsync<PaymentFirebase>();
+
+            var listPaymentFirbase = await firebaseClient
+                .Child("Payment")
+                .Child(id).Child("Paid").OnceAsListAsync<PaymentFirebase>();
+
+            List<PaymentFirebase> list = new List<PaymentFirebase>();
+
+            foreach (var item in listPaymentFirbase)
+            {
+                list.Add(item.Object);
+            }
+           
+               
+                
+
+
+          //  listPaymentFirbase.List.Add(paymentFirebase);
 
             if (p.CardNumber != null)
             {
                 paymentFirebase.PaymentInfo = p;
                 p.CardNumber = Encrypt(p.CardNumber);
-                await firebaseClient.Child("Payment")
-                  .Child(id).PutAsync(paymentFirebase);
-                p.CardNumber = Decrypt(p.CardNumber);
+            }
 
+            list.Add(paymentFirebase);
+
+
+            await firebaseClient.Child("Payment")
+                 .Child(id).Child("Paid").PutAsync(list);
+
+
+            if(p.CardNumber!=null && p.CardNumber.Length > 16)
+            {
+                p.CardNumber=Decrypt(p.CardNumber);
             }
             Random rnd = new Random();
 
 
             ViewBag.PaymentFirebase = paymentFirebase;
+            ViewBag.OrderId = CounterID+ listPaymentFirbase.Count;
             ViewBag.random = rnd.Next(100000000, 1000000000);
 
             return View();

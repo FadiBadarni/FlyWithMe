@@ -189,6 +189,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Class\CityNameAttribute.cs" />
+    <Compile Include="Class\ListPaymentFirbase.cs" />
     <Compile Include="Class\PaymentFirebase.cs" />
     <Compile Include="Class\PaypalConfiguration.cs" />
     <Compile Include="Class\Planes.cs" />
@@ -196,10 +197,12 @@
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaymentWithPaypalController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BookingModule.cs" />
+    <Compile Include="Models\loginModel.cs" />
     <Compile Include="Models\Passenger.cs" />
     <Compile Include="Models\PaymentModel.cs" />
     <Compile Include="Models\SearchModel.cs" />
@@ -259,6 +262,8 @@
     <Content Include="Views\PaymentWithPaypal\SuccessView.cshtml" />
     <Content Include="Views\PaymentWithPaypal\PaymentWithPaypal.cshtml" />
     <Content Include="Views\PaymentWithPaypal\FailureView.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\ViewOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

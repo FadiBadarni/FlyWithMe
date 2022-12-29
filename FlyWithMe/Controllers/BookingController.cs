@@ -124,9 +124,7 @@ namespace FlyWithMe.Controllers
                 To=search.Destination
 
             };
-            var PaymentFirebase = firebaseClient
-                   .Child("Payment")
-                   .Child(p[0].ID + "")
+            var PaymentFirebase = firebaseClient.Child("Payment").Child(p[0].ID + "").Child("Unpaid")
                    .PutAsync(paymentFirebase);
 
             ViewBag.planes1 = planes1;
