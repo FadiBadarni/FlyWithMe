@@ -12,6 +12,7 @@ using Firebase.Database;
 using Firebase.Database.Query;
 using FlyWithMe.Class;
 using FlyWithMe.Models;
+using Microsoft.Ajax.Utilities;
 using PayPal.Api;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Payment = PayPal.Api.Payment;
@@ -238,24 +239,41 @@ namespace FlyWithMe.Controllers
 
         public async Task<ActionResult> SuccessView(PaymentModel p, string id)
         {
-
-
-
             var firebaseClient = new FirebaseClient(FirbaseLink);
-
-            int CounterID = await firebaseClient
-                  .Child("Payment")
-                  .Child("CounterID")
-                  .OnceSingleAsync<int>();
-
-            CounterID++;
-          
-            await firebaseClient.Child("Payment")
-              .Child("CounterID").PutAsync(CounterID);
-
 
             if (id == null)
                 id = Request.Params["id"];
+
+           
+            int keyOrder = 0;
+            try
+            {
+                keyOrder = await firebaseClient
+                 .Child("Payment")
+                 .Child(id).Child("PaymentID").OnceSingleAsync<int>();
+
+            }catch(Exception ex)
+            {
+                keyOrder = await firebaseClient
+               .Child("Payment")
+               .Child("PaymentID")
+               .OnceSingleAsync<int>();
+
+                keyOrder++;
+
+                await firebaseClient.Child("Payment")
+                  .Child("PaymentID").PutAsync(keyOrder);
+
+                await firebaseClient.Child("Payment")
+                  .Child(id).Child("PaymentID").PutAsync(keyOrder);
+            }
+           
+
+            
+        
+
+
+           
 
 
             
@@ -303,7 +321,7 @@ namespace FlyWithMe.Controllers
 
 
             ViewBag.PaymentFirebase = paymentFirebase;
-            ViewBag.OrderId = CounterID+ listPaymentFirbase.Count;
+            ViewBag.OrderId =keyOrder*1000 + listPaymentFirbase.Count;
             ViewBag.random = rnd.Next(100000000, 1000000000);
 
             return View();
