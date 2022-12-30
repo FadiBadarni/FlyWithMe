@@ -67,7 +67,9 @@ label {
     margin: 8px 0;
     box-sizing: border-box;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 10px;
+    background-color:ghostwhite;
+
 }
 
 button {

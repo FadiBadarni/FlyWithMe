@@ -202,19 +202,21 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BookingModule.cs" />
-    <Compile Include="Models\loginModel.cs" />
+    <Compile Include="Models\MyFlight.cs" />
     <Compile Include="Models\Passenger.cs" />
     <Compile Include="Models\PaymentModel.cs" />
     <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\about.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\FlightList.css" />
     <Content Include="Content\home.css" />
+    <Content Include="Content\MyFlight.css" />
     <Content Include="Content\PassengersInfo.css" />
     <Content Include="Content\Payment.css" />
     <Content Include="Content\scripts.js" />
@@ -223,7 +225,9 @@
     <Content Include="Global.asax" />
     <Content Include="Content\ProcessPayment.css" />
     <Content Include="images\background.jpg" />
+    <Content Include="images\bg-2.jpg" />
     <Content Include="images\bg2.png" />
+    <Content Include="images\flywithme.png" />
     <Content Include="images\logo.jpg" />
     <Content Include="images\passenger.png" />
     <Content Include="images\ticket.png" />
@@ -253,7 +257,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\OutboundFlights.cshtml" />
     <Content Include="Views\Booking\PassengersInfo.cshtml" />
@@ -262,7 +265,7 @@
     <Content Include="Views\PaymentWithPaypal\SuccessView.cshtml" />
     <Content Include="Views\PaymentWithPaypal\PaymentWithPaypal.cshtml" />
     <Content Include="Views\PaymentWithPaypal\FailureView.cshtml" />
-    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\MyFlight.cshtml" />
     <Content Include="Views\User\ViewOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>

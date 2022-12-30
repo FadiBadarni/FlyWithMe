@@ -1,0 +1,35 @@
+﻿@model FlyWithMe.Models.MyFlight
+
+@{
+}
+
+<head>
+    <link href="~/Content/MyFlight.css" rel="stylesheet" />
+</head>
+
+
+<body>
+    <img class="bg-2" src="~/images/bg-2.jpg" alt="">
+
+    @using (Html.BeginForm("ViewOrders", "User", FormMethod.Post, new { @class = "search-form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.ID, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.ID, new { htmlAttributes = new { @class = "form-input" } })
+                @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.OrderID, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.OrderID, new { htmlAttributes = new { @class = "form-input" } })
+                @Html.ValidationMessageFor(model => model.OrderID, "", new { @class = "text-danger" })
+            </div>
+            <button class="search-button">Search</button>
+        </div>
+    }
+
+
+
+</body>

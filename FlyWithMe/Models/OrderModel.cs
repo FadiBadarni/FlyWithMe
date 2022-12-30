@@ -6,11 +6,11 @@ using System.Web;
 
 namespace FlyWithMe.Models
 {
-    public class loginModel
+    public class OrderModel
     {
 
 
-       
+
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "ID")]
@@ -23,13 +23,13 @@ namespace FlyWithMe.Models
         [RegularExpression(@"^\d{7}$", ErrorMessage = "The order wiht a 7-digit integer")]
         public int OrderID { get; set; }
 
-      //  [ValidatePersonName]
+        //  [ValidatePersonName]
         [EmailAddress]
         [Display(Name = "Email Address")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-        
-     
+
+
 
     }
 
@@ -37,13 +37,13 @@ namespace FlyWithMe.Models
     //public class ValidatePersonName : ValidationAttribute
     //{
     //    protected override ValidationResult IsValid(object value, ValidationContext validationContext) { 
-            
-            
+
+
     //        string PhoneNumber = (string)validationContext.ObjectType.GetProperty("Phone Number").GetValue(validationContext.ObjectInstance, null);
-        
+
     //        string Email = (string)validationContext.ObjectType.GetProperty("Email Address").GetValue(validationContext.ObjectInstance, null);
 
-           
+
 
     //        //check at least one has a value
     //        if (string.IsNullOrEmpty(Email) && string.IsNullOrEmpty(PhoneNumber))

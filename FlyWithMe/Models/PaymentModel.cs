@@ -18,14 +18,14 @@ namespace FlyWithMe.Models
         public string Email { get; set; }
         [Required]
         [DataType(DataType.Text)]
-        [RegularExpression(@"^\d{16}$", ErrorMessage = "Credit Card must be a 16-Digit Integer")]
+        [RegularExpression(@"^\d{16}$", ErrorMessage = "Credit Card must be a 16-Digit Number")]
         public string CardNumber { get; set; }
         [Required]
         [DataType(DataType.Text)]
-        [RegularExpression(@"^(0[1-9]|1[0-2])\/(202[3-9]|2030)$", ErrorMessage = "Expiration date must be in the format MM/YY, where MM is a two-digit month ranging from 01 to 12 and YY is a two-digit year ranging from 2023 to 2030")]
+        [RegularExpression(@"^(0[1-9]|1[0-2])\/(202[3-9]|2030)$", ErrorMessage = "Expiration date must be in the format MM/YYYY")]
         public string ExpirationDate { get; set; }
         [Required]
-        [RegularExpression(@"^\d{3}$", ErrorMessage = "CCV must be a 3-Digit Integer")]
+        [RegularExpression(@"^\d{3}$", ErrorMessage = "CCV must be a 3-Digit Number")]
         [DataType(DataType.Text)]
         public int SecurityCode { get; set; }
     }

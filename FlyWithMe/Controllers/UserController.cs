@@ -25,9 +25,8 @@ namespace FlyWithMe.Controllers
         {
             return View();
         }
-        public  ActionResult Login()
+        public ActionResult MyFlight()
         {
-
             return View();
         }
 
@@ -49,21 +48,22 @@ namespace FlyWithMe.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> ViewOrders(loginModel loginModel) { 
+        public async Task<ActionResult> ViewOrders(MyFlight myFlight)
+        {
 
             var firebaseClient = new FirebaseClient(FirbaseLink);
-            int order = (loginModel.OrderID/1000);
-            int fOrder=await firebaseClient.Child("Payment").Child(loginModel.ID + "").Child("PaymentID").OnceSingleAsync<int>();
+            int order = (myFlight.OrderID / 1000);
+            int fOrder = await firebaseClient.Child("Payment").Child(myFlight.ID + "").Child("PaymentID").OnceSingleAsync<int>();
 
             if (fOrder != order)
-                return Redirect("/User/Login");
-         
+                return Redirect("/User/MyFlight");
+
 
             var listPaymentFirebase = await firebaseClient.Child("Payment")
-                .Child(loginModel.ID + "")
+                .Child(myFlight.ID + "")
                 .Child("Paid").OnceAsListAsync<PaymentFirebase>();
             List<PaymentFirebase> list = new List<PaymentFirebase>();
-            foreach(var payment in listPaymentFirebase)
+            foreach (var payment in listPaymentFirebase)
             {
                 list.Add(payment.Object);
             }
@@ -71,16 +71,16 @@ namespace FlyWithMe.Controllers
 
             foreach (PaymentFirebase p in list)
             {
-                if(p.PaymentInfo != null)
-                if (p.PaymentInfo.CardNumber != null && p.PaymentInfo.CardNumber.Length > 16)
-                {
-                    p.PaymentInfo.CardNumber = Decrypt(p.PaymentInfo.CardNumber);
-                }
+                if (p.PaymentInfo != null)
+                    if (p.PaymentInfo.CardNumber != null && p.PaymentInfo.CardNumber.Length > 16)
+                    {
+                        p.PaymentInfo.CardNumber = Decrypt(p.PaymentInfo.CardNumber);
+                    }
             }
 
 
             ViewBag.listPaymentFirebase = list;
-            ViewBag.OrderID=order*1000;
+            ViewBag.OrderID = order * 1000;
 
             return View();
         }

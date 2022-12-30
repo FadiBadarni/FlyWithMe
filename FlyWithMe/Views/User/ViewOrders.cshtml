@@ -24,15 +24,14 @@
 
         </div>
         @foreach (FlyWithMe.Class.PaymentFirebase paymentFirebase in listPaymentFirebase)
-        { 
-            @(j++)
+        {
+            j++;
             <div class="right">
                 <div id="success-title2">
                     <p>Your Order   @(ViewBag.OrderID+j)</p>
                 </div>
 
 
-                <div class="right">
                     <div id="success-title2">
                         <p>Thank you for your purchase! Your flight details are as follows</p>
                     </div>
@@ -150,12 +149,6 @@
                                                 @(paymentFirebase.InboundFlight.DepartureDate)
                                             </label>
                                         </li>
-                                        <li class="ticket-id">
-                                            Ticket ID :
-                                            <label class="passenger-label" id="ticketIdLabel">
-                                                ticket ID...
-                                            </label>
-                                        </li>
                                         <li class="">
                                             <label class="passenger-label" id="from-to">
                                                 @(paymentFirebase.From) → @(paymentFirebase.To)
@@ -189,12 +182,6 @@
                                                 Departure Date :
                                                 <label class="passenger-label" id="">
                                                     @(paymentFirebase.OutboundFlight.DepartureDate)
-                                                </label>
-                                            </li>
-                                            <li class="ticket-id">
-                                                Ticket ID :
-                                                <label class="passenger-label" id="ticketIdLabel">
-                                                    ticket ID...
                                                 </label>
                                             </li>
                                             <li class="">
@@ -262,7 +249,6 @@
 
                 </div>
 
-            </div>
         }
 
 
