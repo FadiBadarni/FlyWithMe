@@ -1,22 +1,31 @@
-# FlyWithMe
+# FlyWithMe ✈️
 Welcome to FlyWithMe, a flight booking system developed by a team of software engineering students as part of their introduction to networking course. We have utilized the latest technologies, including ASP.NET, C#, and a Firebase database, to create a seamless and intuitive website for our users.
 
-## Enhancements to User Experience
+## Table of Contents
+* [User Experience Enhancements](#User-Experience-Enhancements)
+* [My Flight Page](#My-Flight-Page)
+* [Advanced Search Functionality](#Advanced-Search-Functionality)
+* [Security Measures](#Security-Measures)
+* [Seat Reservation System](#Seat-Reservation-System)
+* [Payment Options](#Payment-Options)
+* [Run The Repo](#Run-The-Repo)
+
+## User Experience Enhancements 💫
 To enhance the user experience, we have incorporated both CSS and JavaScript into our design. CSS allows us to define the styles and layout of the website, while JavaScript adds dynamic and interactive elements such as animations and drop-down menus. This combination results in a functional and visually appealing platform for our users.
 
-## My Flight Page
+## My Flight Page 🎫
 One feature that we have implemented to improve the user experience is the "My Flight" page, which can be accessed from the navigation bar. This page allows users to enter their ID and confirmation number to view their reservation again. This is a convenient way for users to easily access their flight details.
 
-## Advanced Search Functionality
+## Advanced Search Functionality 🔍
 In addition to standard search criteria such as departure and return dates, origin and destination countries, and number of passengers, our system also includes a sorting filter to help users find the best flights for their needs. Users can sort flights by price or popularity, and have the option to highlight the cheapest flight after search results are displayed. This helps users quickly and easily find flights that suit their budget and preferences.
 
-## Security Measures
+## Security Measures 🔒
 At FlyWithMe, we prioritize the safety and privacy of our users' personal and financial information. To protect against unauthorized access, we have implemented firewalls and utilize the AES (Advanced Encryption Standard) algorithm to encrypt sensitive data. We are dedicated to providing a secure platform for booking flights.
 
-## Seat Reservation System
+## Seat Reservation System 🛋️
 We have also implemented a seat reservation system to ensure that users can secure their seats until the flight is completed. This prevents any conflicts or double bookings and allows users to confidently book their flights without worrying about availability. This feature is particularly useful for users who may not have the time to complete the booking process in one sitting, as it allows them to come back later and pick up where they left off.
 
-## Payment Options
+## Payment Options 💳
 To further improve the user experience, we offer multiple payment options. In addition to the use of the PayPal sandbox, which allows us to simulate real-life payments in a secure and controlled environment, we also offer the option to pay directly through our website. We understand the importance of convenience for our users, and we strive to make it as easy as possible for them to book their flights. However, we also prioritize the security of our users' payment information and do not store all of the payment information provided, only keeping a limited amount on file for future bookings.
 
 ## Run The Repo:
